@@ -3,17 +3,6 @@ library(lme4)
 library(splines)
 
 
-scores <- 0.5 * (log(1 - y) - (log(1 - 0.6))) / time_points
-
-
-tibble(time = 0:100) %>% 
-  mutate(
-    scores = 1 - (1 - 0.4) * exp(-0.02 * time)
-  ) %>% 
-  ggplot() +
-  geom_line(aes(x = time, y = scores)) +
-  expand_limits(y = 0:1)
-
 raw <- read_csv(here::here("data", "27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv"))
 
 
@@ -95,10 +84,15 @@ AIC(m)
 m <- lmer(y0 ~ time_points + age + (1 | Patient.ID), data = dat)
 AIC(m)
 
+m
+
 
 m <- lmer(y0 ~ ns(time_points, 4) * age + (time_points | Patient.ID) + (time_points | study), data = dat)
 AIC(m); summary(m)$sigma
 
+
+m <- lmer(y0 ~ ns(time_points, 4) * age + (1 | Patient.ID)+ (1 | study), data = dat)
+AIC(m)
 
 newdata <- dat %>% 
   select(study, Patient.ID) %>% 
@@ -109,10 +103,10 @@ newdata <- dat %>%
 
 simulate(m, nsim = 5, re.form = NA)
 
-newdata <- data.frame(time_points = seq(0, 120, 60), age = 60)
+newdata <- data.frame(time_points = seq(0, 360, 30), age = 60)
 
 pfun <- function(fit) {
-  predict(fit, newdata = newdata, re.form = NULL)
+  predict(fit, newdata = newdata, re.form = NA)
 }
 
 
