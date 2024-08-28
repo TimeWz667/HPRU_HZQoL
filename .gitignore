@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+.config/
+.local/
+out/
+models/*.rds
+
