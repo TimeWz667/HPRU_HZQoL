@@ -4,8 +4,6 @@ library(tidybayes)
 
 raw <- read_csv(here::here("data", "27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv"))
 
-
-
 raw %>% 
   ggplot() +
   geom_bar(aes(x = age, fill = study))
