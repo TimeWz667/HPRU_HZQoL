@@ -81,7 +81,18 @@ sims <- bind_rows(lapply(20:100, \(age) {
 ggplot(sims) + 
   stat_lineribbon(aes(x = Age, y = QL00), alpha = 0.2) +
   scale_fill_brewer() 
+
+
+g_ql <- ggplot(sims) + 
+  stat_lineribbon(aes(x = Age, y = QL35)) +
+  scale_y_continuous("QALY loss at 3.5% discounting rate") +
+  scale_x_continuous("Age of HZ onset") +
+  scale_fill_brewer() 
   
+g_ql
+
+ggsave(g_ql, filename = here::here("docs", "figs", "proj_qol.png"), width = 6, height = 4.5)
+
 
 ggplot(sims) + 
   stat_lineribbon(aes(x = Age, y = 1 / RRec), alpha = 0.2) +
