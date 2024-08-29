@@ -120,7 +120,7 @@ ggplot(sims) +
   scale_fill_brewer() 
 
 
-g_ql <- ggplot(sims) + 
+g_ql <- ggplot(sims %>% filter(Age < 99)) + 
   stat_lineribbon(aes(x = Age, y = QL35)) +
   scale_y_continuous("QALY loss at 3.5% discounting rate") +
   scale_x_continuous("Age of HZ onset") +

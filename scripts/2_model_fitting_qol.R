@@ -19,92 +19,16 @@ dat <- raw %>%
   ) %>% 
   rename(ti = time_points)
 
+
 dat_qol <- dat %>% 
   mutate(ti = ti / 365) %>% 
   filter(qol > 0) %>% 
   filter(qol < 1) %>% 
-  select(ti, qol, age) %>% 
-  mutate(
-    Agp = cut(age, c(0, 30, seq(35, 90, 5), 100), right = F)
-  )
-
-
-dat_qol <- dat_qol[sample.int(nrow(dat_qol)), ]
-
-dat_qol %>% 
-  group_by(Agp) %>% 
-  summarise(n())
-
-model <-  stan_model(here::here("models", "logit_qol.stan"))
-
-ds <- dat_qol %>%
-  head(500) %>% 
-  (\(df) {
-    list(
-      N = nrow(df),
-      Ts = df$ti,
-      Ys = df$qol,
-      min_qol = min_qol
-    )
-  })
-
-post <- sampling(model, data = ds, pars = c("qol0", "b0", "b1"), chains = 3, iter = 2000, warmup = floor(2000 - 1000))
-
-ext <- data.frame(extract(post))
-write_csv(ext, file = here::here("out", "post_qol_all.csv"))
-
-
-
-res_all <- list(
-  data.frame(summary(post)$summary)[1:3, ] %>% 
-    mutate(Group = "All", Index = c("qol0", "b0", "b1"))
-)
-
-
-res_agp <- lapply(levels(dat_qol$Agp), \(agp) {
-  ds <- dat_qol %>% 
-    filter(Agp == agp) %>% 
-    (\(df) {
-      list(
-        N = nrow(df),
-        Ts = df$ti,
-        Ys = df$qol,
-        min_qol = min_qol
-      )
-    })
-  
-  post <- sampling(model, data = ds, pars = c("qol0", "b0", "b1"), 
-                   chains = 3, iter = 2000, warmup = floor(2000 - 1000))
-  
-  ext <- data.frame(extract(post))
-  write_csv(ext, file = here::here("out", "post_qol_" + glue::as_glue(agp) + ".csv"))
-  
-  
-  data.frame(summary(post)$summary)[1:3, ] %>% 
-    mutate(Group = "All", Index = c("qol0", "b0", "b1"))
-  
-})
-
-
-res <- bind_rows(c(res_all, res_agp)) %>% 
-  relocate(Group, mean, starts_with("X"))
-
-write_csv(res, here::here("docs", "tabs", "summary_post_qol.csv" ))
-
-
-bind_rows(res_agp) %>% 
-  filter(Index == "qol0") %>% 
-  select(Group, mean) %>% 
-  mutate(a = seq(25, 90, 5)) %>% 
-  ggplot() +
-  geom_point(aes(x = a, y = mean)) +
-  geom_smooth(aes(x = a, y = mean), method = "loess")
-
+  select(ti, qol, age, subject = Patient.ID)
 
 
 ## QOL as a function of age
-
-model <-  stan_model(here::here("models", "logit_qol_a3.stan"))
+model <-  stan_model(here::here("models", "logit_qol_a.stan"))
 
 ds <- dat_qol %>%
   #head(1000) %>% 
@@ -122,6 +46,51 @@ post <- sampling(model, data = ds, pars = c("b0", "b1", "b2"),
 ext <- data.frame(extract(post))
 write_csv(ext, file = here::here("results", "post_qol_(a).csv"))
 
+
+## QOL as a function of age and time
+model <-  stan_model(here::here("models", "logit_qol_at.stan"))
+
+ds <- dat_qol %>%
+  (\(df) {
+    list(
+      N = nrow(df),
+      As = df$age,
+      Ts = df$ti,
+      Ys = df$qol
+    )
+  })
+
+post <- sampling(model, data = ds, pars = c("b0", "b1", "b2", "bt"), 
+                 chains = 3, iter = 15000, warmup = 14000)
+
+ext <- data.frame(extract(post))
+write_csv(ext, file = here::here("results", "post_qol_(a,t).csv"))
+
+
+
+## QOL as a function of age and time; random intercept for each subject
+model <-  stan_model(here::here("models", "logit_qol_at_subject.stan"))
+
+ds <- dat_qol %>%
+  head(200) %>% 
+  (\(df) {
+    ids <- as.numeric(as.factor(df$subject)) 
+    
+    list(
+      N = nrow(df),
+      M = length(unique(ids)),
+      As = df$age,
+      Ts = df$ti,
+      Ys = df$qol,
+      IDs = ids
+    )
+  })
+
+post <- sampling(model, data = ds, pars = c("b0", "b1", "b2", "bt"), 
+                 chains = 3, iter = 15000, warmup = 14000)
+
+ext <- data.frame(extract(post))
+write_csv(ext, file = here::here("results", "post_qol_(a,t|subject).csv"))
 
 
 

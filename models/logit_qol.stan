@@ -1,8 +1,7 @@
 data {
   int<lower=0> N;
   real Ys[N];
-  real Ts[N];
-  
+
   real min_qol;
 }
 
@@ -18,7 +17,7 @@ model {
   // sigma ~ gamma(1, 1);
   
   for (i in 1:N) {
-    target += normal_lpdf(logit(Ys[i])| b0 + 0 * Ts[i], sigma);
+    target += normal_lpdf(logit(Ys[i])| b0, sigma);
   }
 }
 
