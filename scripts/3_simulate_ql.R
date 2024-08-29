@@ -112,6 +112,9 @@ sims <- bind_rows(lapply(20:100, \(age) {
 }))
 
 
+write_csv(sims, here::here("results", "sim_ql.csv"))
+
+
 ggplot(sims) + 
   stat_lineribbon(aes(x = Age, y = QL00)) +
   scale_fill_brewer() 
