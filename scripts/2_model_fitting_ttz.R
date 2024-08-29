@@ -142,9 +142,16 @@ post <- sampling(model, data = ds, pars = c("b0", "b1", "rate_age"),
 
 
 ext <- data.frame(extract(post))
-write_csv(ext, file = here::here("out", "post_ttz_(a).csv"))
 
-summary(post)
+ext %>% 
+  write_csv(file = here::here("out", "post_ttz_(a).csv"))
+
+
+ext %>% 
+  select(b0, b1) %>% mutate(Key = 1:n()) %>% 
+  relocate(Key) %>% 
+  write_csv(here::here("results", "post_ttz_(a).csv"))
+
 
 samples <- data.frame(extract(post, pars = "rate_age")) %>% 
   mutate(Key = 1:n()) %>% 
@@ -154,18 +161,6 @@ samples <- data.frame(extract(post, pars = "rate_age")) %>%
 samples %>%
   filter(Key <= 1000) %>% 
   write_csv(here::here("docs", "tabs", "samples_ttz(t).csv"))
-
-
-samples %>% 
-  mutate(
-    Dur = 1 - 1 / Rate + exp(- Rate) / Rate,
-    Dur = (1 - Dur) * (1 - 0.75)
-  ) %>% 
-  group_by(Age) %>% 
-  summarise(M = mean(Dur), L = quantile(Dur, 0.025), U = quantile(Dur, 0.975)) %>% 
-  ggplot() +
-  geom_ribbon(aes(x = Age, ymin = L, ymax = U), alpha = 0.2) +
-  geom_line(aes(x = Age, y = M))
 
 
 g_fit <- as_tibble(summary(post)$summary[-c(1:2), ]) %>% 

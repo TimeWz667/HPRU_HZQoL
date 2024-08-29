@@ -18,7 +18,7 @@ pars_demo <- sup_demo %>%
 #pars_qol0 <- lapply(levels(idx_agp), \(agp) read_csv(here::here("out", "post_qol_" + glue::as_glue(agp) + ".csv")) %>% pull(qol0))
 # names(pars_qol0) <- levels(idx_agp)
 
-pars_qol0 <- read_csv(file = here::here("out", "post_qol_(a)_lm.csv"))
+pars_qol0 <- read_csv(file = here::here("results", "post_qol_(a)_lm.csv"))
 
 pars_qol0 %>% 
   ggplot(aes(x = age)) +
@@ -27,7 +27,7 @@ pars_qol0 %>%
   
 
 
-ttz <- read_csv( here::here("out", "post_ttz_(a).csv"))
+ttz <- read_csv( here::here("results", "post_ttz_(a).csv"))
 
 
 ## simulate
