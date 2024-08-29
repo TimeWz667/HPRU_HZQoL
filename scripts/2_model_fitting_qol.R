@@ -120,7 +120,7 @@ post <- sampling(model, data = ds, pars = c("b0", "b1", "b2"),
                  chains = 3, iter = 10000, warmup = 9000)
 
 ext <- data.frame(extract(post))
-write_csv(ext, file = here::here("out", "post_qol_(a).csv"))
+write_csv(ext, file = here::here("results", "post_qol_(a).csv"))
 
 
 
