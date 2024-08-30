@@ -72,7 +72,6 @@ write_csv(ext, file = here::here("results", "post_qol_(a,t).csv"))
 model <-  stan_model(here::here("models", "logit_qol_at_subject.stan"))
 
 ds <- dat_qol %>%
-  head(200) %>% 
   (\(df) {
     ids <- as.numeric(as.factor(df$subject)) 
     
