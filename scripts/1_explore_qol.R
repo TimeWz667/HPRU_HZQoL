@@ -80,7 +80,7 @@ res_agp <- lapply(levels(dat_qol$Agp), \(agp) {
   
 })
 
-res_tgp <- bind_rows(res_agp)
+res_agp <- bind_rows(res_agp)
 
 
 res_tgp <- lapply(levels(dat_qol$Tgp), \(tgp) {
@@ -109,12 +109,4 @@ res <- bind_rows(c(res_all, res_agp, res_tgp)) %>%
   relocate(Group, mean, starts_with("X"))
 
 write_csv(res, here::here("docs", "tabs", "summary_exploratory_qol.csv" ))
-
-
-
-res_tgp %>% 
-  filter(Index == "qol0") %>% 
-  ggplot() +
-  geom_point(aes(x = Group, y= mean))
-
 
