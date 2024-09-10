@@ -1,8 +1,6 @@
 data {
   int<lower=0> N;
   real Ys[N];
-
-  real min_qol;
 }
 
 parameters {
@@ -19,11 +17,4 @@ model {
   for (i in 1:N) {
     target += normal_lpdf(logit(Ys[i])| b0, sigma);
   }
-}
-
-generated quantities {
-  real qol0;
-  
-  qol0 = inv_logit(b0) * (1 - min_qol) + min_qol;
-  
 }
