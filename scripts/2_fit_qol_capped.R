@@ -6,7 +6,15 @@ theme_set(theme_bw())
 options(mc.cores = 6)
 rstan_options(auto_write = TRUE)
 
+source(here::here("scripts", "fn_stan.R"))
 
+n_iter <- 10000
+n_collect <- 500
+n_warmup <- floor(n_iter - n_collect)
+n_chains <- 4
+
+
+## Load data
 load(here::here("data", "qol_reformed.rdata"))
 
 reformed <- reformed %>% filter(Q_rescaled > 0)
@@ -45,9 +53,8 @@ posts <- bind_rows(lapply(agps, function(agp) {
   
   save(post, ds, file = here::here("out", "post_" + model_src + "_" + agp + ".rdata"))
   
-  su <- summary(post)$summary
-  data.frame(su)[, c(1, 2, 3, 5, 7, 9, 10)] %>% mutate(Var = row.names(su), Agp = agp)
-
+  su <- restructure_stan(post)$Summary %>% mutate(Agp = agp)
+  su
 })) %>% 
   relocate(Agp, Var)
 
@@ -76,7 +83,7 @@ model <- stan_model(here::here("models", model_src + ".stan"))
 ds <- local({
   sel <- reformed %>%
     mutate(Key = 1:n(), Key = sample(Key, n())) %>% 
-    filter(Key <= 3000) %>% 
+    filter(Key <= 1500) %>% 
     select(Qs = Q_rescaled, Zs = Health, Ts = ti, Cs = Norm_rescaled, As = Age) %>% 
     as.list()
   
@@ -87,20 +94,17 @@ ds <- local({
 
 post <- sampling(model, data = ds, pars = c("b0", "ba1", "ba2", "bt", "bta1", "bta2", "sigma"), 
                  init = \() list(b0 = 1, ba1 = 0, ba2 = 0, bt = 1, bta1 = 0, bta2 = 0, sigma = 0.5),
-                 chains = 4, iter = 5000, warmup = 4500)
+                 chains = n_chains, iter = n_iter, warmup = n_warmup)
 
 
 post
 
 save(post, ds, file = here::here("out", "post_" + model_src + ".rdata"))
 
-su <- summary(post)$summary
-write_csv(su, file = here::here("docs", "tabs", "fit_" + model_src + ".csv"))
 
+res <- restructure_stan(post)
 
-ext <- data.frame(extract(post))
-head(ext)
-
-write_csv(ext, file = here::here("posteriors", "post_"+ model_src + ".csv"))
+write_csv(res$Summary, file = here::here("docs", "tabs", "fit_" + model_src + ".csv"))
+write_csv(res$Ext, file = here::here("posteriors", "post_"+ model_src + ".csv"))
 
 

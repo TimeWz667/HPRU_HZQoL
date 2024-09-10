@@ -3,10 +3,19 @@ library(rstan)
 
 theme_set(theme_bw())
 
+## Setting
 options(mc.cores = 6)
 rstan_options(auto_write = TRUE)
 
+source(here::here("scripts", "fn_stan.R"))
 
+n_iter <- 10000
+n_collect <- 500
+n_warmup <- floor(n_iter - n_collect)
+n_chains <- 4
+
+
+## Load data
 load(here::here("data", "qol_reformed.rdata"))
 
 reformed <- reformed %>% filter(Q_rescaled > 0)
@@ -16,6 +25,7 @@ head(reformed)
 min_qol <- min(reformed$EQ5D)
 
 
+set.seed(11667)
 
 ## QOL as a function of age
 model_src <- "logit_qol_a"
@@ -24,11 +34,12 @@ model_src <- glue::as_glue(model_src)
 model <- stan_model(here::here("models", model_src + ".stan"))
 
 
+
 ds <- local({
   sel <- reformed  %>%
-    filter(Health == 0) %>% 
-    # mutate(Key = 1:n(), Key = sample(Key, n())) %>%
-    # filter(Key <= 300) %>%
+    filter(Health == 0) %>%
+    mutate(Key = 1:n(), Key = sample(Key, n())) %>%
+    filter(Key <= 2000) %>%
     filter(ti > 0) %>% 
     select(Ts = ti, As = Age, Ys = Q_rescaled) %>% 
     as.list()
@@ -39,18 +50,15 @@ ds <- local({
 
 
 post <- sampling(model, data = ds, pars = c("b0", "ba1", "ba2", "sigma"), 
-                 chains = 4, iter = 15000, warmup = floor(15000 - 500), verbose = FALSE)
+                 chains = n_chains, iter = n_iter, warmup = n_warmup)
 
 
 save(post, ds, file = here::here("out", "post_" + model_src + ".rdata"))
 
-su <- summary(post)$summary
-write_csv(su, file = here::here("docs", "tabs", "fit_" + model_src + ".csv"))
+res <- restructure_stan(post)
 
-ext <- data.frame(extract(post))
-head(ext)
-write_csv(ext, file = here::here("posteriors", "post_"+ model_src + ".csv"))
-
+write_csv(res$Summary, file = here::here("docs", "tabs", "fit_" + model_src + ".csv"))
+write_csv(res$Ext, file = here::here("posteriors", "post_"+ model_src + ".csv"))
 
 
 ## QOL as a function of age and time
@@ -63,8 +71,8 @@ model <- stan_model(here::here("models", model_src + ".stan"))
 ds <- local({
   sel <- reformed  %>%
     filter(Health == 0) %>% 
-    # mutate(Key = 1:n(), Key = sample(Key, n())) %>%
-    # filter(Key <= 300) %>%
+    mutate(Key = 1:n(), Key = sample(Key, n())) %>%
+    filter(Key <= 1000) %>%
     filter(ti > 0) %>% 
     select(Ts = ti, As = Age, Ys = Q_rescaled) %>% 
     as.list()
@@ -75,16 +83,14 @@ ds <- local({
 
 
 post <- sampling(model, data = ds, pars = c("b0", "ba1", "ba2", "bt", "sigma"), 
-                 chains = 4, iter = 15000, warmup = 14500)
+                 chains = n_chains, iter = n_iter, warmup = n_warmup)
 
 save(post, ds, file = here::here("out", "post_" + model_src + ".rdata"))
 
-su <- summary(post)$summary
-write_csv(su, file = here::here("docs", "tabs", "fit_" + model_src + ".csv"))
+res <- restructure_stan(post)
 
-ext <- data.frame(extract(post))
-head(ext)
-write_csv(ext, file = here::here("posteriors", "post_"+ model_src + ".csv"))
+write_csv(res$Summary, file = here::here("docs", "tabs", "fit_" + model_src + ".csv"))
+write_csv(res$Ext, file = here::here("posteriors", "post_"+ model_src + ".csv"))
 
 
 

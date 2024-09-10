@@ -3,14 +3,20 @@ library(rstan)
 
 theme_set(theme_bw())
 
+## Setting
 options(mc.cores = 6)
 rstan_options(auto_write = TRUE)
 
+source(here::here("scripts", "fn_stan.R"))
 
+n_iter <- 10000
+n_collect <- 500
+n_warmup <- floor(n_iter - n_collect)
+n_chains <- 4
+
+
+## Load data
 load(here::here("data", "qol_reformed.rdata"))
-
-reformed <- reformed %>% filter(Q_rescaled > 0)
-
 head(reformed)
 
 min_qol <- min(reformed$EQ5D)
@@ -38,20 +44,18 @@ ds <- local({
 
 
 post <- sampling(model, data = ds, pars = c("b0", "ba1"), 
-                 chains = 4, iter = 5000, warmup = floor(5000 - 500))
+                 chains = n_chains, iter = n_iter, warmup = n_warmup)
 
-
+post
 
 save(post, ds, file = here::here("out", "post_" + model_src + ".rdata"))
 
-su <- summary(post)$summary
-write_csv(su, file = here::here("docs", "tabs", "fit_" + model_src + ".csv"))
 
+res <- restructure_stan(post)
 
-ext <- data.frame(extract(post))
-head(ext)
+write_csv(res$Summary, file = here::here("docs", "tabs", "fit_" + model_src + ".csv"))
+write_csv(res$Ext, file = here::here("posteriors", "post_"+ model_src + ".csv"))
 
-write_csv(ext, file = here::here("posteriors", "post_"+ model_src + ".csv"))
 
 
 # 
