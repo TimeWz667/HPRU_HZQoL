@@ -39,7 +39,7 @@ ds <- local({
 
 
 post <- sampling(model, data = ds, pars = c("b0", "ba1", "ba2", "sigma"), 
-                 chains = 4, iter = 5000, warmup = floor(5000 - 500), verbose = FALSE)
+                 chains = 4, iter = 15000, warmup = floor(15000 - 500), verbose = FALSE)
 
 
 save(post, ds, file = here::here("out", "post_" + model_src + ".rdata"))
@@ -63,8 +63,8 @@ model <- stan_model(here::here("models", model_src + ".stan"))
 ds <- local({
   sel <- reformed  %>%
     filter(Health == 0) %>% 
-    mutate(Key = 1:n(), Key = sample(Key, n())) %>%
-    filter(Key <= 300) %>%
+    # mutate(Key = 1:n(), Key = sample(Key, n())) %>%
+    # filter(Key <= 300) %>%
     filter(ti > 0) %>% 
     select(Ts = ti, As = Age, Ys = Q_rescaled) %>% 
     as.list()
