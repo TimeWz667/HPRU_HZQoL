@@ -19,7 +19,7 @@ min_qol <- min(raw$EQ5D)
 
 reformed <- raw %>% 
   mutate(ti = time_points / 365) %>% 
-  select(Age = age, ti = ti, EQ5D) %>% 
+  select(SID = study, PID = Patient.ID, Age = age, ti = ti, EQ5D) %>% 
   left_join(norm) %>% 
   mutate(
     Agp = cut(Age, c(0, 30, seq(35, 90, 5), 100), right = F),
