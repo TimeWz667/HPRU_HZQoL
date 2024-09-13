@@ -15,6 +15,11 @@ load(here::here("data", "qol_reformed.rdata"))
 min_qol <- min(reformed$EQ5D)
 
 
+reformed %>% 
+  ggplot() +
+  geom_point(aes(x = ti, y = EQ5D))
+
+
 ## Load population norm
 load(here::here("data", "sup_demo.rdata"))
 pars_demo <- sup_demo %>% 
