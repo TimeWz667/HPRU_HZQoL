@@ -17,16 +17,9 @@
 .Rproj.user/
 
 
-# R Environment Variables
-.Renviron
-
-# pkgdown site
-docs/
-
-
 .config/
 .local/
+
 out/
 models/*.rds
-results/sim*
 

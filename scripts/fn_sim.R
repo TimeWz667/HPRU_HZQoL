@@ -89,7 +89,6 @@ sim_cap_qol_at <- \(df, pars, q0, norm) {
 }
 
 
-
 calc_shortfall <- \(proj, pars_demo) {
   n_sim <- length(unique(proj$Key))
   
