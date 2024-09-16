@@ -88,11 +88,17 @@ stats <- bind_rows(
 write_csv(stats, here::here("docs", "tabs", "stats_shortfall.csv"))
 
 
+labs_model <- c(
+  M1 = "TTE + QoL(Age)",
+  M2 = "TTE + QoL(Age, Time)",
+  M3 = "Bounded logit distribution"
+)
+
 g_ql <- stats %>% 
   ggplot(aes(x = Age)) +
   geom_ribbon(aes(ymin = QL35_L, ymax = QL35_U), alpha = 0.2) +
   geom_line(aes(y = QL35_M)) +
-  facet_wrap(.~Model) +
+  facet_wrap(.~Model, labeller = labeller(Model = labs_model)) +
   scale_y_continuous("Quality of life loss due to HZ against population norm in the UK") +
   scale_x_continuous("Age of rush onset") +
   expand_limits(y = c(0, 0.2))
@@ -103,7 +109,7 @@ g_qlh <- stats %>%
   ggplot(aes(x = Age)) +
   geom_ribbon(aes(ymin = QLH35_L, ymax = QLH35_U), alpha = 0.2) +
   geom_line(aes(y = QLH35_M)) +
-  facet_wrap(.~Model) +
+  facet_wrap(.~Model, labeller = labeller(Model = labs_model)) +
   scale_y_continuous("Quality of life loss due to HZ against perfect health") +
   scale_x_continuous("Age of rush onset") +
   expand_limits(y = c(0, 0.2))
