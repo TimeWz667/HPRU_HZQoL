@@ -45,7 +45,6 @@ proj_m1 <- targets %>%
   sim_t2z(pars_time2zero) %>% 
   sim_qol_a(post_logit_qol_a, min_qol)
 
-
 ## T2Z + qol(t)
 proj_m2 <- targets %>% 
   sim_t2z(pars_time2zero) %>% 
@@ -57,7 +56,6 @@ proj_m3 <- targets %>%
 
 
 ## Plot projections
-
 proj_m1 %>% 
   group_by(Age, Ti) %>% 
   summarise(
@@ -99,8 +97,6 @@ proj_m3 %>%
   scale_y_continuous("QOL", labels = scales::percent) +
   scale_color_discrete("Age") +
   expand_limits(y = 0:1)
-
-
 
 
 reformed %>% 

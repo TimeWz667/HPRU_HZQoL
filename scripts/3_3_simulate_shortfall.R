@@ -35,8 +35,8 @@ norm <- pars_demo %>%
   select(Age, Norm_rescaled)
 
 
-## 
-n_sim <- 1000
+## Simulation
+n_sim <- 500
 
 targets <- tibble(
   Key = 1:n_sim
@@ -44,26 +44,33 @@ targets <- tibble(
   crossing(Age = 50:99, Ti = seq(0, 3, 0.02))
 
 
-## T2Z + const qol
+### T2Z + const qol
 proj_m1 <- targets %>% 
   sim_t2z(pars_time2zero) %>% 
   sim_qol_a(post_logit_qol_a, min_qol) %>% 
   calc_shortfall(pars_demo)
 
 
-## T2Z + qol(t)
+### T2Z + qol(t)
 proj_m2 <- targets %>% 
   sim_t2z(pars_time2zero) %>% 
   sim_qol_at(post_logit_qol_at, min_qol) %>% 
   calc_shortfall(pars_demo)
 
 
-## Capped logit
+### Capped logit
 proj_m3 <- targets %>% 
   sim_cap_qol_at(post_logit_cap_qol_at, min_qol, norm) %>% 
   calc_shortfall(pars_demo)
 
 
+### Outputs
+write_csv(proj_m1, here::here("posteriors", "pars_model1.csv"))
+write_csv(proj_m2, here::here("posteriors", "pars_model2.csv"))
+write_csv(proj_m3, here::here("posteriors", "pars_model3.csv"))
+
+
+## Statistics
 stats <- bind_rows(
   proj_m1 %>% mutate(Model = "M1"),
   proj_m2 %>% mutate(Model = "M2"),
@@ -78,28 +85,35 @@ stats <- bind_rows(
     ))
   )
 
+write_csv(stats, here::here("docs", "tabs", "stats_shortfall.csv"))
 
 
-stats %>% 
+g_ql <- stats %>% 
   ggplot(aes(x = Age)) +
   geom_ribbon(aes(ymin = QL35_L, ymax = QL35_U), alpha = 0.2) +
   geom_line(aes(y = QL35_M)) +
   facet_wrap(.~Model) +
   scale_y_continuous("Quality of life loss due to HZ against population norm in the UK") +
   scale_x_continuous("Age of rush onset") +
-  expand_limits(y = 0.2)
+  expand_limits(y = c(0, 0.2))
 
 
 
-stats %>% 
+g_qlh <- stats %>% 
   ggplot(aes(x = Age)) +
   geom_ribbon(aes(ymin = QLH35_L, ymax = QLH35_U), alpha = 0.2) +
   geom_line(aes(y = QLH35_M)) +
   facet_wrap(.~Model) +
   scale_y_continuous("Quality of life loss due to HZ against perfect health") +
   scale_x_continuous("Age of rush onset") +
-  expand_limits(y = 0.2)
+  expand_limits(y = c(0, 0.2))
 
+
+g_ql
+g_qlh
+
+ggsave(g_ql, filename = here::here("docs", "figs", "g_proj_ql_loss_norm.png"), width = 7, height = 5)
+ggsave(g_qlh, filename = here::here("docs", "figs", "g_proj_ql_loss_perfect.png"), width = 7, height = 5)
 
 
 
