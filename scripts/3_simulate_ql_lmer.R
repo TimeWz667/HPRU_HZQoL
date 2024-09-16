@@ -52,9 +52,10 @@ sim_lmer_at <- \(df, pars, q0) {
   sim <- df %>% 
     left_join(pars, by = "Key") %>% 
     mutate(
-      logit_q = b0 + b_t1 * Ti + b_t2 * Ti ^ 2 + b_a1 * Age + b_a2 * Age ^ 2,
+      logit_q = b0 + b_a1 * Age + b_a2 * Age ^ 2 + (b_t + b_at1 * Age + b_at2 * Age ^ 2) * Ti, 
       qol = 1 / (1 + exp(- logit_q)),
       qol = pmin(pmax(qol, 0.3), 0.7),
+      qol = (qol - 0.3) / (0.7 - 0.3) ,
       qol = qol * (1 - min_qol) + min_qol,
       p_z = 0
     ) %>% 
@@ -84,7 +85,7 @@ stats_lmer %>%
   geom_line(aes(y = QL35_M)) +
   scale_y_continuous("Quality of life loss due to HZ against population norm in the UK") +
   scale_x_continuous("Age of rush onset") +
-  expand_limits(y = 0.2)
+  expand_limits(y = 0)
 
 
 stats_lmer %>% 
@@ -93,6 +94,22 @@ stats_lmer %>%
   geom_line(aes(y = QLH35_M)) +
   scale_y_continuous("Quality of life loss due to HZ against perfect health") +
   scale_x_continuous("Age of rush onset") +
-  expand_limits(y = 0.2)
+  expand_limits(y = 0)
+
+
+
+proj_lmer
+
+proj = targets %>% 
+  sim_lmer_at(pars_lmer_at, min_qol)
+
+
+proj %>% 
+  filter(Age == 80) %>% 
+  filter(Ti < 1) %>% 
+  ggplot() +
+  geom_line(aes(x = Ti, y = qol, group = Key), alpha = 0.2)
+
+
 
 

@@ -27,11 +27,11 @@ dat <- reformed %>%
 # dat <- dat %>% filter(y0 != max(y0))
 
 
-m_at <- lmer(Y ~ poly(ti, 2, raw = T) + poly(Age, 2, raw = T) + (1 | PID:SID) + (1 | SID), data = dat)
+m_at <- lmer(Y ~ ti * poly(Age, 2, raw = T) + (1 | PID:SID) + (1 | SID), data = dat)
 AIC(m_at)
 summary(m_at)
 
-m_t <- lmer(Y ~ poly(ti, 2, raw = T) + (1 | PID:SID) + (1 | SID), data = dat)
+m_t <- lmer(Y ~ ti + (1 | PID:SID) + (1 | SID), data = dat)
 AIC(m_t)
 summary(m_t)
 
@@ -54,7 +54,7 @@ samples <- samples$replicates
 
 head(samples)
 
-names(samples) <- c("b0", "b_t1", "b_t2", "b_a1", "b_a2")
+names(samples) <- c("b0", "b_t", "b_a1", "b_a2", "b_at1", "b_at2")
 head(samples)
 
 write_csv(samples, here::here("posteriors", "boot_lmer_at.csv"))
