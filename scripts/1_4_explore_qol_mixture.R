@@ -41,6 +41,17 @@ clu %>%
 
 
 clu %>% 
+  filter(Age >= 50) %>% 
+  group_by(Age) %>% 
+  summarise(Cluster = mean(Cluster) - 1) %>%
+  mutate(
+    Cluster = log(Cluster / (1 - Cluster))
+  ) %>% 
+  ggplot() +
+  geom_point(aes(x = Age, y = Cluster))
+
+
+clu %>% 
   group_by(Tgp) %>% 
   summarise(Cluster = mean(Cluster) - 1) %>% 
   ggplot() +
