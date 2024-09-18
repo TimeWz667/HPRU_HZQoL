@@ -50,6 +50,9 @@ proj_m1 <- targets %>%
   sim_qol_a(post_logit_qol_a, min_qol) %>% 
   calc_shortfall(pars_demo)
 
+plot(density(proj_m1$QLH00))
+
+
 
 ### T2Z + qol(t)
 proj_m2 <- targets %>% 

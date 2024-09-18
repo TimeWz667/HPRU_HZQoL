@@ -115,7 +115,10 @@ resids %>%
 
 resids %>% 
   ggplot() +
-  geom_density(aes(x = resid_original, fill = Model), alpha = 0.3)
+  geom_density(aes(x = resid_original, fill = Model), alpha = 0.3) +
+  geom_vline(xintercept = 0) +
+  facet_wrap(.~Model) + 
+  expand_limits(y = 6)
 
 
 
