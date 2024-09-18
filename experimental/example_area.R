@@ -28,8 +28,9 @@ losses = data[, .(loss_min = area(time_points, 1 - EQ5D) / 365.25),
     by = .(study, Patient.ID, age)]
 
 # Look at trend in QALY loss with age
+losses[, author := sub(" et al.*$", "", study)]
 ggplot(losses[age >= 50], aes(x = age, y = loss_min)) +
-    geom_point(aes(colour = study)) +
+    geom_point(aes(colour = author)) +
     geom_smooth() +
     geom_vline(aes(xintercept = 80)) + 
     coord_cartesian(ylim = c(0, 0.2)) +
@@ -51,7 +52,7 @@ for (p in seq(1, length(patients), by = 40)) {
     pat = pat[!is.na(pat)]
     plot = ggplot(data[Patient.ID %in% pat]) +
         geom_area(aes(x = time_points, y = 1 - EQ5D)) +
-        geom_point(aes(x = time_points, y = 1 - EQ5D), colour = "red") +
+        geom_point(aes(x = time_points, y = 1 - EQ5D), colour = "red", size = 0.5) +
         facet_wrap(~panel_id, nrow = 5, ncol = 8) +
         cowplot::theme_cowplot(font_size = 7) +
         labs(x = "Time (days)", y = "QALY loss")
