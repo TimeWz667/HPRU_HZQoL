@@ -9,12 +9,14 @@
 # User-specific files
 .Ruserdata
 
-
 # Output files from R CMD check
 /*.Rcheck/
 
 # RStudio files
 .Rproj.user/
+
+# Mac litter
+.DS_Store
 
 
 .config/
