@@ -60,3 +60,11 @@ for (p in seq(1, length(patients), by = 40)) {
 }
 
 dev.off()
+
+# QALY loss, PHN versus non-PHN
+phn = data[time_points > 90 & EQ5D < 1, unique(Patient.ID)]
+losses[, PHN := Patient.ID %in% phn]
+ggplot(losses, aes(x = age, y = loss_min, colour = PHN)) + 
+    geom_point() + 
+    geom_smooth() + 
+    facet_wrap(~PHN)
