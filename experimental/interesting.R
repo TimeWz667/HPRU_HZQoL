@@ -2,6 +2,8 @@ library(haven)
 library(data.table)
 library(ggplot2)
 
+## note https://eprints.whiterose.ac.uk/124872/8/st0528.pdf?a
+
 
 # Some interesting observations.
 
@@ -10,7 +12,9 @@ library(ggplot2)
 # the Netherlands weights, all of the Rampakakis / MASTER studies (including 
 # Drolet) use the UK EQ5D weights:
 
-root = "~/OneDrive - London School of Hygiene and Tropical Medicine/Review of QOL after HZ onset/Data"
+# root = "~/OneDrive - London School of Hygiene and Tropical Medicine/Review of QOL after HZ onset/Data"
+root = "~/Documents/Data/HZQoL"
+
 ma1 = as.data.table(read_sas(file.path(root, "MASTER studies data/EQ5D - All Patients_14MAY2017.sas7bdat")))
 
 data = fread("./data/27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv")
@@ -51,3 +55,16 @@ ma1[USUBJID == "100001" & Country == "Thailand"]
 
 # [Note it's not for Latin America, but for Spanish-speaking Hispanics in the US]
 
+
+
+
+# Relationship between JAN/LA/UK QALY judgements
+ma = as.data.table(read_sas(file.path(root, "MASTER studies data/EQ5D - All Patients_14MAY2017.sas7bdat")))
+
+ggplot(ma) + 
+  geom_point(aes(x = EUROQOL_UK, y = EUROQOL_JAN)) + 
+  geom_abline(yintercept = 0, slope = 1)
+
+ggplot(ma) + 
+  geom_point(aes(x = EUROQOL_UK, y = EUROQOL_LA)) + 
+  geom_abline(yintercept = 0, slope = 1)
