@@ -4,20 +4,21 @@ library(rstan)
 theme_set(theme_bw())
 
 
-source(here::here("scripts", "fn_stan.R"))
-
-n_iter <- 100
-n_collect <- 50
-n_warmup <- floor(n_iter - n_collect)
-n_chains <- 4
-
-
 ## Load data
 load(here::here("data", "qol_reformed.rdata"))
 head(reformed)
 
 min_qol <- min(reformed$EQ5D)
 
+d <- reformed %>% 
+  filter(Health == 0) %>% 
+  filter(Q_rescaled > 0)
+
+qs <- d$Q_rescaled
+
+km <- kmeans(log(qs / (1 - qs)), 2)
+
+km$centers
 
 clu <- reformed %>% 
   filter(Health == 0) %>% 

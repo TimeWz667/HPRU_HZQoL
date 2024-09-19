@@ -50,8 +50,8 @@ posts <- bind_rows(lapply(agps, function(agp) {
   })
   
   post <- sampling(model, data = ds, pars = c("p0", "mu", "sigma"), 
-                   init = \() list(mu = rep(0, 2), sigma = c(0.5, 0.5)),
-                   chains = 2, iter = 15000, warmup = 14500)
+                   init = \() list(mu = c(1.47, -0.23), sigma = c(0.1, 0.1)),
+                   chains = 1, iter = 1500, warmup = 1000)
   
   save(post, ds, file = here::here("out", "post_" + model_src + "_" + agp + ".rdata"))
   
@@ -64,6 +64,9 @@ posts <- bind_rows(lapply(agps, function(agp) {
 rownames(posts) <- NULL
 
 posts %>% arrange(Var, Agp)
+
+posts %>% 
+  filter(startsWith(Var, "mu"))
 
 write_csv(posts, file = here::here("docs", "tabs", "fit_" + model_src + "_agp.csv"))
 
