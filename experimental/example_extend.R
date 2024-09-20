@@ -3,20 +3,22 @@ library(ggplot2)
 
 # Load data
 data = fread("./data/27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv")
-# data = fread("./data/test.csv")
 data = data[order(study, Patient.ID, time_points)]
 
-# This explores QALY loss as the area under the polygon defined by loss
-# measurements, e.g. if 1 - EQ5D measurements are *, looks like this:
+# This extends the method in example_area.R with additional areas (%%%):
 #           *                                   
 #          #|##                                 
 #        ###|#####*                    *        
-#      *####|#####|#####          #####|         
-# -----|####|#####|##########*#########|--------
+#    %%*####|#####|#####          #####|%%%%   
+# %%%%%|####|#####|##########*#########|%%%%%%%
 #
-# i.e. no area "sticks out" before the first point on the time axis or after
-# the last point on the time axis. My argument is that the QALY loss for a
-# given patient should be at least this much.
+# The area on the left is the QALY loss that prompted the visit to health care.
+# The area on the right, only for those patients for whom calculation of QALY
+# over time was censored.
+
+# Do some processing on data to identify censored patients etc
+### LEFT OFF HERE
+data[, last := c(rep(FALSE, .N - 1)
 
 # Calculate QALY loss for each patient
 area = function(t, x)
@@ -61,11 +63,3 @@ for (p in seq(1, length(patients), by = 40)) {
 }
 
 dev.off()
-
-# QALY loss, PHN versus non-PHN
-phn = data[time_points > 90 & EQ5D < 1, unique(Patient.ID)]
-losses[, PHN := Patient.ID %in% phn]
-ggplot(losses, aes(x = age, y = loss_min, colour = PHN)) + 
-    geom_point() + 
-    geom_smooth() + 
-    facet_wrap(~PHN)
