@@ -129,37 +129,33 @@ QALY_JN = function(EqMo, EqSC, EqUA, EqPD, EqAD)
 }
 
 # Create tables of EQ5D3 codes and index values
-TableUK = numeric(0)
-TableLA = numeric(0)
-TableJN = numeric(0)
-for (a in 1:3) {
-  for (b in 1:3) {
-    for (c in 1:3) {
-      for (d in 1:3) {
-        for (e in 1:3) {
-          nm = paste0(a, b, c, d, e)
-          TableUK[nm] = QALY_UK(a, b, c, d, e)
-          TableLA[nm] = QALY_LA(a, b, c, d, e)
-          TableJN[nm] = QALY_JN(a, b, c, d, e)
-        }
-      }
-    }
-  }
-}
+EQ5D3L = CJ(EqMo = 1:3, EqSC = 1:3, EqUA = 1:3, EqPD = 1:3, EqAD = 1:3)
+EQ5D3L[, code := paste0(EqMo, EqSC, EqUA, EqPD, EqAD)]
+TableUK = EQ5D3L[, structure(QALY_UK(EqMo, EqSC, EqUA, EqPD, EqAD), names = code)]
+TableLA = EQ5D3L[, structure(QALY_LA(EqMo, EqSC, EqUA, EqPD, EqAD), names = code)]
+TableJN = EQ5D3L[, structure(QALY_JN(EqMo, EqSC, EqUA, EqPD, EqAD), names = code)]
 
 # Location of Data directory for QOL review
-# root = "~/OneDrive - London School of Hygiene and Tropical Medicine/Review of QOL after HZ onset/Data"
-root = "~/Documents/Data/HZQoL"
+root = "~/OneDrive - London School of Hygiene and Tropical Medicine/Review of QOL after HZ onset/Data"
+# root = "~/Documents/Data/HZQoL"
 
 ## Scott et al data
 sc = fread(file.path(root, "HZ Judy Breuer data/Data.csv"))
 
+# Exclude patients who withdrew consent
+sc_exclude = sc[V2STATUS == 2 | V3STATUS == 2 | V4STATUS == 2, ID]
+sc = sc[!ID %in% sc_exclude]
+
+# Exclude patients marked as "not shingles"
+sc_exclude = sc[V2STATUS == 4 | V3STATUS == 4 | V4STATUS == 4, ID]
+sc = sc[!ID %in% sc_exclude]
+
 # Failed to parse here is OK -- it means #NULL! in the original character date data.
 sc[, RASHSTDA := lubridate::dmy(RASHSTDA)]
 sc[, V1DATE := lubridate::dmy(V1DATE)]
-sc[, V2DATE := lubridate::dmy(V2DATE)]    # 1 failed to parse
-sc[, V3DATE := lubridate::dmy(V3DATE)]    # 4 failed to parse
-sc[, VISDAT4 := lubridate::dmy(VISDAT4)]  # 8 failed to parse
+sc[, V2DATE := lubridate::dmy(V2DATE)]
+sc[, V3DATE := lubridate::dmy(V3DATE)]    # 1 failed to parse
+sc[, VISDAT4 := lubridate::dmy(VISDAT4)]  # 2 failed to parse
 
 # Time points
 sc[, t_1 := as.numeric(V1DATE - RASHSTDA)]
@@ -238,16 +234,13 @@ mac = ma[Country == "Canada"]
 mac = merge(mac, canada_times, by.x = c("USUBJID", "visit_number"), by.y = c("USUBJID", "variable"), all.x = TRUE)
 ma = rbind(ma[Country != "Canada"], mac, use.names = TRUE, fill = TRUE)
 
-##### TODO check / rationalize the below.
+# Imputation of typical delays between visits
+canada_times[, visit := 1:.N, by = USUBJID]
+canada_times = merge(canada_times, canada_times[visit == 1, .(USUBJID, onset = t)], by = "USUBJID")
+canada_times[onset >= 0 & onset <= 14, median(t - onset, na.rm = TRUE), by = visit]
 
-# Imputation of mean delays between visits
-keepers = canada_times[variable == 1 & t <= 14, USUBJID]
-mac[USUBJID %in% keepers, median(t-onset, na.rm = TRUE), by = visit_number]
-
-ma_times = c(-Inf, 0, 7, 14, 21, 30, 60, 90, 120, 150, 180)
+ma_times = c(-Inf, 0, 7, 14, 21, 30, 60, 90, 120, 150, 181)
 ma[is.na(t), t := onset + ma_times[visit_number + 1]]
-
-#####
 
 # Floor age
 ma[, age := floor(age)]
@@ -286,9 +279,33 @@ vw = melt(vw, id.vars = c("PtNoT0d", "Age", "VsclT0d"),
 )
 names(vw)[1:4] = c("id", "age", "rash_onset", "visit")
 
-# According to original methodology, assign specific time to each visit
-vw_times = c(4, 18, 34, 94, 184, 274, 369)
-vw[, t := vw_times[visit]]
+vw_method = "updated"
+vw[, visit := as.numeric(as.character(visit))] # unfactor
+
+if (vw_method == "original") {
+    # According to original methodology, assign specific time to each visit
+    vw_times = c(4, 18, 34, 94, 184, 274, 369)
+    vw[, t := vw_times[visit]]
+} else {
+    # Make onset/reference date whichever is earlier, onset of rash as recorded, or first visit date
+    vw = merge(vw, vw[visit == 1, .(id, date_visit1 = date)], by = "id", all = TRUE)
+    vw[, date1 := pmin(rash_onset, date_visit1)]
+    
+    # Calculate t
+    vw[, t := as.numeric(date - date1)]
+    
+    # Fix irregular rash onset date for one participant
+    vw[id == 102424, t := as.numeric(date - date_visit1)]
+    
+    # Remove NA visits and renumber remaining visits
+    vw = vw[!is.na(EqMo)]
+    vw[, visit := 1:.N, by = id]
+
+    # For irregular entries, assign dates from protocol
+    vw_times = c(4, 18, 34, 94, 184, 274, 369)
+    time_travellers = vw[!is.na(t), any(diff(t) <= 0), by = id][V1 == TRUE, id]
+    vw[id %in% time_travellers, t := vw_times[visit]]
+}
 
 # Convert to numeric (remove haven labels)
 vw$EqMo = as.numeric(vw$EqMo)
@@ -301,8 +318,6 @@ vw_out = vw[!is.na(EqMo),
     .(country = "Netherlands", study = "Van Wijck et al. 2016", id, age, visit, t, 
     EqMo, EqSC, EqUA, EqPD, EqAD)]
 
-vw_out[, visit := as.numeric(as.character(visit))] # unfactor
-
 
 ## Create output data
 dat = rbind(sc_out, ma_out, vw_out)
@@ -313,14 +328,16 @@ dat[study %like% "Drolet", id := paste("M Canada", id)]
 dat[study %like% "MASTER", study := paste("Rampakakis et al. 2017", country)]
 dat[study %like% "Rampakakis", id := paste(country, as.numeric(id))]
 dat[study %like% "Van", id := paste("Van Wijck", id)]
-
-#### TODO save here I suppose
+setkey(dat, "id")
 
 # Keep only complete cases
 dat = dat[complete.cases(dat)]
 
 # Remove any baseline measurements
 dat = dat[visit > 0]
+
+# Renumber visits
+dat[, visit := 1:.N, by = id]
 
 # Select patients with at least 4 time points
 exclude_points = dat[, .(zap = .N < 4), by = id][zap == TRUE, id]
@@ -330,193 +347,33 @@ dat = dat[!id %in% exclude_points]
 exclude_late = dat[visit == 1 & t > 14, id]
 dat = dat[!id %in% exclude_late]
 
+# Exclude if first visit is before rash onset
+exclude_early = dat[visit == 1 & t < 0, id]
+dat = dat[!id %in% exclude_early]
 
+# Differences in exclusions:
+# Scott: We exclude Scott 13 on the basis of >14 days between rash onset and
+# first time point. Scott 13 was not excluded in the previous study but should
+# have been.
+# Drolet: We exclude 125001 on the basis of only 3 timepoints; we exclude
+# 156004, 161001, 201001, 210001 because of first recording > 14 days after 
+# rash onset. Previous study excluded 104005, 109005, 118009, 159003, 170003, 
+# 189007, 195003, 205007, 206004, but these seem fine and so we include them.
+# Other MASTER: No differences
+# Van Wijck: No differences
 
-dat_format = dat[, .(time_points = t, age, study, EQ5D = QALY_UK(EqMo, EqSC, EqUA, EqPD, EqAD), Patient.ID = id)]
-fwrite(dat_format, "data/test.csv")
+# Reorder to be same order as original data...
+dat = dat[order(study, id)]
 
-test = fread("./data/test.csv")
-data = fread("./data/27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv")
-setdiff(test[, unique(Patient.ID)], data[, unique(Patient.ID)])
-setdiff(data[, unique(Patient.ID)], test[, unique(Patient.ID)])
-data[study %like% "Ramp"]
+fwrite(dat, "./data/eq5d_components.csv")
 
-sc_out
+## Produce outputs
 
-##### TODO revisit this
-
-# Make onset/reference date whichever is earlier, onset of rash as recorded, or first visit date
-vw = merge(vw, vw[visit == 1, .(id, date_visit1 = date)], by = "id", all = TRUE)
-vw[, date1 := pmin(rash_onset, date_visit1)]
-
-# Fix irregular rash onset date for one participant
-vw[id == 102424, t := as.numeric(date - date_visit1)]
-
-# Remove NA visits and renumber remaining visits
-vw = vw[!is.na(EqMo)]
-vw[, visit := 1:.N, by = id]
-
-ggplot(vw) +
-    geom_point(aes(x = visit, y = t))
-
-time_travellers = vw[!is.na(t), any(diff(t) < 0), by = id][V1 == TRUE, id]
-time_travellers = vw[!is.na(t), any(diff(t) == 0), by = id][V1 == TRUE, id]
-
-ggplot(vw[id %in% time_travellers]) +
-    geom_line(aes(x = visit, y = t, group = id))
-
-vw[id %in% time_travellers]
-
-# Note. Original methodology used defined days -- 
-# i.e. 4, 18, 34, 94, 184, 274, 369.
-
-dat[, Q0 := QALY_NL(EqMT0p, EqSCT0p, EqUAT0p, EqPDT0p, EqADT0p)]
-dat[, Q1 := QALY_NL(EqMT1p, EqSCT1p, EqUAT1p, EqPDT1p, EqADT1p)]
-dat[, Q2 := QALY_NL(EqMT2p, EqSCT2p, EqUAT2p, EqPDT2p, EqADT2p)]
-dat[, Q3 := QALY_NL(EqMT3p, EqSCT3p, EqUAT3p, EqPDT3p, EqADT3p)]
-dat[, Q4 := QALY_NL(EqMT4p, EqSCT4p, EqUAT4p, EqPDT4p, EqADT4p)]
-dat[, Q5 := QALY_NL(EqMT5p, EqSCT5p, EqUAT5p, EqPDT5p, EqADT5p)]
-dat[, Q6 := QALY_NL(EqMT6p, EqSCT6p, EqUAT6p, EqPDT6p, EqADT6p)]
-
-dat2 = melt(dat[, .(Patient.ID = PtNoT0d, Age = Age, Q0, Q1, Q2, Q3, Q4, Q5, Q6)],
-    id.vars = c("Patient.ID", "Age"))
-dat2 = dat2[order(Patient.ID, variable)]
-
-########
-
-
-
-
-
-
-
-
-
-
-
-not_in_mb = setdiff(ma[Country == "Canada", unique(USUBJID)], mb[, unique(unique)])
-# there are none other way round: setdiff(mb[, unique(unique)], ma[Country == "Canada", unique(USUBJID)])
-View(ma[USUBJID %in% not_in_mb])
-# ok so, can't just use the marc brisson data set
-canadians = ma[Country == "Canada"]
-
-# steps: first, check marc brisson data set is consistent with the master data set
-# second, get actual dates of surveys from marc brisson data set
-# third, apply imputation to remaining canadians not in marc brisson
-
-# cas_incident (only 0 or 1)
-mb[, table(cas_incident, useNA = "ifany")]
-# zhz_onset = onset date;
-# zi_date_1, days_since_onset_1, etc to 10
-
-# Need to add time of visit; next plot is odd
-plot(data[study %like% "Rampakakis", sort(unique(time_points))])
-# TODO left off here
-# I think what has happened is that duration since rash onset was used as start
-# point, then adding increments to that. Check tomorrow.
-# Yup.
-
-ma_out = ma[,
-  .(country = Country, study = "MASTER", id = USUBJID, age = NA,
-  visit = visit_number, t = NA, EqMo, EqSC, EqUA, EqPD, EqAD)]
-
-
-mb = fread(file.path(root, "Marc Brisson/master.csv"))
-mb[, EQ5D_1  := QALY_UK(mobile_1 , care_1 , usual_1 , discomf_1 , anxiety_1 )]
-mb[, EQ5D_2  := QALY_UK(mobile_2 , care_2 , usual_2 , discomf_2 , anxiety_2 )]
-mb[, EQ5D_3  := QALY_UK(mobile_3 , care_3 , usual_3 , discomf_3 , anxiety_3 )]
-mb[, EQ5D_4  := QALY_UK(mobile_4 , care_4 , usual_4 , discomf_4 , anxiety_4 )]
-mb[, EQ5D_5  := QALY_UK(mobile_5 , care_5 , usual_5 , discomf_5 , anxiety_5 )]
-mb[, EQ5D_6  := QALY_UK(mobile_6 , care_6 , usual_6 , discomf_6 , anxiety_6 )]
-mb[, EQ5D_7  := QALY_UK(mobile_7 , care_7 , usual_7 , discomf_7 , anxiety_7 )]
-mb[, EQ5D_8  := QALY_UK(mobile_8 , care_8 , usual_8 , discomf_8 , anxiety_8 )]
-mb[, EQ5D_9  := QALY_UK(mobile_9 , care_9 , usual_9 , discomf_9 , anxiety_9 )]
-mb[, EQ5D_10 := QALY_UK(mobile_10, care_10, usual_10, discomf_10, anxiety_10)]
-
-mb[, .(unique, EQ5D_1, EQ5D_2, EQ5D_3, EQ5D_4, EQ5D_5, EQ5D_6, EQ5D_7, EQ5D_8, EQ5D_9, EQ5D_10)]
-ma1[Country == "Canada" & USUBJID == "101001"]
-# for mb, 7006 columns. can cut view_v[1 to 10]_[number], 
-# side_v[1 to 10]_[number], body_part_v[1 to 10]_[number], 
-# x_v[1 to 10]_[number] 
-# jackpot is here:
-# mobile_x care_x usual_x discomf_x anxiety_x, where x is visit number 1 to 10
-
-ma1 = as.data.table(read_sas(file.path(root, "MASTER studies data/Active patients only/Age - Duration from Rash Onset_PHE 27MAR2017.sas7bdat")))
-ma1 = as.data.table(read_sas(file.path(root, "MASTER studies data/Active patients only/EQ-5D_PHE 27MAR2017.sas7bdat")))
-ma1 = as.data.table(read_sas(file.path(root, "MASTER studies data/Baseline Characteristics - All Patients_14MAY2017.sas7bdat")))
-
-
-# Load transformed data
-data = fread("./data/27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv")
-data = data[order(study, Patient.ID, time_points)]
-data2 = data[study %like% "Van Wijck"]
-data2[time_points == 4, variable := "Q0"]
-data2[time_points == 18, variable := "Q1"]
-data2[time_points == 34, variable := "Q2"]
-data2[time_points == 94, variable := "Q3"]
-data2[time_points == 184, variable := "Q4"]
-data2[time_points == 274, variable := "Q5"]
-data2[time_points == 369, variable := "Q6"]
-data2[, Patient.ID := as.numeric(stringr::str_remove(Patient.ID, "Van Wijck "))]
-
-# Merge data
-dm = merge(data2, dat2, by = c("Patient.ID", "variable"), all = TRUE)
-
-ggplot(dm) +
-    geom_point(aes(x = EQ5D, y = value)) +
-    geom_abline(yintercept = 0, slope = 1)
-
-dat2
-data2
-keep
-
-0126
-4, 18, 34, 369
-
-dat[1, sntT0p - VsclT0d]
-dat[1, sntT1p - VsclT0d]
-dat[1, sntT2p - VsclT0d]
-dat[1, sntT6p - VsclT0d]
-
-
-dat[1, sntT0p - sntT0d]
-dat[1, sntT1p - sntT0d]
-dat[1, sntT2p - sntT0d]
-dat[1, sntT6p - sntT0d]
-
-dat[1, sntT0p - IncT0d]
-dat[1, sntT1p - IncT0d]
-dat[1, sntT2p - IncT0d]
-dat[1, sntT6p - IncT0d]
-
-dat[1, sntT0p - DgnHZT0d]
-dat[1, sntT1p - DgnHZT0d]
-dat[1, sntT2p - DgnHZT0d]
-dat[1, sntT6p - DgnHZT0d]
-
-
-
-
-
-dat[3, sntT0p - VsclT0d]
-dat[3, sntT1p - VsclT0d]
-dat[3, sntT2p - VsclT0d]
-dat[3, sntT3p - VsclT0d]
-dat[3, sntT4p - VsclT0d]
-dat[3, sntT5p - VsclT0d]
-dat[3, sntT6p - VsclT0d]
-
-dat[3, sntT0p - sntT0d]
-dat[3, sntT1p - sntT0d]
-dat[3, sntT2p - sntT0d]
-dat[3, sntT6p - sntT0d]
-
-dat[3, sntT0p - IncT0d]
-dat[3, sntT1p - IncT0d]
-dat[3, sntT2p - IncT0d]
-dat[3, sntT6p - IncT0d]
-
-dat[3, sntT0p - DgnHZT0d]
-dat[3, sntT1p - DgnHZT0d]
-dat[3, sntT2p - DgnHZT0d]
-dat[3, sntT6p - DgnHZT0d]
+dat_uk = dat[, .(time_points = t, age, study, EQ5D = QALY_UK(EqMo, EqSC, EqUA, EqPD, EqAD), Patient.ID = id, value_set = "UK")]
+fwrite(dat_uk, "data/eq5d_uk.csv")
+dat_orig = dat[, .(time_points = t, age, study, 
+    EQ5D = ifelse(study == "Van Wijck et al. 2016", 
+        QALY_NL(EqMo, EqSC, EqUA, EqPD, EqAD),
+        QALY_UK(EqMo, EqSC, EqUA, EqPD, EqAD)), Patient.ID = id, 
+    value_set = ifelse(study == "Van Wijck et al. 2016", "NL", "UK"))]
+fwrite(dat_orig, "data/eq5d_orig.csv")
