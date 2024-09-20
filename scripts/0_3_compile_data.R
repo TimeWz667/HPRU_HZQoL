@@ -18,12 +18,13 @@ min_qol <- min(raw$EQ5D)
 
 
 reformed <- raw %>% 
-  mutate(ti = time_points / 365) %>% 
+  mutate(ti = time_points / 365.25) %>% 
   select(SID = study, PID = Patient.ID, Age = age, ti = ti, EQ5D) %>% 
   left_join(norm) %>% 
   mutate(
     Agp = cut(Age, c(0, 30, seq(35, 90, 5), 100), right = F),
-    Health = (EQ5D >= Norm) + 0,
+    HealthNorm = (EQ5D >= Norm) + 0,
+    HealthPerfect = (EQ5D == 1) + 0,
     Q_rescaled = (EQ5D - min_qol) / (max_qol - min_qol),
     Norm_rescaled = (Norm - min_qol) / (max_qol - min_qol)
   )
