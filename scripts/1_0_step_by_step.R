@@ -238,7 +238,7 @@ points(haz$ti + 0.5, haz$Surv / hf(0.5), col = 2, pch = 20, cex = 2)
 haz_full %>% 
   ggplot(aes(x = ti, y = Haz)) +
   geom_line(aes(colour = "month")) +
-  geom_line(data = haz_season_full, aes(colour = "season")) +
+  geom_line(data = haz_season_full, aes(colour = "season"), size = 3) +
   geom_line(data = haz, aes(colour = "int"))
 
 
