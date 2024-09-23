@@ -95,7 +95,7 @@ for (vs in c("orig", "uk")) {
   
   boot_cluster <- stats_cluster %>%
     filter(Agp == "All") %>% 
-    crossing(Key = 1:5) %>% 
+    crossing(Key = 1:2000) %>% 
     mutate(
       Q = rnorm(n(), mu, std),
       Q = pmin(Q, 1)
