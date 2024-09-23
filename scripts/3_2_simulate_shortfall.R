@@ -94,8 +94,8 @@ for(vs in c("orig", "uk")) {
     )
   
   
-  write_csv(sims, here::here("docs", "tabs", "QALY_loss_sims" + vs + ".csv"))
-  write_csv(stats, here::here("docs", "tabs", "QALY_loss_stats" + vs + ".csv"))
+  write_csv(sims, here::here("posteriors", "QALY_loss_sims_" + vs + ".csv"))
+  write_csv(stats, here::here("docs", "tabs", "QALY_loss_stats_" + vs + ".csv"))
   
   
   g_ql <- stats %>% 
