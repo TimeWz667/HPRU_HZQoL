@@ -132,7 +132,7 @@ g_tte_imputated <- dat_filled %>%
   geom_point(aes(T_evt2, pr, colour = Censored), alpha = 0.2) +
   geom_line(data = haz, aes(x = ti, y = Surv)) +
   scale_y_continuous("Survival", labels = scales::percent) +
-  scale_x_continuous("Years since rush onset") +
+  scale_x_continuous("Years since rash onset") +
   scale_colour_discrete("Censored") +
   theme(legend.position = "bottom")
 

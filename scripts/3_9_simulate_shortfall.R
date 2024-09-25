@@ -103,7 +103,7 @@ g_ql <- stats %>%
   geom_line(aes(y = QL35_M)) +
   facet_wrap(.~Model, labeller = labeller(Model = labs_model)) +
   scale_y_continuous("Quality of life loss due to HZ against population norm in the UK") +
-  scale_x_continuous("Age of rush onset") +
+  scale_x_continuous("Age of rash onset") +
   expand_limits(y = c(0, 0.2))
 
 
@@ -114,7 +114,7 @@ g_qlh <- stats %>%
   geom_line(aes(y = QLH35_M)) +
   facet_wrap(.~Model, labeller = labeller(Model = labs_model)) +
   scale_y_continuous("Quality of life loss due to HZ against perfect health") +
-  scale_x_continuous("Age of rush onset") +
+  scale_x_continuous("Age of rash onset") +
   expand_limits(y = c(0, 0.2))
 
 

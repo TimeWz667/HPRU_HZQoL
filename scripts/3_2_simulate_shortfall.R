@@ -106,7 +106,7 @@ for(vs in c("orig", "uk")) {
     geom_ribbon(aes(ymin = L, ymax = U), alpha = 0.2) +
     geom_line(aes(y = M)) +
     scale_y_continuous("QALY loss") +
-    scale_x_continuous("Age at rush onset") +
+    scale_x_continuous("Age at rash onset") +
     facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
     expand_limits(y = 0)
   

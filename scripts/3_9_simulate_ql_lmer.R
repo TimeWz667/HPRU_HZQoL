@@ -84,7 +84,7 @@ stats_lmer %>%
   geom_ribbon(aes(ymin = QL35_L, ymax = QL35_U), alpha = 0.2) +
   geom_line(aes(y = QL35_M)) +
   scale_y_continuous("Quality of life loss due to HZ against population norm in the UK") +
-  scale_x_continuous("Age of rush onset") +
+  scale_x_continuous("Age of rash onset") +
   expand_limits(y = 0)
 
 
@@ -93,7 +93,7 @@ stats_lmer %>%
   geom_ribbon(aes(ymin = QLH35_L, ymax = QLH35_U), alpha = 0.2) +
   geom_line(aes(y = QLH35_M)) +
   scale_y_continuous("Quality of life loss due to HZ against perfect health") +
-  scale_x_continuous("Age of rush onset") +
+  scale_x_continuous("Age of rash onset") +
   expand_limits(y = 0)
 
 
