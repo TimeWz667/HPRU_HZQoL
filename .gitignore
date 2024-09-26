@@ -27,3 +27,6 @@ models/*.rds
 
 posteriors/QALY_loss_sims_*.csv
 
+docs/cookbooks/~$*
+
+
