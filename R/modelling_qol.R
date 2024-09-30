@@ -53,13 +53,14 @@ fit_qol <- function(dat) {
 
 
 summarise_qol <- function(fit, file) {
-  write_csv(fit$stats, file)
+  write_csv(fit$stats, file = here::here("docs", "tabs", "fit_qol.csv"))
+  write_csv(fit$stats, file = here::here("posteriors", "fit_qol.csv"))
   return(fit$stats)
 }
 
 
 simulate_qol <- function(fit, n_sim = 2000) {
-  boot_cluster <- fit$stats_cluster %>%
+  boot_cluster <- fit$stats %>%
     filter(Agp == "All") %>% 
     crossing(Key = 1:n_sim) %>% 
     mutate(
