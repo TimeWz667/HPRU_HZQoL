@@ -147,13 +147,4 @@ sup_demo <- sup_demo_s %>%
   )
 
 
-sup_demo %>% 
-  filter(Year == 2023) %>% 
-  ggplot() +
-  geom_line(aes(x = Age, y = norm)) +
-  geom_line(aes(x = Age, y = norm_leoss))
-
-
-
-
 save(sup_demo_s, sup_demo, file = here::here("data", "sup_demo.rdata"))

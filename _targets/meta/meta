@@ -1,0 +1,22 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+calc_hazard|function|ab2ed81d6b57e50e|||||||||||||||
+calc_timing|function|e94bd7a5fb48f4ca|||||||||||||||
+compose_stan_model|function|6fcdfe79cf1a31d2|||||||||||||||
+data_norm|stem|329a39970725e07b|e7e922217b54f771|ada3b098e3a7feae|528001548||t19996.6072028107s|6642a5a34fb3a445|129568|rds|local|vector|||3.34||
+data_qol|stem|f5832a96d46250d0|2f87b54211f448f3|4706143fd700f51f|909460246||t19996.7975654168s|46d744855ce5276f|23001|rds|local|vector|||0.11||
+data_raw|stem|c5a58811face5cee|8b723abb763b5798|8bedcec0ff405173|-644868125||t19996.6926492596s|abe74fed48cda338|42267|rds|local|vector|||0.95||
+data_tte|stem|d5b2f19bea743144|152104bc9428ff37|0d143aa7671d6540|-1550666243||t19996.7987815896s|4388fb5c14f2303e|29385|rds|local|vector|||1.45|There were 60 warnings in summarise.The first warning wasℹ In argument T_last  maxtiEnd.ℹ In group 22 PID  Argentina 1031.Caused by warning in max no nonmissing arguments to max returning Infℹ Run dplyrlast_dplyr_warnings to see the 59 remaining warnings.|
+empirical_surv|function|18b044ab39a0adbb|||||||||||||||
+file_model_tte|stem|dad9da606fdcaf0e|898b92e5e31a3ffe|2c530c1562a7fbd1|-508233647|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/models/time2zero_age.stan|t19989.6904073109s|cb5de256bff6bdf1|247|file|local|vector|||1.17||
+file_norm|stem|349988d8565a4604|ab2bca9b67392fc2|2c530c1562a7fbd1|164554510|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/qale_shortfall.csv|t19962.5437130159s|86edadd499abb8ca|19082|file|local|vector|||0||
+file_qol|stem|630c5c3d2b149ff7|83e86be6a2430f29|2c530c1562a7fbd1|771708187|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/eq5d_uk.csv|t19986.7053561405s|286b43f29899ff37|525725|file|local|vector|||6.53||
+fit_qol|function|fc01e92e16c3bb2c|||||||||||||||
+format_qol|function|0db13f6fe95a7e46|||||||||||||||
+format_tte|function|98b4275be2892d9d|||||||||||||||
+get_data_norm|function|d519826d70934664|||||||||||||||
+get_data_qol|function|1f1e017f9ec07651|||||||||||||||
+model_tte|stem|15f1178df0571b2e|6d58dc69dfc2a3cd|820519467a493e9f|1423656442||t19996.7937406262s|80dc0a9ef80da1cd|1480251|rds|local|vector|||131.9||
+pars_qol|stem|b82d82354a88b299|409850949b1cfe17|e7509761b266eb22|741732625||t19996.8128441757s|de5e2ea11c70f2e6|40589|rds|local|vector|||0.3||
+simulate_qol|function|767bf4a248d4bcc6|||||||||||||||
+summarise_qol|function|ebf096c33c7903ff|||||||||||||||
+tab_pars_qol|stem|f614cfb7cf381160|1f85f44960f97789|024328a5614109a1|-1613513142||t19996.8140823981s|9224c7c7d6e63076|1502|rds|local|vector|||0.3||
