@@ -245,6 +245,9 @@ ma[is.na(t), t := onset + ma_times[visit_number + 1]]
 # Floor age
 ma[, age := floor(age)]
 
+# Remember IDs of individuals in perfect health at start of study
+ma_perfect = ma[Visit == "SV0" & EUROQOL_UK == 1, .(Country, USUBJID)]
+
 # Output in common format
 ma_out = ma[, .(country = Country, study = "MASTER", id = USUBJID, age = age,
     visit = visit_number, t = t, EqMo, EqSC, EqUA, EqPD, EqAD)]
@@ -377,3 +380,9 @@ dat_orig = dat[, .(time_points = t, age, study,
         QALY_UK(EqMo, EqSC, EqUA, EqPD, EqAD)), Patient.ID = id, 
     value_set = ifelse(study == "Van Wijck et al. 2016", "NL", "UK"))]
 fwrite(dat_orig, "data/eq5d_orig.csv")
+
+dat_perfect = dat
+dat_perfect[, USUBJID := sprintf("%06s", stringr::str_remove_all(id, "[A-Za-z ]*"))]
+dat_perfect = merge(dat_perfect, ma_perfect, by.x = c("country", "USUBJID"), by.y = c("Country", "USUBJID"))
+dat_perf_uk = dat_perfect[, .(time_points = t, age, study, EQ5D = QALY_UK(EqMo, EqSC, EqUA, EqPD, EqAD), Patient.ID = id, value_set = "UK")]
+fwrite(dat_perf_uk, "data/eq5d_perf_uk.csv")
