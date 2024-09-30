@@ -4,7 +4,9 @@ library(ggplot2)
 # Load data
 # data = fread("./data/27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv")
 # data = fread("./data/eq5d_orig.csv")
+# data = fread("./data/eq5d_perf_uk.csv")
 data = fread("./data/eq5d_uk.csv")
+# data = data[study %like% "Drolet|Rampakakis"]
 data = data[order(study, Patient.ID, time_points)]
 
 # This explores QALY loss as the area under the polygon defined by loss
