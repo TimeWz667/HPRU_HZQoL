@@ -65,7 +65,7 @@ sim_ql <- \(age0 = 50, pars, pars_demo, dt = 0.01) {
 }
 
 
-simulate_shortfall <- function(pars, data_norm, age0 = 50, age1 = 99) {
+simulate_shortfall <- function(pars, data_norm, vset = "uk", age0 = 50, age1 = 99) {
   pars_demo <- data_norm %>% 
     filter(Year == 2023) %>% 
     ungroup() %>% 
@@ -73,13 +73,13 @@ simulate_shortfall <- function(pars, data_norm, age0 = 50, age1 = 99) {
   
   sim <- bind_rows(lapply(age0:age1, \(a0) sim_ql(age0 = a0, pars = pars, pars_demo = pars_demo)))
   
-  write_csv(sim, here::here("posteriors", "QALY_loss_sims_uk.csv"))
+  write_csv(sim, here::here("posteriors", paste0("QALY_loss_sims_", vset, ".csv")))
   
   return(sim)
 }
 
 
-summarise_shortfall <- function(sim) {
+summarise_shortfall <- function(sim, vset) {
   stats <- sim %>% 
     select(-Key) %>% 
     group_by(Age) %>% 
@@ -88,12 +88,12 @@ summarise_shortfall <- function(sim) {
     pivot_wider()
   
 
-  write_csv(stats, here::here("docs", "tabs", "QALY_loss_stats_uk.csv"))
+  write_csv(stats, here::here("docs", "tabs", paste0("QALY_loss_stats_", vset, ".csv")))
   
   return(stats)
 }
 
-vis_shortfall <- function(sim, stats) {
+vis_shortfall <- function(sim, stats, vset) {
   gs <- list()
   gs$g_ql <- stats %>% 
     filter(startsWith(Index, "QL")) %>% 
@@ -103,13 +103,30 @@ vis_shortfall <- function(sim, stats) {
     geom_ribbon(aes(ymin = L, ymax = U), alpha = 0.2) +
     geom_line(aes(y = M)) +
     scale_y_continuous("QALY loss") +
-    scale_x_continuous("Age at rash onset") +
+    scale_x_continuous("Age at onset of HZ rush") +
     facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
-    expand_limits(y = 0)
+    expand_limits(y = 0) +
+    labs(caption = "discounting: 3.5%") +
+    theme_bw()
   
   
+  gs$g_ql_grad <- sim %>% 
+    select(Age, QL35, QLH35) %>% 
+    filter(Age < 99) %>%  
+    pivot_longer(-Age, names_to = "Index") %>% 
+    ggplot(aes(x = Age, y = value)) +
+    stat_lineribbon() +
+    scale_fill_brewer() +
+    scale_y_continuous("QALY loss") +
+    scale_x_continuous("Age at onset of HZ rush") +
+    facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
+    expand_limits(y = 0) +
+    labs(caption = "discounting: 3.5%") +
+    theme_bw()
   
-  ggsave(gs$g_ql, filename = here::here("docs", "figs", "g_ql_uk.png"), width = 7, height = 4)
+  
+  ggsave(gs$g_ql, filename = here::here("docs", "figs", paste0("g_ql_", vset, ".png")), width = 7, height = 4)
+  ggsave(gs$g_ql_grad, filename = here::here("docs", "figs", paste0("g_ql_grad_", vset, ".png")), width = 7.3, height = 4)
   
   return(gs)
 

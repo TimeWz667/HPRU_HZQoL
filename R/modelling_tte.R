@@ -1,8 +1,5 @@
-fit_tte <- function(model, dat_tte) {
-  n_iter <- 20000
-  n_collect <- 500
+fit_tte <- function(model, dat_tte, n_iter = 2e4, n_collect = 500, n_chains = 4) {
   n_warmup <- floor(n_iter - n_collect)
-  n_chains <- 4
   
   ds <- local({
     d <- dat_tte %>% filter(T_evt > 0)
@@ -22,8 +19,8 @@ fit_tte <- function(model, dat_tte) {
 }
 
 
-summarise_tte <- function(fit, file) {
-  write_csv(fit$Summary, file = here::here("docs", "tabs", "fit_time2zero_age.csv"))
-  write_csv(fit$Ext, file = here::here("posteriors", "post_time2zero_age.csv"))
+summarise_tte <- function(fit) {
+  write_csv(fit$Summary, file = here::here("docs", "tabs", "fit_time2zero.csv"))
+  write_csv(fit$Ext, file = here::here("posteriors", "post_time2zero.csv"))
   return(fit$Summary)
 }

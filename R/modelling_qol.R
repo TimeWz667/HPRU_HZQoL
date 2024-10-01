@@ -52,9 +52,9 @@ fit_qol <- function(dat) {
 }
 
 
-summarise_qol <- function(fit, file) {
-  write_csv(fit$stats, file = here::here("docs", "tabs", "fit_qol.csv"))
-  write_csv(fit$stats, file = here::here("posteriors", "fit_qol.csv"))
+summarise_qol <- function(fit, vset) {
+  write_csv(fit$stats, file = here::here("docs", "tabs", paste0("fit_qol_", vset, ".csv")))
+  write_csv(fit$stats, file = here::here("posteriors", paste0("fit_qol_", vset, ".csv")))
   return(fit$stats)
 }
 
