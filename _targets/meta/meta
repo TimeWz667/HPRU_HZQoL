@@ -33,9 +33,13 @@ pars_shortfall|pattern|358f54270dc32dd2|7811fc93084c65e9||-1547213787||||81532|r
 pars_shortfall_646445537cc521c8|branch|791face0c8e21fcd|7811fc93084c65e9|3a6996100afb2897|618580596||t19997.0116851987s|dbebda4c3f3d5fd2|40770|rds|local|vector|pars_shortfall||0.07||
 pars_shortfall_a6cff2ca6059032d|branch|4096a226c44338b8|7811fc93084c65e9|3c9b6d4120415482|-2133075148||t19997.0116861832s|ffca9885ed3057cf|40762|rds|local|vector|pars_shortfall||0.05||
 pars_tte|stem|bc20af501c49eb9e|619081ef22f6a365|e26179b583cbcaca|-250904775||t19997.0060562312s|a0dd9cc59b0500da|44656|rds|local|vector|||53|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
+plot_qol|pattern|1e0f40e120f94966|e519e5f518d41fe2||-1456464826||||1669398|rds|local|vector||plot_qol_5a8626b0c57700bb*plot_qol_77899c305cf17e06|1.02||
+plot_qol_5a8626b0c57700bb|branch|f7a48de0b8689359|e519e5f518d41fe2|20b754b2b5860a44|177899596||t19997.6697756827s|e5e85ff16bc0e2db|832971|rds|local|vector|plot_qol||0.55||
+plot_qol_77899c305cf17e06|branch|7104e30edbff0fb2|e519e5f518d41fe2|750df57f6011de0a|-1064920778||t19997.6697834373s|b24a9586e9bc39b2|836427|rds|local|vector|plot_qol||0.47||
 plot_shortfall|pattern|faf37d9f44f66618|eb0ec8473dcd6f7d||1324589521||||13339929|rds|local|vector||plot_shortfall_bbf29c3bb2fee4b5*plot_shortfall_7df0b5b65b302560|5.37||
 plot_shortfall_7df0b5b65b302560|branch|6d06720a71503116|eb0ec8473dcd6f7d|78672d359382ffa2|1232209569||t19997.0318754245s|ade8f0f574285db9|6670309|rds|local|vector|plot_shortfall||2.66||
 plot_shortfall_bbf29c3bb2fee4b5|branch|aac0b189e29b5240|eb0ec8473dcd6f7d|e3a01ea5630b5914|1101232729||t19997.0318386685s|9db255b44ecebbda|6669620|rds|local|vector|plot_shortfall||2.71||
+plot_tte|stem|dd21bf125a2f02e8|cd4811cac7923767|04f64c5254b8e7a9|1222683081||t19997.7208893836s|f2de2469be356334|110|rds|local|vector|||6.3||
 restructure_stan|function|5f51b2b00b777379|||||||||||||||
 sim_ql|function|a951a74925ee5ea9|||||||||||||||
 sim_shortfall|pattern|75abb20e5d290a42|c0ce617673a9c165||1106514453||||5208236|rds|local|vector||sim_shortfall_b0ea4191ecc56fc9*sim_shortfall_531366c379ee1619|367.98||
@@ -53,5 +57,7 @@ tab_pars_tte|stem|ec0a8286ec64693c|2e79bfe6f608a2db|a79bf2398a2529cb|-1803849541
 tab_shortfall|pattern|0e632391fd29362e|5557097ffba8b575||170634571||||24880|rds|local|vector||tab_shortfall_0eebb4409126f966*tab_shortfall_f3bb8bbaac01937b|0.52||
 tab_shortfall_0eebb4409126f966|branch|6e51e525c00924b7|5557097ffba8b575|4c20069eeb46d3d3|453994838||t19997.0169556942s|b9656fbf53e3d2b1|12440|rds|local|vector|tab_shortfall||0.25||
 tab_shortfall_f3bb8bbaac01937b|branch|6e51e525c00924b7|5557097ffba8b575|4ae51c0fce1a2541|950683250||t19997.0169592591s|b9656fbf53e3d2b1|12440|rds|local|vector|tab_shortfall||0.27||
+vis_qol|function|bb3bc85324126f1c|||||||||||||||
 vis_shortfall|function|50c08c62d3592428|||||||||||||||
+vis_tte|function|846fecc9e48e5025|||||||||||||||
 vset|stem|84ec6d9292e9db45|4f00e0423dabb358|2c530c1562a7fbd1|1607844257||t19997.0004718211s|db2361de2073f9e4|61|rds|local|vector||vset_003c01a3a8452731*vset_4569be510f4f8783|0.53||

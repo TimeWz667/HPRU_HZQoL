@@ -39,6 +39,7 @@ g_tte <- sims %>%
   scale_y_continuous("Time to recovery, year") +
   facet_grid(.~Source)
 
+g_tte
 
 ggsave(g_tte, filename = here::here("docs", "figs", "g_sim_tte.png"), width = 7, height = 4)
 
