@@ -24,6 +24,7 @@
 
 out/
 models/*.rds
+models/legacy/*.rds
 
 posteriors/QALY_loss_sims_*.csv
 
