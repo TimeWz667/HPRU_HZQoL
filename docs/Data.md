@@ -28,8 +28,14 @@
 - norm_leoss for population norm smoothed with LEOSS spline on age
 
 #### EQ5D related to herpes zoster
-- [27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv](data/27-06-2018 EQ5D_IL.df.mini EQ5D individual level data.csv)
-- individual data fetched from reviewed studies listed in **studies/**
+- [eq5d_uk.csv](data/eq5d_uk.csv)
+  - individual data fetched from reviewed studies listed in **studies/**
+  - using UK value set
+  
+- [eq5d_orig.csv](data/eq5d_orig.csv)
+  - individual data fetched from reviewed studies listed in **studies/**
+  - using original value sets
+
 
 
 ## Reformed datasets for analysis 
