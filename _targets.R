@@ -46,14 +46,7 @@ list(
   tar_target(pars_shortfall, boot_pars(pars_tte, pars_qol, n_sim = 1000), pattern = map(pars_qol)),
   tar_target(sim_shortfall, simulate_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_qol, vset)),
   tar_target(tab_shortfall, summarise_shortfall(sim_shortfall, vset), pattern = map(sim_shortfall, vset)),
-  tar_target(plot_shortfall, vis_shortfall(sim_shortfall, tab_shortfall, vset), pattern = map(sim_shortfall, tab_shortfall, vset))
-  
-  ## presentation
-
-
-
-  # 
-  # tar_target(gof, eval_gof(data_norm, data_tte, sim_qol_t))
-  
+  tar_target(plot_shortfall, vis_shortfall(sim_shortfall, tab_shortfall, vset), pattern = map(sim_shortfall, tab_shortfall, vset)),
+  tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset))
 
 )

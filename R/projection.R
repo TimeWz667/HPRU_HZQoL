@@ -93,6 +93,65 @@ summarise_shortfall <- function(sim, vset) {
   return(stats)
 }
 
+
+vis_qol_t <- function(pars, pars_demo, vset, age = 50) {
+  theme_set(theme_bw())
+  
+  norm0 <- pars_demo %>% filter(Year == 2023 & Age == age) %>% pull(norm)
+  
+  sim_qol <- pars %>% 
+    filter(Key < 100) %>% 
+    crossing(ti = seq(0, 1, 0.01)) %>% 
+    mutate(
+      Age = age, 
+      rate = r0 * exp(Age * ba1),
+      pr_hz = 1 - pexp(ti, rate),
+      Cluster = runif(n()),
+      Cluster = case_when(
+        Cluster < Prop_0 ~ "0",
+        Cluster < Prop_0 + Prop_1 ~ "1",
+        T ~ "2",
+      ),
+      Q = case_when(
+        Cluster == "0" ~ Q_0,
+        Cluster == "1" ~ Q_1,
+        T ~ Q_2
+      ),
+      qol = (Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2),
+    )
+  
+  gs <- list()
+  
+  gs$g_qol <- sim_qol %>% 
+    ggplot() +
+    geom_point(aes(x = ti, y = Q, colour = Cluster, alpha = pr_hz), pch = 19) +
+    scale_alpha("Disutility", range = c(0.1, 0.5), label = scales::percent) +
+    scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
+    scale_x_continuous("Months since rush onset", label = scales::number_format(scale = 12)) +
+    expand_limits(y = c(-0.5, 1)) +
+    labs(caption = paste0("Age: ", age))
+  
+  
+  gs$g_qol_t <- sim_qol %>% 
+    mutate(qol_t = qol * pr_hz + (1 - pr_hz)) %>% 
+    ggplot() +
+    stat_lineribbon(aes(x = ti, y = qol_t)) +
+    geom_hline(yintercept = norm0, linetype = 2) +
+    geom_text(x = 1, y = norm0, vjust = 1.5, hjust = 1.1, label = "Population norm") +
+    #geom_point(aes(x = ti, y = qol_t), pch = 19) +
+    scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
+    scale_fill_brewer() +
+    scale_x_continuous("Months since rush onset", label = scales::number_format(scale = 12)) +
+    expand_limits(y = c(-0.5, 1)) +
+    labs(caption = paste0("Age: ", age))
+  
+  ggsave(gs$g_qol, filename = here::here("docs", "figs", paste0("g_qol_", age, "_", vset, ".png")), width = 8, height = 5)
+  ggsave(gs$g_qol_t, filename = here::here("docs", "figs", paste0("g_qol(", age, ")_", vset, ".png")), width = 8, height = 5)
+  
+  return(gs)
+}
+
+
 vis_shortfall <- function(sim, stats, vset) {
   gs <- list()
   gs$g_ql <- stats %>% 
