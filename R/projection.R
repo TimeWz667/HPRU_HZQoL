@@ -196,7 +196,7 @@ vis_shortfall <- function(sim, stats, vset) {
     geom_ribbon(aes(ymin = L, ymax = U), alpha = 0.2) +
     geom_line(aes(y = M)) +
     scale_y_continuous("QALY loss") +
-    scale_x_continuous("Age at onset of HZ rush") +
+    scale_x_continuous("Age at onset of HZ rash") +
     facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
     expand_limits(y = 0) +
     labs(caption = "discounting: 3.5%") +
@@ -211,7 +211,7 @@ vis_shortfall <- function(sim, stats, vset) {
     stat_lineribbon() +
     scale_fill_brewer() +
     scale_y_continuous("QALY loss") +
-    scale_x_continuous("Age at onset of HZ rush") +
+    scale_x_continuous("Age at onset of HZ rash") +
     facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
     expand_limits(y = 0) +
     labs(caption = "discounting: 3.5%") +
