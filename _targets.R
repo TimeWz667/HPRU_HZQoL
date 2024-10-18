@@ -10,6 +10,9 @@ tar_option_set(
 
 tar_source()
 
+dir.create("pars/", showWarnings = F)
+dir.create("posteriors/", showWarnings = F)
+
 
 options(dplyr.summarise.inform = FALSE)
 options(mc.cores = 4)
@@ -46,6 +49,7 @@ list(
   tar_target(sim_shortfall, simulate_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset)),
   tar_target(tab_shortfall, summarise_shortfall(sim_shortfall, vset), pattern = map(sim_shortfall, vset)),
   tar_target(plot_shortfall, vis_shortfall(sim_shortfall, tab_shortfall, vset), pattern = map(sim_shortfall, tab_shortfall, vset)),
-  tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset))
+  tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset)),
 
+  tar_target(js_shortfall, output_pars_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset))
 )

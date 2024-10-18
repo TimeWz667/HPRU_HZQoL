@@ -132,7 +132,7 @@ vis_qol_t <- function(pars, pars_demo, vset, age = 50) {
     geom_text(x = 1, y = norm0, vjust = -.5, hjust = 1.1, label = "Population norm") +
     scale_alpha("Probability of \ndisutility", range = c(0, 0.5), label = scales::percent) +
     scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
-    scale_x_continuous("Months since rush onset", label = scales::number_format(scale = 12)) +
+    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
     expand_limits(y = c(-0.5, 1)) +
     labs(caption = paste0("Age: ", age))
   
@@ -146,7 +146,7 @@ vis_qol_t <- function(pars, pars_demo, vset, age = 50) {
     #geom_point(aes(x = ti, y = qol_t), pch = 19) +
     scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
     scale_fill_brewer() +
-    scale_x_continuous("Months since rush onset", label = scales::number_format(scale = 12)) +
+    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
     expand_limits(y = c(-0.5, 1)) +
     labs(caption = paste0("Age: ", age))
   
@@ -159,7 +159,7 @@ vis_qol_t <- function(pars, pars_demo, vset, age = 50) {
     geom_text(x = 1, y = norm0, vjust = -.5, hjust = 1.1, label = "Population norm") +
     scale_alpha("Probability of \ndisutility", range = c(0, 0.5), label = scales::percent) +
     scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
-    scale_x_continuous("Months since rush onset", label = scales::number_format(scale = 12)) +
+    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
     expand_limits(y = c(-0.5, 1)) +
     labs(caption = paste0("Age: ", age))
   
@@ -173,7 +173,7 @@ vis_qol_t <- function(pars, pars_demo, vset, age = 50) {
     #geom_point(aes(x = ti, y = qol_t), pch = 19) +
     scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
     scale_fill_brewer() +
-    scale_x_continuous("Months since rush onset", label = scales::number_format(scale = 12)) +
+    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
     expand_limits(y = c(-0.5, 1)) +
     labs(caption = paste0("Age: ", age))
   
@@ -196,7 +196,7 @@ vis_shortfall <- function(sim, stats, vset) {
     geom_ribbon(aes(ymin = L, ymax = U), alpha = 0.2) +
     geom_line(aes(y = M)) +
     scale_y_continuous("QALY loss") +
-    scale_x_continuous("Age at onset of HZ rush") +
+    scale_x_continuous("Age at onset of HZ rash") +
     facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
     expand_limits(y = 0) +
     labs(caption = "discounting: 3.5%") +
@@ -211,7 +211,7 @@ vis_shortfall <- function(sim, stats, vset) {
     stat_lineribbon() +
     scale_fill_brewer() +
     scale_y_continuous("QALY loss") +
-    scale_x_continuous("Age at onset of HZ rush") +
+    scale_x_continuous("Age at onset of HZ rash") +
     facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
     expand_limits(y = 0) +
     labs(caption = "discounting: 3.5%") +
