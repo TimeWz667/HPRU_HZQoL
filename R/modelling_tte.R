@@ -32,7 +32,7 @@ fit_tte <- function(model, dat_tte, n_iter = 2e4, n_collect = 500, n_chains = 4)
 summarise_tte <- function(fit) {
   write_csv(fit$Summary, file = here::here("docs", "tabs", "fit_time2zero.csv"))
   write_csv(fit$Ext, file = here::here("posteriors", "post_time2zero.csv"))
-  return(fit$Summary)
+  return(here::here("posteriors", "post_time2zero.csv"))
 }
 
 

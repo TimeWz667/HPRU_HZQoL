@@ -83,7 +83,13 @@ fit_qol <- function(model, dat_qol, n_iter = 2e4, n_collect = 500, n_chains = 4)
 summarise_qol <- function(fit, vset) {
   write_csv(fit$Summary, file = here::here("docs", "tabs", paste0("fit_qol_", vset, ".csv")))
   write_csv(fit$Ext, file = here::here("posteriors", paste0("post_qol_", vset, ".csv")))
-  return(fit$Summary)
+  return(here::here("posteriors", paste0("post_qol_", vset, ".csv")))
+}
+
+
+summarise_qol_kmeans <- function(fit, vset) {
+  write_csv(fit$stats, file = here::here("posteriors", paste0("post_qol_k_", vset, ".csv")))
+  return(here::here("posteriors", paste0("post_qol_k_", vset, ".csv")))
 }
 
 

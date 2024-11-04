@@ -13,7 +13,11 @@ output_pars_shortfall <- function(pars_sf, data_norm, vset = "uk") {
     pars_shortfall = pars_sf
   )
   
-  jsonlite::write_json(js, here::here("pars", paste0("pars_qol_", vset, ".json")), auto_unbox = T)
+  f <- here::here("pars", paste0("pars_ql_", vset, ".csv"))
+  write_csv(pars_sf, f)
+  
+  f <- here::here("pars", paste0("pars_qol_", vset, ".json"))
+  jsonlite::write_json(js, f, auto_unbox = T)
 
-  return(js)
+  return(f)
 }

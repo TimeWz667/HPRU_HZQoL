@@ -35,24 +35,29 @@ list(
   tar_target(file_model_tte, here::here("models", "time2zero_surv_age.stan"), format = "file"),
   tar_target(model_tte, stan_model(file_model_tte)),
   tar_target(pars_tte, fit_tte(model_tte, data_tte)),
-  tar_target(tab_pars_tte, summarise_tte(pars_tte)),
+  tar_target(file_pars_tte, summarise_tte(pars_tte), format = "file"),
   tar_target(plot_tte, vis_tte(data_tte, pars_tte)),
  
   ## modelling, QoL
   tar_target(data_qol, format_qol(data_raw), pattern = map(data_raw)),
-  tar_target(file_model_qol, here::here("models", "k_simplex.stan"), format = "file"),
-  tar_target(model_qol, stan_model(file_model_qol)),
-  tar_target(pars_qol, fit_qol(model_qol, data_qol), pattern = map(data_qol)),
-  tar_target(tab_pars_qol, summarise_qol(pars_qol, vset), pattern = map(pars_qol, vset)),
+  
+  # tar_target(file_model_qol, here::here("models", "k_simplex.stan"), format = "file"),
+  # tar_target(model_qol, stan_model(file_model_qol)),
+  # tar_target(pars_qol, fit_qol(model_qol, data_qol), pattern = map(data_qol)),
+  # tar_target(file_pars_qol, summarise_qol(pars_qol, vset), pattern = map(pars_qol, vset), format = "file"),
+  # 
   tar_target(pars_qol_k, fit_qol_kmeans(data_qol), pattern = map(data_qol)),
-  # tar_target(plot_qol, vis_qol(data_qol, pars_qol, vset), pattern = map(data_qol, pars_qol, vset))
+  tar_target(file_pars_qol_k, summarise_qol_kmeans(pars_qol_k, vset), pattern = map(pars_qol_k, vset), format = "file"),
+  tar_target(plot_qol, vis_qol(data_qol, pars_qol_k, vset), pattern = map(data_qol, pars_qol_k, vset)),
   
   ## simulation
-  tar_target(pars_shortfall, boot_pars(pars_tte, pars_qol_k, n_sim = 1000), pattern = map(pars_qol_k)),
+  
+  tar_target(pars_shortfall, boot_pars(file_pars_tte, file_pars_qol_k, n_sim = 1000), pattern = map(file_pars_qol_k)),
   tar_target(sim_shortfall, simulate_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset)),
   tar_target(tab_shortfall, summarise_shortfall(sim_shortfall, vset), pattern = map(sim_shortfall, vset)),
-  tar_target(plot_shortfall, vis_shortfall(sim_shortfall, tab_shortfall, vset), pattern = map(sim_shortfall, tab_shortfall, vset))
-  # tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset)),
-  # 
-  # tar_target(js_shortfall, output_pars_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset))
+  tar_target(plot_shortfall, vis_shortfall(sim_shortfall, tab_shortfall, vset), pattern = map(sim_shortfall, tab_shortfall, vset)),
+  tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset)),
+
+  tar_target(js_shortfall, output_pars_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset), format = "file")
+  
 )
