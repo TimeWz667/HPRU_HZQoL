@@ -1,4 +1,4 @@
-fit_qol <- function(dat) {
+fit_qol_kmeans <- function(dat) {
   require(dplyr)
   
   dat_cluster <- dat %>% 
@@ -52,16 +52,42 @@ fit_qol <- function(dat) {
 }
 
 
+summarise_qol_kmeans <- function(fit) {
+  
+}
+
+
+fit_qol <- function(model, dat_qol, n_iter = 2e4, n_collect = 500, n_chains = 4) {
+  n_warmup <- floor(n_iter - n_collect)
+  
+  ds <- list(
+    N = nrow(dat_qol),
+    K = 2,
+    Ys = dat_qol$EQ5D
+  )
+  
+  km <- fit_qol_kmeans(dat_qol)$stats %>% 
+    filter(Agp == "All" & Cluster != "0") %>% 
+    arrange(mu)
+  
+  post <- sampling(model, data = ds, pars = c("theta", "mu", "sigma"), 
+                   init = \() { list(mu = km$mu, sigma = km$std)},
+                   chains = n_chains, iter = n_iter, warmup = n_warmup)
+  
+  res <- restructure_stan(post)
+  return(res)
+  
+}
+
+
 summarise_qol <- function(fit, vset) {
-  write_csv(fit$stats, file = here::here("docs", "tabs", paste0("fit_qol_", vset, ".csv")))
-  write_csv(fit$stats, file = here::here("posteriors", paste0("fit_qol_", vset, ".csv")))
-  return(fit$stats)
+  write_csv(fit$Summary, file = here::here("docs", "tabs", paste0("fit_qol_", vset, ".csv")))
+  write_csv(fit$Ext, file = here::here("posteriors", paste0("post_qol_", vset, ".csv")))
+  return(fit$Summary)
 }
 
 
 vis_qol <- function(dat_qol, fit, vset) {
-  theme_set(theme_bw())
-  
   pars <- fit$stats %>%
     ungroup() %>% 
     filter(Agp == "All")

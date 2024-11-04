@@ -9,7 +9,7 @@ rstan_options(auto_write = TRUE)
 
 ## simulation study
 
-n_sim <- 100
+n_sim <- 1000
 
 
 mu <- c(0.6, 0.9)
@@ -28,8 +28,6 @@ sims <- tibble(Key = 1:n_sim) %>%
 
 
 plot(density(sims$x))
-
-
 
 
 sims_c <- sims %>% 
@@ -55,14 +53,15 @@ sims_c %>%
 
 ds <- list(
   N = nrow(sims),
-  Ys = sims$x
+  Ys = sims$x, 
+  K = 2
 )
 
 
-model <- rstan::stan_model(here::here("models", "logit_qol_mixture.stan"))
+model <- rstan::stan_model(here::here("models", "k_simplex.stan"))
 
-post <- rstan::sampling(model, data = ds, pars = c("p0", "mu", "sigma"), 
-                        init = \() { list(mu = stats$mu, sigma = stats$std) },
-                        iter = 1e4, warmup = 9000)
+post <- rstan::sampling(model, data = ds, pars = c("mu", "sigma", "theta"), 
+                        init = \() list(mu = stats$mu, sigma = stats$std),
+                        iter = 5000, warmup = 4000)
 
 post

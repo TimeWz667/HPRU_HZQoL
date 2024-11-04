@@ -1,12 +1,22 @@
 fit_tte <- function(model, dat_tte, n_iter = 2e4, n_collect = 500, n_chains = 4) {
   n_warmup <- floor(n_iter - n_collect)
   
+
   ds <- local({
-    d <- dat_tte %>% filter(T_evt > 0)
+    #dat_tte <- tar_read(data_tte) #%>% head(200)
+    dat_tte <- dat_tte %>% filter(T_evt > 0)
+    
+    dat_int <- dat_tte %>% filter(Recovered)
+    dat_cen <- dat_tte %>% filter(!Recovered)
+    
     list(
-      Ts = d$T_evt2,
-      As = d$Age,
-      N = nrow(d)
+      N = nrow(dat_int),
+      Ts0 = dat_int$T_last,
+      Ts1 = dat_int$T_end,
+      As = dat_int$Age,
+      N_Cen = nrow(dat_cen),
+      Ts_Cen = dat_cen$T_end,
+      As_Cen = dat_cen$Age
     )
   })
   

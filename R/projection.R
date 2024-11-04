@@ -23,33 +23,30 @@ boot_pars <- function(pars_tte, pars_qol, n_sim = 1000) {
 }
 
 
-sim_ql <- \(age0 = 50, pars, pars_demo, dt = 0.01) {
+sim_ql <- \(age0 = 50, pars, pars_demo) {
   n_sim <- max(pars$Key)
-  ti <- seq(0, 100 - age0, dt)
-  crossing(Key = 1:n_sim, Age = age0, ti = ti) %>% 
+
+  crossing(Key = 1:n_sim, Age = age0, ti = 0:(100 - age0)) %>% 
     mutate(
       AgeT = floor(Age + ti)
     ) %>% 
     left_join(pars, by = "Key") %>% 
     left_join(pars_demo %>% rename(AgeT = Age), by = "AgeT") %>% 
+    group_by(Key) %>% 
     mutate(
       rate = r0 * exp(Age * ba1),
-      p_health = pexp(ti, rate),
+      p_health = 1 + (exp(-rate * (ti + 1)) - exp(-rate * ti)) / rate,
       p_hz = 1 - p_health,
-      ql_ph = 1 - (Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2),
-      ql_pn = norm - (pmin(Q_0, norm) * Prop_0 + pmin(Q_1, norm) * Prop_1 + pmin(Q_2, norm) * Prop_2),
-      ql_ph = ql_ph * p_hz,
-      ql_pn = ql_pn * p_hz
-    ) %>% 
-    group_by(Key, Age, AgeT) %>% 
-    summarise(
-      across(c(ql_ph, ql_pn, mr, norm), mean)
-    ) %>% 
-    mutate(
-      surv = c(1, cumprod(1 - mr)[-n()]),
+      ql_ph = Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2,
+      ql_ph = (1 - ql_ph) * p_hz,
+      ql_pn = pmin(Q_0, norm) * Prop_0 + pmin(Q_1, norm) * Prop_1 + pmin(Q_2, norm) * Prop_2,
+      ql_pn = (norm - ql_pn) * p_hz,
+      surv = cumprod(1 - mr),
+      surv = (surv + c(1, surv[-n()])) / 2,
       d15 = (1 + 0.015) ^ -(AgeT - Age),
       d35 = (1 + 0.035) ^ -(AgeT - Age)
     ) %>% 
+    group_by(Key, Age) %>% 
     summarise(
       LE = sum(surv),
       QALE1 = sum((norm - ql_pn) * surv),
@@ -191,7 +188,7 @@ vis_shortfall <- function(sim, stats, vset) {
   gs$g_ql <- stats %>% 
     filter(startsWith(Index, "QL")) %>% 
     filter(endsWith(Index, "35")) %>% 
-    filter(Age < 98) %>% 
+    filter(Age <= 99) %>% 
     ggplot(aes(x = Age)) +
     geom_ribbon(aes(ymin = L, ymax = U), alpha = 0.2) +
     geom_line(aes(y = M)) +
@@ -205,7 +202,7 @@ vis_shortfall <- function(sim, stats, vset) {
   
   gs$g_ql_grad <- sim %>% 
     select(Age, QL35, QLH35) %>% 
-    filter(Age < 99) %>%  
+    filter(Age <= 99) %>%  
     pivot_longer(-Age, names_to = "Index") %>% 
     ggplot(aes(x = Age, y = value)) +
     stat_lineribbon() +

@@ -124,7 +124,7 @@ format_qol <- function(df) {
     ) %>% 
     filter(EndZeros == 0) %>% 
     ungroup() %>% 
-    select(PID, Age, Agp, EQ5D, loss) %>% 
+    select(PID, SID, ti, Age, Agp, EQ5D, loss) %>% 
     mutate(
       Key = 1:n()
     )

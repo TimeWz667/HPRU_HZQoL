@@ -1,0 +1,43 @@
+---
+title: "Included_studies"
+format: html
+editor: visual
+---
+
+## list of studies
+
+
+| Authors | Year | Ref |
+| | |
+| | |
+| | |
+
+
+
+## Characteristics
+
+Number of studies
+- Number of studies: 13
+- Studies with EQ5D: 
+- with patient-level EQ-5D available:
+
+
+Data sets in quantitative synthesis
+- xx studies
+- xx data sets
+- xx patients
+
+
+#### Studies by years
+
+- Before 2008:
+- 2010-2014:
+- 2015-2019:
+- 2020-2024:
+
+
+#### Studies by countries
+
+
+
+

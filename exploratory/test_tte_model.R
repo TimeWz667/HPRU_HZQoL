@@ -10,7 +10,6 @@ theme_set(theme_bw())
 
 rate_true <- 5
 
-
 n_sim <- 100
 
 n_reg <- 70
@@ -58,6 +57,27 @@ lis <- lapply(seq(0.01, 10, 0.01), \(r) {
 plot(lis$rate, lis$li)
 abline(v = rate_true, col = 2)
 abline(v = lis %>% filter(li == max(li)) %>% pull(rate), col = 3)
+
+
+
+lis <- lapply(seq(0.01, 10, 0.01), \(r) {
+  ts0 <- xs$Evt0 / 365
+  ts1 <- xs$Evt1 / 365
+  
+  
+  
+  list(
+    rate = r,
+    li = sum(- r * ts0 + pexp(ts1 - ts0, r, log.p = T))
+  )
+}) %>% 
+  bind_rows()
+
+
+plot(lis$rate, lis$li)
+abline(v = rate_true, col = 2)
+abline(v = lis %>% filter(li == max(li)) %>% pull(rate), col = 3)
+
 
 
 ds <- local({

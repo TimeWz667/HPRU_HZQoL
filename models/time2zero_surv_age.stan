@@ -15,12 +15,18 @@ parameters {
 }
 
 transformed parameters {
-  real<lower=0, upper=1> prob[N];
+  // real<lower=0, upper=1> prob[N];
+  // 
+  // for (i in 1:N) {
+  //   prob[i] = exponential_cdf(Ts1[i], r0 * exp(ba1 * As[i])) - exponential_cdf(Ts0[i], r0 * exp(ba1 * As[i]));
+  // }
+  real lp[N];
+  real rate;
   
   for (i in 1:N) {
-    prob[i] = exponential_cdf(Ts1[i], r0 * exp(ba1 * As[i])) - exponential_cdf(Ts0[i], r0 * exp(ba1 * As[i]));
+    rate = r0 * exp(ba1 * As[i]);
+    lp[i] = - rate * Ts0[i] + exponential_lcdf(Ts1[i] - Ts0[i]| rate);
   }
-  
   
   
 }
@@ -29,9 +35,8 @@ model {
   r0 ~ exponential(1);
   ba1 ~ normal(0, 1);
   
-  for (i in 1:N) {
-    target += log(prob);
-  }
+  target += sum(lp);
+  
   for (i in 1:N_Cen) {
     target += exponential_lccdf(Ts_Cen[i] | r0 * exp(ba1 * As_Cen[i]));
   }
