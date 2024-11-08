@@ -36,7 +36,7 @@ list(
   tar_target(model_tte, stan_model(file_model_tte)),
   tar_target(pars_tte, fit_tte(model_tte, data_tte)),
   tar_target(file_pars_tte, summarise_tte(pars_tte), format = "file"),
-  tar_target(plot_tte, vis_tte(data_tte, pars_tte)),
+  tar_target(plot_tte, visualise_tte(data_tte, pars_tte)),
  
   ## modelling, QoL
   tar_target(data_qol, format_qol(data_raw), pattern = map(data_raw)),
@@ -48,7 +48,8 @@ list(
   # 
   tar_target(pars_qol_k, fit_qol_kmeans(data_qol), pattern = map(data_qol)),
   tar_target(file_pars_qol_k, summarise_qol_kmeans(pars_qol_k, vset), pattern = map(pars_qol_k, vset), format = "file"),
-  tar_target(plot_qol, vis_qol(data_qol, pars_qol_k, vset), pattern = map(data_qol, pars_qol_k, vset)),
+  tar_target(plot_qol, visualise_qol(data_qol, pars_qol_k, vset), pattern = map(data_qol, pars_qol_k, vset)),
+  
   
   ## simulation
   

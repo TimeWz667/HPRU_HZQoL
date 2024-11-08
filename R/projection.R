@@ -189,6 +189,7 @@ vis_shortfall <- function(sim, stats, vset) {
     filter(startsWith(Index, "QL")) %>% 
     filter(endsWith(Index, "35")) %>% 
     filter(Age <= 99) %>% 
+    mutate(Index = factor(Index, c("QLH35", "QL35"))) %>% 
     ggplot(aes(x = Age)) +
     geom_ribbon(aes(ymin = L, ymax = U), alpha = 0.2) +
     geom_line(aes(y = M)) +
@@ -204,6 +205,7 @@ vis_shortfall <- function(sim, stats, vset) {
     select(Age, QL35, QLH35) %>% 
     filter(Age <= 99) %>%  
     pivot_longer(-Age, names_to = "Index") %>% 
+    mutate(Index = factor(Index, c("QLH35", "QL35"))) %>% 
     ggplot(aes(x = Age, y = value)) +
     stat_lineribbon() +
     scale_fill_brewer() +
