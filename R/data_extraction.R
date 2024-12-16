@@ -4,7 +4,7 @@ get_data_norm <- function(file_norm) {
   require(readxl)
   
   
-  demo_proj <- read_xls(here::here("data", "uk_pop_proj_2020.xls"), sheet = "Population") %>% 
+  demo_proj <- read_xls(here::here("data", "external", "uk_pop_proj_2020.xls"), sheet = "Population") %>% 
     pivot_longer(-c(Sex, Age), names_to = "Year", values_to = "N") %>% 
     mutate(
       Age = ifelse(Age %in% as.character(0:100), Age, "100"),
@@ -18,7 +18,7 @@ get_data_norm <- function(file_norm) {
   
   
   demo_pre <- bind_rows(lapply(2012:2020, function(yr) {
-    raw_pre <- read_xlsx(here::here("data", "uk_pop_data.xlsx"), sheet = as.character(yr))
+    raw_pre <- read_xlsx(here::here("data", "external", "uk_pop_data.xlsx"), sheet = as.character(yr))
     raw_pre %>% 
       filter(geogcode %in% c("E92000001", "K02000001")) %>% 
       pivot_longer(starts_with(c("m_", "f_"))) %>% 
@@ -66,11 +66,11 @@ get_data_norm <- function(file_norm) {
   
   
   mor_proj <- bind_rows(
-    read_xlsx(here::here("data", "uk_mor.xlsx"), sheet = "males period qx", skip = 4) %>% 
+    read_xlsx(here::here("data", "external", "uk_mor.xlsx"), sheet = "males period qx", skip = 4) %>% 
       pivot_longer(-age, names_to = "Year", values_to = "mortality") %>% 
       rename(Age = age) %>% 
       mutate(Sex = "m"),
-    read_xlsx(here::here("data", "uk_mor.xlsx"), sheet = "females period qx", skip = 4) %>% 
+    read_xlsx(here::here("data", "external", "uk_mor.xlsx"), sheet = "females period qx", skip = 4) %>% 
       pivot_longer(-age, names_to = "Year", values_to = "mortality") %>% 
       rename(Age = age) %>% 
       mutate(Sex = "f")
@@ -142,7 +142,7 @@ get_data_norm <- function(file_norm) {
     )
   
   
-  save(sup_demo_s, sup_demo, file = here::here("data", "sup_demo.rdata"))
+  save(sup_demo_s, sup_demo, file = here::here("data", "processed", "sup_demo.rdata"))
   
   return(sup_demo)
 }
@@ -164,8 +164,8 @@ get_data_qol <- function(file, tag = "uk") {
       Set = tag
     )
 
-  write_csv(dat_qol, file = here::here("data", "qol_" +glue::as_glue(tag) + "_set.csv"))
-  save(dat_qol, file = here::here("data", "qol_" +glue::as_glue(tag) + "_set.rdata")) 
+  write_csv(dat_qol, file = here::here("data", "processed", "qol_" +glue::as_glue(tag) + "_set.csv"))
+  save(dat_qol, file = here::here("data", "processed", "qol_" +glue::as_glue(tag) + "_set.rdata")) 
   
   return(dat_qol)
 }

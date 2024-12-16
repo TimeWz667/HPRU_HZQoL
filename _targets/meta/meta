@@ -1,18 +1,18 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-amlu|object|356cf9419a2eff7a|||||||||||||||
+amlu|object|d010672dfabdb2ed|||||||||||||||
 boot_pars|function|a60a2cea5ea5d2e0|||||||||||||||
 calc_hazard|function|ab2ed81d6b57e50e|||||||||||||||
 calc_timing|function|e94bd7a5fb48f4ca|||||||||||||||
 compose_stan_model|function|6fcdfe79cf1a31d2|||||||||||||||
-data_norm|stem|329a39970725e07b|e7e922217b54f771|ada3b098e3a7feae|528001548||t19996.6072028107s|6642a5a34fb3a445|129568|rds|local|vector|||3.34||
-data_qol|pattern|8e817d422929d0bf|2f87b54211f448f3||909460246||||63368|rds|local|vector||data_qol_ee64f2f6047e377a*data_qol_1c11c94f373ce396|0.09||
-data_qol_1c11c94f373ce396|branch|592a438ebcb93f82|2f87b54211f448f3|25ba755007abbd97|-1953460836||t20031.7752665618s|2ea309bfa42a264b|31843|rds|local|vector|data_qol||0.04||
-data_qol_ee64f2f6047e377a|branch|6cdd976098145d02|2f87b54211f448f3|bceb02595cea8c22|-112162931||t20031.7752648893s|1247f6bf9f0911c0|31525|rds|local|vector|data_qol||0.15||
-data_raw|pattern|5c5425ff7a86dbd2|52df58838b26989f||-644868125||||84762|rds|local|vector||data_raw_fa6bddd639031fc4*data_raw_51858ed0da6c8d5a|0.9||
-data_raw_51858ed0da6c8d5a|branch|1e74b3d712da89fd|52df58838b26989f|bed56f7a27c93761|-2036505950||t19997.0004853406s|8c6cf1e28ae59243|42659|rds|local|vector|data_raw||0.36||
-data_raw_fa6bddd639031fc4|branch|257b33bd51e23466|52df58838b26989f|336214358479fb6c|892328321||t19997.0004806049s|b351f3233201273e|42103|rds|local|vector|data_raw||0.54||
-data_tte|pattern|dde41170005a552b|152104bc9428ff37||-1550666243||||29377|rds|local|vector||data_tte_ee64f2f6047e377a|0.45||
-data_tte_ee64f2f6047e377a|branch|ab0119a7e5899fcd|152104bc9428ff37|dcf0df213741b565|-1929104443||t19997.0004926438s|9aab104c0501e428|29377|rds|local|vector|data_tte||0.45|There were 60 warnings in summarise.The first warning wasℹ In argument T_last  maxtiEnd.ℹ In group 22 PID  Argentina 1031.Caused by warning in max no nonmissing arguments to max returning Infℹ Run dplyrlast_dplyr_warnings to see the 59 remaining warnings.|
+data_norm|stem|7f1c99c339a6fe5b|e7e922217b54f771|aa3406e765fdb7f9|528001548||t20073.4709704443s|6642a5a34fb3a445|129568|rds|local|vector|||2.82||
+data_qol|pattern|49a376fbba169f67|2f87b54211f448f3||909460246||||61807|rds|local|vector||data_qol_ee64f2f6047e377a*data_qol_1c11c94f373ce396|0.05||
+data_qol_1c11c94f373ce396|branch|ab902f8f2a0d6707|2f87b54211f448f3|306294687b1b62fa|-1953460836||t20073.470979043s|dc995b64e1817242|31058|rds|local|vector|data_qol||0.02||
+data_qol_ee64f2f6047e377a|branch|2a20ad00851402d8|2f87b54211f448f3|ab990ae62ea70493|-112162931||t20073.4709785006s|daa5165382219d82|30749|rds|local|vector|data_qol||0.03||
+data_raw|pattern|ad957e6619c76a93|52df58838b26989f||-644868125||||82500|rds|local|vector||data_raw_fa6bddd639031fc4*data_raw_51858ed0da6c8d5a|0.56||
+data_raw_51858ed0da6c8d5a|branch|edaf6d8108cc67bf|52df58838b26989f|b65cd39edd7242f5|-2036505950||t20073.4709779585s|5b9ba6c48c606888|41542|rds|local|vector|data_raw||0.25||
+data_raw_fa6bddd639031fc4|branch|07c71c824ce438d8|52df58838b26989f|38a2bb4675ddd8d6|892328321||t20073.470974477s|e92bf9a7510b8a07|40958|rds|local|vector|data_raw||0.31||
+data_tte|pattern|9d4f09ace6531561|152104bc9428ff37||-1550666243||||28226|rds|local|vector||data_tte_ee64f2f6047e377a|0.53||
+data_tte_ee64f2f6047e377a|branch|5f122202d7ac14ce|152104bc9428ff37|23d9675f3ab956bb|-1929104443||t20073.4709853156s|5cb8ae27ce7e107f|28226|rds|local|vector|data_tte||0.53|There were 58 warnings in summarise.The first warning wasℹ In argument T_last  maxtiEnd.ℹ In group 22 PID  Argentina 001031.Caused by warning in max no nonmissing arguments to max returning Infℹ Run dplyrlast_dplyr_warnings to see the 57 remaining warnings.|
 empirical_surv|function|18b044ab39a0adbb|||||||||||||||
 explore_qol|function|816c0e6a2500d543|||||||||||||||
 f_pars_shortfall|pattern|d0aaab6c7f7916bb|615e0962486aa27c||1289093194||||324886|file|local|vector||f_pars_shortfall_e867e7691f595ebe*f_pars_shortfall_afac729bfa5b7307|0.52||
@@ -20,21 +20,21 @@ f_pars_shortfall_afac729bfa5b7307|branch|2d9aa723cf88f703|615e0962486aa27c|9692a
 f_pars_shortfall_e867e7691f595ebe|branch|a0d61550e19c8666|615e0962486aa27c|e87a0f7df4701f22|-720502425|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/pars/pars_shortfall_uk.csv|t20031.8827412885s|3862b035dfa44ff1|162528|file|local|vector|f_pars_shortfall||0.33||
 file_model_qol|stem|57afb3392b459c42|41b571916913abba|2c530c1562a7fbd1|-1094038322|H:/Working/Analyses/HPRU_HZQoL/models/k_simplex.stan|t20024.4855324074s|f0b846f98fe9b631|664|file|local|vector|||0.89||
 file_model_tte|stem|ec1d35e068f867a0|37b9f4c90a3c16d9|2c530c1562a7fbd1|-508233647|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/models/time2zero_surv_age.stan|t20031.562796305s|62619894a6bb51b5|791|file|local|vector|||0.78||
-file_norm|stem|349988d8565a4604|ab2bca9b67392fc2|2c530c1562a7fbd1|164554510|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/qale_shortfall.csv|t19962.5437130159s|86edadd499abb8ca|19082|file|local|vector|||0||
+file_norm|stem|6eca346ff643a39d|5feb2e7c57808ad0|2c530c1562a7fbd1|164554510|D:/HPRU_HZQoL/data/external/qale_shortfall.csv|t20056.5426220214s|3f14782eb0c1687e|19285|file|local|vector|||0.13||
 file_pars_qol_k|pattern|b08b1a501b30528c|7723989db778cf15||-1639549524||||5440|file|local|vector||file_pars_qol_k_94f40f59ccf65d67*file_pars_qol_k_f26501a37f1c67bc|0.38||
 file_pars_qol_k_94f40f59ccf65d67|branch|6c31ace3aceb1bc0|7723989db778cf15|ac091f5f9c57baea|1392381880|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_k_uk.csv|t20031.8031640203s|fc93de56013b9f4a|2709|file|local|vector|file_pars_qol_k||0.35||
 file_pars_qol_k_f26501a37f1c67bc|branch|99105ce885e94ddc|7723989db778cf15|df42b7715b9b3353|1327781588|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_k_orig.csv|t20031.80316485s|33cd33d7df69488b|2731|file|local|vector|file_pars_qol_k||0.03||
 file_pars_tte|stem|ff6bf0cd5459714f|2e79bfe6f608a2db|8bb4b4e857c227df|-1646548341|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_time2zero.csv|t20031.8033241219s|33274653f7044d05|119054|file|local|vector|||0.75||
-file_qol|pattern|c5defd856396d10d|91668208475b1824||771708187||||1051410|file|local|vector||file_qol_387b59a5eb0be5cd*file_qol_c099b9bdf0fc30fc|0.02||
-file_qol_387b59a5eb0be5cd|branch|630c5c3d2b149ff7|91668208475b1824|2c530c1562a7fbd1|-1340806544|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/eq5d_uk.csv|t19986.7053561405s|286b43f29899ff37|525725|file|local|vector|file_qol||0.02||
-file_qol_c099b9bdf0fc30fc|branch|167ac2033adc2c9e|91668208475b1824|2c530c1562a7fbd1|-960363958|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/eq5d_orig.csv|t19986.7053561058s|9942fa000a631de0|525685|file|local|vector|file_qol||0||
+file_qol|pattern|7c0c8692a1d03085|b0a26d68924c0d57||771708187||||1098325|file|local|vector||file_qol_387b59a5eb0be5cd*file_qol_c099b9bdf0fc30fc|0||
+file_qol_387b59a5eb0be5cd|branch|0d1c42cb1b060df3|b0a26d68924c0d57|2c530c1562a7fbd1|-1340806544|D:/HPRU_HZQoL/data/processed/eq5d_uk.csv|t20059.7263799398s|85549125fd521d91|547540|file|local|vector|file_qol||0||
+file_qol_c099b9bdf0fc30fc|branch|33845739417d3aec|b0a26d68924c0d57|2c530c1562a7fbd1|-960363958|D:/HPRU_HZQoL/data/processed/eq5d_orig.csv|t20059.7264198818s|6ff2352874c457f9|550785|file|local|vector|file_qol||0||
 fit_qol|function|833b90aff0179bd3|||||||||||||||
 fit_qol_kmeans|function|fc01e92e16c3bb2c|||||||||||||||
 fit_tte|function|9a3834a48839beaa|||||||||||||||
 format_qol|function|2549105362a72b4f|||||||||||||||
 format_tte|function|98b4275be2892d9d|||||||||||||||
-get_data_norm|function|d519826d70934664|||||||||||||||
-get_data_qol|function|1f1e017f9ec07651|||||||||||||||
+get_data_norm|function|94c4ffd6debda126|||||||||||||||
+get_data_qol|function|b103524d83fa3b7f|||||||||||||||
 js_shortfall|pattern|9ead4ba9a044c6fc|e6440a15a925188c||539120898||||284144|file|local|vector||js_shortfall_e867e7691f595ebe*js_shortfall_afac729bfa5b7307|0.15||
 js_shortfall_67dc98d687688ae8|branch|10026b4668ce7aca|e6440a15a925188c|7a81cde2cda617e9|1504985208||t20006.3939814815s|bec0bd7003ab15be|43403|rds|local|vector|js_shortfall||0.14||
 js_shortfall_afac729bfa5b7307|branch|3fd3411c64cf5223|e6440a15a925188c|79fcd617e6486f28|-2020645248|D:/Projects/HPRU/Shingrix/HPRU_HZQoL/pars/pars_qol_orig.json|t20031.8863033684s|138674d196eb19bd|142033|file|local|vector|js_shortfall||0.23||
@@ -91,9 +91,11 @@ sim_shortfall_e867e7691f595ebe|branch|87f9ee9a5f8ad9fe|c0ce617673a9c165|59aa4bf2
 sim_shortfall_fb84db6cafb47bd3|branch|5294f50c538daaeb|c0ce617673a9c165|c8f2dc236d69adf4|348748916||t20026.3925462963s|b822bce51a6f779c|2613297|rds|local|vector|sim_shortfall||8.99||
 simulate_qol|function|24f476e91f3bcb18|||||||||||||||
 simulate_shortfall|function|bca9107b419f3f16|||||||||||||||
+split_training_qol|function|1e9c65f83ed2702f|||||||||||||||
+split_training_tte|function|1e9c65f83ed2702f|||||||||||||||
 summarise_qol|function|8d3eaa9cee0fa482|||||||||||||||
 summarise_qol_kmeans|function|12585f482f0015aa|||||||||||||||
-summarise_shortfall|function|3bc448dcb3a1b839|||||||||||||||
+summarise_shortfall|function|358408d05709faa1|||||||||||||||
 summarise_tte|function|784820d3d02ac0c8|||||||||||||||
 tab_pars_qol|pattern|940b222973452bed|1e4683093d5d4313||-1613513142||||1586|rds|local|vector||tab_pars_qol_b0ea4191ecc56fc9*tab_pars_qol_531366c379ee1619|1.15||
 tab_pars_qol_531366c379ee1619|branch|9f58081d8e3965da|1e4683093d5d4313|8a039ce044026b83|-1715849326||t20026.1050694444s|fcc047ad9204673a|792|rds|local|vector|tab_pars_qol||0.45||
@@ -114,4 +116,4 @@ vis_shortfall|function|78e1c791a71fad29|||||||||||||||
 vis_tte|function|846fecc9e48e5025|||||||||||||||
 visualise_qol|function|944848939023ca63|||||||||||||||
 visualise_tte|function|b1dc6204516a126f|||||||||||||||
-vset|stem|84ec6d9292e9db45|4f00e0423dabb358|2c530c1562a7fbd1|1607844257||t19997.0004718211s|db2361de2073f9e4|61|rds|local|vector||vset_003c01a3a8452731*vset_4569be510f4f8783|0.53||
+vset|stem|b1c0b3d39b7468ba|4f00e0423dabb358|2c530c1562a7fbd1|1607844257||t20073.470935101s|db2361de2073f9e4|61|rds|local|vector||vset_003c01a3a8452731*vset_4569be510f4f8783|1.91|package tibble was built under R version 4.4.1. package tidyverse was built under R version 4.4.1. package tidyr was built under R version 4.4.1. package readr was built under R version 4.4.1. package purrr was built under R version 4.4.1. package dplyr was built under R version 4.4.1. package stringr was built under R version 4.4.1. package forcats was built under R version 4.4.1. package lubridate was built under R version 4.4.1. package tidybayes was built under R version 4.4.1. package readxl was built under R version 4.4.1|
