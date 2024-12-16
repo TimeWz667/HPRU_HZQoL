@@ -99,10 +99,11 @@ visualise_tte <- function(dat_tte, pars_tte) {
     ggplot() +
     geom_point(aes(x = Age, y = value, colour = Source)) +
     geom_ribbon(data = exp_ci, aes(x = Age, ymin = l, ymax = u), alpha = 0.2) +
-    geom_line(data = exp_ci, aes(x = Age, y = m)) +
+    geom_line(data = exp_ci, aes(x = Age, y = m)) + 
     scale_y_continuous("Time to recovery, months", breaks = seq(0, 2.5, 0.5), 
                        labels = scales::number_format(scale = 12, suffix = " mo."),
-                       limits = c(0, 1.5))
+                       limits = c(0, 1.5)) + 
+    scale_colour_brewer(palette = "Accent")
   
   
   gs$g_tte_pred <- exp_cri %>% 

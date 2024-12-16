@@ -58,11 +58,11 @@ pars_shortfall_75fd12b18d9fcc93|branch|58ac545f59163550|8c72393d09478e0e|c6e7882
 pars_shortfall_a6cff2ca6059032d|branch|4096a226c44338b8|7811fc93084c65e9|3c9b6d4120415482|-2133075148||t19997.0116898148s|ffca9885ed3057cf|40762|rds|local|vector|pars_shortfall||0.05||
 pars_shortfall_a8a2e400563a9303|branch|3d1c1d2ff404d240|e20b84bde643ea9f|06dd67d7aecaf7fb|-156079451||t20031.8118367493s|8e5e4e7ab732af57|40339|rds|local|vector|pars_shortfall||0.42||
 pars_tte|stem|4c827dde52606345|619081ef22f6a365|90240c465df05fe9|-250904775||t20031.7994823916s|0b56eb0a5a22f280|43844|rds|local|vector|||74.21|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
-plot_qol|pattern|56135093887a3c6d|d1141efd482d1e53||-1456464826||||2955340|rds|local|vector||plot_qol_0b0a5426d50dc26b*plot_qol_dc36770b71064efd|2.38||
-plot_qol_0b0a5426d50dc26b|branch|06aa93119364fc81|d1141efd482d1e53|798949bca824c770|1550465050||t20035.8631184621s|d6f7b50d3fc87618|1475713|rds|local|vector|plot_qol||1.38||
+plot_qol|pattern|ea556c4056c332b1|d1141efd482d1e53||-1456464826||||5368343|rds|local|vector||plot_qol_0b0a5426d50dc26b*plot_qol_dc36770b71064efd|5.86||
+plot_qol_0b0a5426d50dc26b|branch|aae8a5313fb7bfa1|d1141efd482d1e53|6e5fe4bea80639ec|1550465050||t20072.652601181s|277eea335c791fe8|2681236|rds|local|vector|plot_qol||3.1||
 plot_qol_5a8626b0c57700bb|branch|f7a48de0b8689359|e519e5f518d41fe2|20b754b2b5860a44|177899596||t19997.6697916667s|e5e85ff16bc0e2db|832971|rds|local|vector|plot_qol||0.55||
 plot_qol_77899c305cf17e06|branch|7104e30edbff0fb2|e519e5f518d41fe2|750df57f6011de0a|-1064920778||t19997.6697916667s|b24a9586e9bc39b2|836427|rds|local|vector|plot_qol||0.47||
-plot_qol_dc36770b71064efd|branch|be066896c48964b1|d1141efd482d1e53|14c8b0352ecabdfb|823206712||t20035.8631337419s|6e7e94ccaf870dea|1479627|rds|local|vector|plot_qol||1||
+plot_qol_dc36770b71064efd|branch|eb1ddbc4c5e46da3|d1141efd482d1e53|08500bd0a34c227b|823206712||t20072.6526407178s|5662699189dd375e|2687107|rds|local|vector|plot_qol||2.76||
 plot_qol_t|pattern|1e8f9685a7e9b1b4|9961dfe7b162aa28||-1765103400||||10163573|rds|local|vector||plot_qol_t_e867e7691f595ebe*plot_qol_t_afac729bfa5b7307|16.99||
 plot_qol_t_67dc98d687688ae8|branch|4b4f71b0ba9e1694|9961dfe7b162aa28|ec9a8099facd0131|-1944477895||t20006.936087963s|042df9bfeadd285e|3280359|rds|local|vector|plot_qol_t||7.3||
 plot_qol_t_afac729bfa5b7307|branch|624ae46ab68a4006|9961dfe7b162aa28|b1240f7093957afb|1818299958||t20055.6907539082s|ba30653f3ee5c240|5070368|rds|local|vector|plot_qol_t||8.27||
@@ -77,7 +77,7 @@ plot_shortfall_7df0b5b65b302560|branch|6d06720a71503116|eb0ec8473dcd6f7d|78672d3
 plot_shortfall_b714ca4109a157d5|branch|75545cde9d3f4684|eb0ec8473dcd6f7d|94ea928c257fc1a6|1284400652||t20021.9590509259s|a164da0648a158dd|6776617|rds|local|vector|plot_shortfall||3.47||
 plot_shortfall_bbf29c3bb2fee4b5|branch|aac0b189e29b5240|eb0ec8473dcd6f7d|e3a01ea5630b5914|1101232729||t19997.0318386685s|9db255b44ecebbda|6669620|rds|local|vector|plot_shortfall||2.71||
 plot_shortfall_dc602edac5d947bf|branch|f15ae3cc1b77ac59|eb0ec8473dcd6f7d|2fbff1b34f3eaab1|-1727214897||t20035.835096635s|83632b2d374a6214|6757281|rds|local|vector|plot_shortfall||2.92||
-plot_tte|stem|9e7a6e41d1b7b2a5|844e847c06dfc343|b6664639f2737ad5|1222683081||t20035.8204560705s|9b43f3e0f172ee04|111|rds|local|vector|||2.36|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 51 rows containing missing values or values outside the scale rangegeom_line.. Removed 3 rows containing missing values or values outside the scale rangegeom_point.. Removed 51 rows containing missing values or values outside the scale rangegeom_line.. Removed 3 rows containing missing values or values outside the scale rangegeom_point.|
+plot_tte|stem|9e7a6e41d1b7b2a5|844e847c06dfc343|757847ac08d344a2|1222683081||t20067.9881754947s|9b43f3e0f172ee04|111|rds|local|vector|||2.96|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 51 rows containing missing values or values outside the scale rangegeom_line.. Removed 3 rows containing missing values or values outside the scale rangegeom_point.. Removed 51 rows containing missing values or values outside the scale rangegeom_line.. Removed 3 rows containing missing values or values outside the scale rangegeom_point.|
 restructure_stan|function|5f51b2b00b777379|||||||||||||||
 sim_ql|function|41ffd10116c1f033|||||||||||||||
 sim_shortfall|pattern|fa21f1f6c4f11428|c0ce617673a9c165||1106514453||||5226376|rds|local|vector||sim_shortfall_e867e7691f595ebe*sim_shortfall_afac729bfa5b7307|17.46||
@@ -112,6 +112,6 @@ vis_qol|function|5fb11dd124e6cfe2|||||||||||||||
 vis_qol_t|function|39f7a154ed4e6737|||||||||||||||
 vis_shortfall|function|78e1c791a71fad29|||||||||||||||
 vis_tte|function|846fecc9e48e5025|||||||||||||||
-visualise_qol|function|c3e25875f3d380e5|||||||||||||||
-visualise_tte|function|430830810ab43568|||||||||||||||
+visualise_qol|function|944848939023ca63|||||||||||||||
+visualise_tte|function|b1dc6204516a126f|||||||||||||||
 vset|stem|84ec6d9292e9db45|4f00e0423dabb358|2c530c1562a7fbd1|1607844257||t19997.0004718211s|db2361de2073f9e4|61|rds|local|vector||vset_003c01a3a8452731*vset_4569be510f4f8783|0.53||
