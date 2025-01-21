@@ -6,6 +6,8 @@ visualise_tte <- function(dat_tte, pars_tte) {
   
   gs <- list()
   
+  dat_tte <- dat_tte %>% filter(!is.na(Age))
+  
   rates <- pars_tte$Ext %>% 
     crossing(Age = 10:100) %>% 
     mutate(rate = r0 * exp(Age * ba1)) %>% 
