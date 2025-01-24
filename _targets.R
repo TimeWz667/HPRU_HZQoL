@@ -16,7 +16,7 @@ dir.create("posteriors/", showWarnings = F)
 
 
 options(dplyr.summarise.inform = FALSE)
-options(mc.cores = 4)
+options(mc.cores = 8)
 rstan_options(auto_write = TRUE)
 theme_set(theme_bw())
 
@@ -40,32 +40,32 @@ list(
     ## split training sets
     
     tar_target(subdata_tte, split_training_tte(data_tte, prop = 0.5, prop_training = 0.5, seed = 11667 + 100)),
-    tar_target(subdata_qol, split_training_qol(data_qol, prop = 0.5, prop_training = 0.5, seed = 11667 + 200))
+    tar_target(subdata_qol, split_training_qol(data_qol, prop = 0.5, prop_training = 0.5, seed = 11667 + 200)),
     
     ## exploratory analyses
     
     
-    # ## modelling, TTE
-    # tar_target(file_model_tte, here::here("models", "time2zero_surv_age.stan"), format = "file"),
-    # tar_target(model_tte, stan_model(file_model_tte)),
-    # tar_target(pars_tte, fit_tte(model_tte, data_tte)),
-    # tar_target(file_pars_tte, summarise_tte(pars_tte), format = "file"),
-    # tar_target(plot_tte, visualise_tte(data_tte, pars_tte)),
-    # 
-    # ## modelling, QoL
-    # tar_target(pars_qol_k, fit_qol_kmeans(data_qol), pattern = map(data_qol)),
-    # tar_target(file_pars_qol_k, summarise_qol_kmeans(pars_qol_k, vset), pattern = map(pars_qol_k, vset), format = "file"),
-    # tar_target(plot_qol, visualise_qol(data_qol, pars_qol_k, vset), pattern = map(data_qol, pars_qol_k, vset)),
-    # 
-    # ## simulation
-    # 
-    # tar_target(pars_shortfall, boot_pars(file_pars_tte, file_pars_qol_k, n_sim = 1000), pattern = map(file_pars_qol_k)),
-    # tar_target(sim_shortfall, simulate_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset)),
-    # tar_target(tab_shortfall, summarise_shortfall(sim_shortfall, vset), pattern = map(sim_shortfall, vset)),
-    # tar_target(plot_shortfall, vis_shortfall(sim_shortfall, tab_shortfall, vset), pattern = map(sim_shortfall, tab_shortfall, vset)),
-    # tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset)),
-    # 
-    # tar_target(js_shortfall, output_pars_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset), format = "file")
+    ## modelling, TTE
+    tar_target(file_model_tte, here::here("models", "time2zero_surv_age.stan"), format = "file"),
+    tar_target(model_tte, stan_model(file_model_tte)),
+    tar_target(pars_tte, fit_tte(model_tte, data_tte)),
+    tar_target(file_pars_tte, summarise_tte(pars_tte), format = "file"),
+    tar_target(plot_tte, visualise_tte(data_tte, pars_tte)),
+
+    ## modelling, QoL
+    tar_target(pars_qol_k, fit_qol_kmeans(data_qol), pattern = map(data_qol)),
+    tar_target(file_pars_qol_k, summarise_qol_kmeans(pars_qol_k, vset), pattern = map(pars_qol_k, vset), format = "file"),
+    tar_target(plot_qol, visualise_qol(data_qol, pars_qol_k, vset), pattern = map(data_qol, pars_qol_k, vset)),
+
+    ## simulation
+
+    tar_target(pars_shortfall, boot_pars(file_pars_tte, file_pars_qol_k, n_sim = 1000), pattern = map(file_pars_qol_k)),
+    tar_target(sim_shortfall, simulate_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset)),
+    tar_target(tab_shortfall, summarise_shortfall(sim_shortfall, vset), pattern = map(sim_shortfall, vset)),
+    tar_target(plot_shortfall, vis_shortfall(sim_shortfall, tab_shortfall, vset), pattern = map(sim_shortfall, tab_shortfall, vset)),
+    tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset)),
+
+    tar_target(js_shortfall, output_pars_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset), format = "file")
 )
 
 

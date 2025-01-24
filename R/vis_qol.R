@@ -27,7 +27,7 @@ visualise_qol <- function(dat_qol, pars_qol_k, vset) {
     select(Key, ti, Cluster, Q)
   
   
-  tags <- c("0" = "temporal well-off", "2" = "mild discomfort", "1" = "severe discomfort")
+  tags <- c("0" = "temporal well", "1" = "mild discomfort", "2" = "severe discomfort")
   
   
   sims_data <- bind_rows(

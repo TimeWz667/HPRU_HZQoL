@@ -14,6 +14,30 @@ fit_qol_kmeans <- function(dat) {
       Cluster = as.character(Cluster)
     )
   
+  # sort by mean
+  m1 <- dat_cluster %>% 
+    filter(Cluster == "1") %>% 
+    pull(EQ5D) %>% 
+    mean()
+  
+  m2 <- dat_cluster %>% 
+    filter(Cluster == "2") %>% 
+    pull(EQ5D) %>% 
+    mean()
+
+  if (m1 < m2) {
+    dat_cluster <- dat_cluster %>% 
+      mutate(
+        Cluster = case_when(
+          Cluster == "1" ~ "2",
+          Cluster == "2" ~ "1",
+          T ~ "0"
+        )
+      )
+  }
+  
+  
+  
   stats_cluster_Agp <- dat_cluster %>% 
     group_by(Agp, Cluster) %>% 
     summarise(
