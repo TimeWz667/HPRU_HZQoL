@@ -105,6 +105,7 @@ visualise_tte <- function(dat_tte, pars_tte) {
     scale_y_continuous("Time to recovery, months", breaks = seq(0, 2.5, 0.5), 
                        labels = scales::number_format(scale = 12, suffix = " mo."),
                        limits = c(0, 1.5)) + 
+    scale_x_continuous("Age", limits = c(0, 100))+ 
     scale_colour_brewer(palette = "Accent")
   
   
@@ -114,7 +115,8 @@ visualise_tte <- function(dat_tte, pars_tte) {
     geom_line(aes(x = Age, y = m)) +
     scale_y_continuous("Time to recovery, months", breaks = seq(0, 2.5, 0.5), 
                        labels = scales::number_format(scale = 12, suffix = " mo."),
-                       limits = c(0, 1.5))
+                       limits = c(0, 1.5)) +
+    scale_x_continuous("Age", limits = c(0, 100))
   
   
   gs$g_tte_bind <- ggpubr::ggarrange(
