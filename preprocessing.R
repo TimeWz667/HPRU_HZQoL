@@ -293,7 +293,7 @@ eq5d$Master <- local({
 })
 
 
-## Van Wijck data -----
+## van Wijck data -----
 eq5d$Wijck <- local({
   df <- read_sav(here::here("data", "raw", "Data_Wijck.sav")) %>% 
     select(id = PtNoT0d, age = Age, rash_onset = VsclT0d, starts_with("Eq"), matches("sntT\\d{1}p"))
@@ -355,7 +355,7 @@ eq5d$Wijck <- local({
   }
   
   df_reg <- df2 %>% 
-    mutate(country = "Netherlands", study = "Van Wijck et al. 2016") %>% 
+    mutate(country = "Netherlands", study = "van Wijck et al. 2016") %>% 
     select(country, study, id, age, visit, t, EqMo, EqSC, EqUA, EqPD, EqAD, is_baseline, is_perfect)
 
   df_reg  
@@ -371,7 +371,7 @@ eq5d <- bind_rows(eq5d) %>%
     ),
     id = case_when(
       startsWith(study, "Drolet") ~ paste("M Canada", id),
-      startsWith(study, "Van") ~ paste("Van Wijck", id),
+      startsWith(study, "van") ~ paste("van Wijck", id),
       startsWith(study, "Scott") ~ paste("Scott", id),
       T ~ paste(country, id)
     )
@@ -413,7 +413,7 @@ eq5d %>%
 # rash onset. Previous study excluded 104005, 109005, 118009, 159003, 170003, 
 # 189007, 195003, 205007, 206004, but these seem fine and so we include them.
 # Other MASTER: No differences
-# Van Wijck: No differences
+# van Wijck: No differences
 
 
 exc_id <- eq5d %>%
@@ -479,11 +479,11 @@ eq5d_fu_uk <- eq5d_fu_eli %>%
 eq5d_fu_orig <- eq5d_fu_eli %>% 
   mutate(
     EQ5D = ifelse(
-      study == "Van Wijck et al. 2016",
+      study == "van Wijck et al. 2016",
       QALY_NL(EqMo, EqSC, EqUA, EqPD, EqAD),
       QALY_UK(EqMo, EqSC, EqUA, EqPD, EqAD)
     ),
-    value_set = ifelse(study == "Van Wijck et al. 2016", "NL", "UK")
+    value_set = ifelse(study == "van Wijck et al. 2016", "NL", "UK")
   ) %>% 
   select(value_set, study, Patient.ID = id, age, visit, time_points = t, EQ5D)
 
@@ -503,11 +503,11 @@ eq5d_baseline_uk <- eq5d_baseline %>%
 eq5d_baseline_orig <- eq5d_baseline %>% 
   mutate(
     EQ5D = ifelse(
-      study == "Van Wijck et al. 2016",
+      study == "van Wijck et al. 2016",
       QALY_NL(EqMo, EqSC, EqUA, EqPD, EqAD),
       QALY_UK(EqMo, EqSC, EqUA, EqPD, EqAD)
     ),
-    value_set = ifelse(study == "Van Wijck et al. 2016", "NL", "UK")
+    value_set = ifelse(study == "van Wijck et al. 2016", "NL", "UK")
   ) %>% 
   select(value_set, study, Patient.ID = id, age, EQ5D)
 
