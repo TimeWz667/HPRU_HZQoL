@@ -2,7 +2,12 @@ library(haven)
 library(tidyverse)
 
 
-## 
+## Info ----
+# Proprocessing from raw data
+# Not included in the target pipeline
+# Raw data are not publicly available
+
+
 
 # EQ-5D-3L to health index conversions. 
 # UK, NL summarized in:
