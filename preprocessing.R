@@ -185,9 +185,9 @@ eq5d$Scott <- local({
       id = ID, 
       age = AGEV1,
       EqMo_1 = EQ_MOBIL, EqSC_1 = EQ_SELFC, EqUA_1 = EQ_USACT, EqPD_1 = EQ_PAIND, EqAD_1 = EQ_ANXD,
-      EqMo_2 = EQ_MOBIL, EqSC_2 = EQSELFC2, EqUA_2 = EQUSACT2, EqPD_2 = EQPAIND2, EqAD_2 = EQANXD2,
-      EqMo_3 = EQ_MOBIL, EqSC_3 = EQSELFC3, EqUA_3 = EQUSACT3, EqPD_3 = EQPAIND3, EqAD_3 = EQANXD3,
-      EqMo_4 = EQ_MOBIL, EqSC_4 = EQSELFC4, EqUA_4 = EQUSACT4, EqPD_4 = EQPAIND4, EqAD_4 = EQANXD4
+      EqMo_2 = EQMOBIL2, EqSC_2 = EQSELFC2, EqUA_2 = EQUSACT2, EqPD_2 = EQPAIND2, EqAD_2 = EQANXD2,
+      EqMo_3 = EQMOBIL3, EqSC_3 = EQSELFC3, EqUA_3 = EQUSACT3, EqPD_3 = EQPAIND3, EqAD_3 = EQANXD3,
+      EqMo_4 = EQMOBIL4, EqSC_4 = EQSELFC4, EqUA_4 = EQUSACT4, EqPD_4 = EQPAIND4, EqAD_4 = EQANXD4
     )  %>% 
     select(country, study, id, age, id, matches("t_\\d"), matches("EQ\\w{2}_\\d")) %>% 
     mutate(across(matches("EQ\\w{2}_\\d"), as.numeric)) %>% 
@@ -447,8 +447,7 @@ eq5d_baseline <- eq5d_is %>%
 
 eq5d_baseline %>% 
   group_by(study, id) %>% 
-  summarise(n = n()) %>% 
-  filter(n > 1)
+  summarise(n = n())
 
 
 # Keep eligible records only
