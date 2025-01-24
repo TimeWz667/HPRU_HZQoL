@@ -75,6 +75,9 @@ tab_shortfall_d8eaa6dc83412333|branch|3ecf26ed4503566b|5557097ffba8b575|e8ff53f0
 tab_shortfall_eecba6321776d0c5|branch|fb7a4b827ea6af8d|5557097ffba8b575|f4c097a47de6d747|-1583111523||t20026.3926851852s|f259e8642dc588ed|12485|rds|local|vector|tab_shortfall||0.47||
 tab_shortfall_f3bb8bbaac01937b|branch|6e51e525c00924b7|5557097ffba8b575|4ae51c0fce1a2541|950683250||t19997.0169592591s|b9656fbf53e3d2b1|12440|rds|local|vector|tab_shortfall||0.27||
 vis_tte|function|846fecc9e48e5025|||||||||||||||
+vset|stem|a08550935dcca6a3|4f00e0423dabb358|2c530c1562a7fbd1|1607844257||t20112.7428522911s|s61b|61|rds|local|vector||vset_003c01a3a8452731*vset_4569be510f4f8783|0.59||
+file_norm|stem|6eca346ff643a39d|5feb2e7c57808ad0|2c530c1562a7fbd1|164554510|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/external/qale_shortfall.csv|t20112.3984142662s|s19285b|19285|file|local|vector|||0||
+data_norm|stem|296499dbe0009005|e7e922217b54f771|aa3406e765fdb7f9|528001548||t20112.7428651803s|s129567b|129567|rds|local|vector|||1.04||
 calc_timing|function|e94bd7a5fb48f4ca
 sim_ql|function|41ffd10116c1f033
 restructure_stan|function|5f51b2b00b777379
@@ -103,19 +106,16 @@ fit_qol|function|833b90aff0179bd3
 empirical_surv|function|18b044ab39a0adbb
 summarise_shortfall|function|d807171ab5dd6450
 format_tte|function|98b4275be2892d9d
-vset|stem|a08550935dcca6a3|4f00e0423dabb358|2c530c1562a7fbd1|1607844257||t20112.7428522911s|s61b|61|rds|local|vector||vset_003c01a3a8452731*vset_4569be510f4f8783|0.59||
-file_norm|stem|6eca346ff643a39d|5feb2e7c57808ad0|2c530c1562a7fbd1|164554510|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/external/qale_shortfall.csv|t20112.3984142662s|s19285b|19285|file|local|vector|||0||
-file_qol_387b59a5eb0be5cd|branch|083751b7a00a7c03|b0a26d68924c0d57|2c530c1562a7fbd1|-1340806544|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_uk.csv|t20112.7057760525s|s557164b|557164|file|local|vector|file_qol||0||
-file_qol_c099b9bdf0fc30fc|branch|7c5155a827e79ca3|b0a26d68924c0d57|2c530c1562a7fbd1|-960363958|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_orig.csv|t20112.7057836617s|s560409b|560409|file|local|vector|file_qol||0||
-file_qol|pattern|91b1a6532bae88f8|b0a26d68924c0d57||771708187||||1117573|file|local|vector||file_qol_387b59a5eb0be5cd*file_qol_c099b9bdf0fc30fc|0||
-data_norm|stem|296499dbe0009005|e7e922217b54f771|aa3406e765fdb7f9|528001548||t20112.7428651803s|s129567b|129567|rds|local|vector|||1.04||
-data_raw_fa6bddd639031fc4|branch|155ae48809fd1fb4|52df58838b26989f|71c5c1780162fcd6|892328321||t20112.7428680295s|s42206b|42206|rds|local|vector|data_raw||0.23||
-data_raw_51858ed0da6c8d5a|branch|2d015b1152bc4906|52df58838b26989f|c48c2e6c97b1ddb5|-2036505950||t20112.7428707031s|s42780b|42780|rds|local|vector|data_raw||0.22||
-data_raw|pattern|a93667f1e8c7fc2c|52df58838b26989f||-644868125||||84986|rds|local|vector||data_raw_fa6bddd639031fc4*data_raw_51858ed0da6c8d5a|0.45||
-data_qol_ee64f2f6047e377a|branch|41e5393792d57d92|2f87b54211f448f3|5b4a49af4f839d1f|-112162931||t20112.7428713591s|s31616b|31616|rds|local|vector|data_qol||0.04||
-data_qol_1c11c94f373ce396|branch|f6216d809c598280|2f87b54211f448f3|286d285d493b6480|-1953460836||t20112.7428718683s|s31928b|31928|rds|local|vector|data_qol||0.01||
-data_qol|pattern|1db0680271b73dc1|2f87b54211f448f3||909460246||||63544|rds|local|vector||data_qol_ee64f2f6047e377a*data_qol_1c11c94f373ce396|0.05||
-data_tte_ee64f2f6047e377a|branch|d5869f0c0b7ccbd3|152104bc9428ff37|1dc5a1bff2dabab4|-1929104443||t20112.7428746982s|s29274b|29274|rds|local|vector|data_tte||0.22|There were 60 warnings in summarise.The first warning wasℹ In argument T_last  maxtiEnd.ℹ In group 22 PID  Argentina 001031.Caused by warning in max no nonmissing arguments to max returning Infℹ Run dplyrlast_dplyr_warnings to see the 59 remaining warnings.|
-data_tte|pattern|0b6034a933368647|152104bc9428ff37||-1550666243||||29274|rds|local|vector||data_tte_ee64f2f6047e377a|0.22||
-subdata_qol|stem|3417ce7a41000571|c41a9b70285638da|a00c555a6bb1dc0c|1311773398||t20112.7428754043s|s37839b|37839|rds|local|vector|||0.04||
-subdata_tte|stem|829cee92dcf6618e|f2eac96b090af829|2faecc4a946b3302|806383235||t20112.742875601s|s17790b|17790|rds|local|vector|||0||
+file_qol_387b59a5eb0be5cd|branch|08f4ea4f55abc1a6|b0a26d68924c0d57|2c530c1562a7fbd1|-1340806544|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_uk.csv|t20112.7525974732s|s557164b|557164|file|local|vector|file_qol||0.01||
+file_qol_c099b9bdf0fc30fc|branch|e1925bb7aa1bb63d|b0a26d68924c0d57|2c530c1562a7fbd1|-960363958|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_orig.csv|t20112.7526017109s|s560409b|560409|file|local|vector|file_qol||0||
+file_qol|pattern|0e78621cfbe808e7|b0a26d68924c0d57||771708187||||1117573|file|local|vector||file_qol_387b59a5eb0be5cd*file_qol_c099b9bdf0fc30fc|0.01||
+data_raw_fa6bddd639031fc4|branch|ee85454a68fe8d36|52df58838b26989f|880773c914e7ee5f|892328321||t20112.7571909798s|s42206b|42206|rds|local|vector|data_raw||0.28||
+data_raw_51858ed0da6c8d5a|branch|65063776aa0bded9|52df58838b26989f|2eb0d1c009b94711|-2036505950||t20112.7571933648s|s42780b|42780|rds|local|vector|data_raw||0.19||
+data_raw|pattern|b958eff40cb0f3ce|52df58838b26989f||-644868125||||84986|rds|local|vector||data_raw_fa6bddd639031fc4*data_raw_51858ed0da6c8d5a|0.47||
+data_qol_ee64f2f6047e377a|branch|3a7950946d2d371c|2f87b54211f448f3|e605819b82185456|-112162931||t20112.757194013s|s31616b|31616|rds|local|vector|data_qol||0.03||
+data_qol_1c11c94f373ce396|branch|dbf81c4313059b5d|2f87b54211f448f3|10df1c5192390c15|-1953460836||t20112.7571944899s|s31928b|31928|rds|local|vector|data_qol||0.03||
+data_qol|pattern|3efc643057b35017|2f87b54211f448f3||909460246||||63544|rds|local|vector||data_qol_ee64f2f6047e377a*data_qol_1c11c94f373ce396|0.06||
+data_tte_ee64f2f6047e377a|branch|83e5b2736e18c4ba|152104bc9428ff37|ff534b51598a4968|-1929104443||t20112.7571974875s|s29274b|29274|rds|local|vector|data_tte||0.23|There were 60 warnings in summarise.The first warning wasℹ In argument T_last  maxtiEnd.ℹ In group 22 PID  Argentina 001031.Caused by warning in max no nonmissing arguments to max returning Infℹ Run dplyrlast_dplyr_warnings to see the 59 remaining warnings.|
+data_tte|pattern|8d558efec4abcaf3|152104bc9428ff37||-1550666243||||29274|rds|local|vector||data_tte_ee64f2f6047e377a|0.23||
+subdata_qol|stem|7fbd4c1593f734a5|c41a9b70285638da|4bf91797c91aab47|1311773398||t20112.7571981936s|s37839b|37839|rds|local|vector|||0.03||
+subdata_tte|stem|46308b804543ce5c|f2eac96b090af829|9ee168ba463dcd9a|806383235||t20112.7571983556s|s17790b|17790|rds|local|vector|||0||
