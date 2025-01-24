@@ -3,7 +3,7 @@ library(tidyverse)
 
 
 ## Info ----
-# Proprocessing from raw data
+# Proprocessing from raw data data/raw/
 # Not included in the target pipeline
 # Raw data are not publicly available
 
