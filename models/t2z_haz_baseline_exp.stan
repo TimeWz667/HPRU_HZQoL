@@ -37,3 +37,7 @@ model {
     target += exponential_lccdf(Ts_Cen[i] | r0) * exp(ba1 * As_Cen[i]);
   }
 }
+
+generated quantities {
+   // ... declarations ... statements ...
+}

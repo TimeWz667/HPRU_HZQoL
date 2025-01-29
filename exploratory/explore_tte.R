@@ -1,19 +1,58 @@
 library(targets)
-library(survival)
+#library(survival)
 library(loo)
 library(tidyverse)
 library(rstan)
-
-
+library(survstan)
 
 
 dat_tte <- tar_read(subdata_tte)
 
-dat_tte$training
+## Frequentist approach
+
+training <- dat_tte$training %>% 
+  mutate(
+    time_f = (T_last + T_end) / 2,
+    time_c = T_end,
+    time = ifelse(Recovered, time_f, time_c),
+    status = Recovered + 0,
+    SID = as.character(as.numeric(factor(SID)))
+  ) %>% 
+  filter(time > 0) %>% 
+  select(time, status, SID, Age)
 
 
-n_iter <- 10000
+
+mean(resid(fit_cox) ^ 2)
+
+fit_cox <- coxreg(Surv(time, status) ~ Age, training)
+fit_cox
+plot(basehaz(fit_cox))
+
+
+for (key in c("exponential", "weibull", "lognormal", "loglogistic", "fatigue", "gamma", "gompertz")) {
+  cat("Distribution: ", key)
+  
+  fit_phreg <- survstan::phreg(Surv(time, status) ~ Age, training, baseline = key)
+  
+  cat(", coef(age) = ", fit_phreg$estimates[1])
+  cat(", mse = ", mean(log(fit_phreg$residuals) ^ 2))
+  cat("\n")
+}
+
+# gamma and weibull
+
+
+## Bayesian approach
+
+
+rstan_options(auto_write = TRUE)
+options(mc.cores = 6)
+
+n_iter <- 5000
 n_warmup <- n_iter - 1000
+
+
 
 ds <- local({
   
@@ -35,35 +74,21 @@ ds <- local({
 })
 
 
-training <- dat_tte$training %>% 
-  mutate(
-    time_f = (T_last + T_end) / 2,
-    time_c = T_end,
-    time = ifelse(Recovered, time_f, time_c),
-    status = Recovered + 0,
-    SID = as.character(as.numeric(factor(SID)))
-  ) %>% 
-  filter(time > 0) %>% 
-  select(time, status, SID, Age)
-
-
-fit <- coxph(Surv(time, status) ~ Age, training)
-
-
 ds$ba1 <- coef(fit)[1]
 
 
-model_e <- stan_model(here::here("models", "t2z_surv_exp_a.stan"))
-samples_e <- sampling(model_e, ds, pars = c("r0"), iter = n_iter, warmup = n_warmup, cores = 4)
 
-model_g <- stan_model(here::here("models", "t2z_surv_gamma_a.stan"))
-samples_g <- sampling(model_g, ds, pars = c("alpha", "r0"), iter = n_iter, warmup = n_warmup, cores = 4)
 
-model_l <- stan_model(here::here("models", "t2z_surv_lognorm_a.stan"))
-samples_l <- sampling(model_l, ds, pars = c("mu", "sigma"), iter = n_iter, warmup = n_warmup, cores = 4)
+model_e <- stan_model(here::here("models", "t2z_haz_baseline_exp.stan"))
+model_g <- stan_model(here::here("models", "t2z_haz_baseline_gamma.stan"))
+model_l <- stan_model(here::here("models", "t2z_haz_baseline_lognorm.stan"))
+model_w <- stan_model(here::here("models", "t2z_haz_baseline_weibull.stan"))
 
-model_w <- stan_model(here::here("models", "t2z_surv_weibull_a.stan"))
-samples_w <- sampling(model_w, ds, pars = c("alpha", "sigma"), iter = n_iter, warmup = n_warmup, cores = 4)
+
+samples_e <- sampling(model_e, ds, pars = c("r0"), iter = n_iter, warmup = n_warmup)
+samples_g <- sampling(model_g, ds, pars = c("alpha", "r0"), iter = n_iter, warmup = n_warmup)
+samples_l <- sampling(model_l, ds, pars = c("mu", "sigma"), iter = n_iter, warmup = n_warmup)
+samples_w <- sampling(model_w, ds, pars = c("alpha", "sigma"), iter = n_iter, warmup = n_warmup)
 
 l_e <- extract_log_lik(samples_e, "lp__", F)
 l_g <- extract_log_lik(samples_g, "lp__", F)
@@ -71,8 +96,9 @@ l_l <- extract_log_lik(samples_l, "lp__", F)
 l_w <- extract_log_lik(samples_w, "lp__", F)
 
 
-
-
+library(survstan)
+fit <- survstan::phreg(Surv(futime, fustat) ~ ecog.ps + rx, data = ovarian, baseline = "weibull")
+summary(fit)
 
 
 # model_e <- stan_model(here::here("models", "t2z_surv_exp.stan"))
@@ -88,23 +114,20 @@ l_w <- extract_log_lik(samples_w, "lp__", F)
 # l_g <- extract_log_lik(samples_g, "lp__")
 # l_l <- extract_log_lik(samples_l, "lp__")
 
-
-waic(l_e)
-waic(l_g)
-waic(l_l)
-waic(l_w)
-loo(l_e)
-loo(l_g)
-loo(l_l)
-loo(l_w)
-
-loo_compare(loo(l_e), loo(l_g), loo(l_l), loo(l_w))
+cbind(
+  waic(l_e)$estimates[, 1],
+  waic(l_g)$estimates[, 1],
+  waic(l_l)$estimates[, 1],
+  waic(l_w)$estimates[, 1]
+)
 
 
-
-
-
-plot(basehaz(fit))
+cbind(
+  loo(l_e)$estimates[, 1],
+  loo(l_g)$estimates[, 1],
+  loo(l_l)$estimates[, 1],
+  loo(l_w)$estimates[, 1]
+)
 
 
 bind_rows(
@@ -139,5 +162,4 @@ bind_rows(
     L = quantile(tte, 0.025),
     U = quantile(tte, 0.975)
   )
-
 
