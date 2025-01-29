@@ -10,6 +10,7 @@ data {
 }
 
 parameters {
+  // hyper parameters
   real<lower = 0> r0;
   real ba1;
 }
@@ -18,7 +19,8 @@ transformed parameters {
   real<lower=0, upper=1> prob[N];
 
   for (i in 1:N) {
-    prob[i] = exponential_cdf(Ts1[i], r0 * exp(ba1 * As[i])) - exponential_cdf(Ts0[i], r0 * exp(ba1 * As[i]));
+    prob[i] = (1 - (1 - exponential_cdf(Ts1[i], r0)) ^ exp(ba1 * As[i]));
+    prob[i] -= (1 - (1 - exponential_cdf(Ts0[i], r0)) ^ exp(ba1 * As[i]));
   }
 }
 
@@ -30,6 +32,6 @@ model {
   target += log_sum_exp(prob);
   
   for (i in 1:N_Cen) {
-    target += exponential_lccdf(Ts_Cen[i] | r0 * exp(ba1 * As_Cen[i]));
+    target += exponential_lccdf(Ts_Cen[i] | r0) * exp(ba1 * As_Cen[i]);
   }
 }

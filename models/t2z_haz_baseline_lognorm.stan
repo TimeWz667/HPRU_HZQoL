@@ -7,13 +7,15 @@ data {
   int<lower=0> N_Cen;
   real Ts_Cen[N_Cen];
   int As_Cen[N_Cen];
+  
+  real ba1;
 }
 
 parameters {
   // hyper parameters
   real mu;
   real<lower=0> sigma;
-  real ba1;
+
 }
 
 transformed parameters {
