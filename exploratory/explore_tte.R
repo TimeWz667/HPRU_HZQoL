@@ -30,7 +30,7 @@ fit_cox
 plot(basehaz(fit_cox))
 
 
-for (key in c("exponential", "weibull", "lognormal", "loglogistic", "fatigue", "gamma", "gompertz")) {
+for (key in c("exponential", "weibull", "lognormal", "loglogistic", "gamma", "gompertz")) {
   cat("Distribution: ", key)
   
   fit_phreg <- survstan::phreg(Surv(time, status) ~ Age, training, baseline = key)
@@ -40,11 +40,26 @@ for (key in c("exponential", "weibull", "lognormal", "loglogistic", "fatigue", "
   cat("\n")
 }
 
-# gamma and weibull
+
+fit_phreg <- survstan::phreg(Surv(time, status) ~ Age, training, baseline = "exponential")
+est <- fit_phreg$estimates
+est[2]
+sim_e <- rexp(10000, est[2])
+
+fit_phreg <- survstan::phreg(Surv(time, status) ~ Age, training, baseline = "gamma")
+est <- fit_phreg$estimates
+est[2] * est[3]
+sim_g <- rgamma(1e4, est[2], est[3])
+
+bind_rows(
+  tibble(x = sim_e, d = "e"),
+  tibble(x = sim_g, d = "g")
+) %>% 
+  ggplot() + 
+  geom_density(aes(x = x, fill = d), alpha = 0.3)
 
 
 ## Bayesian approach
-
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = 6)
@@ -55,10 +70,7 @@ n_warmup <- n_iter - 1000
 
 
 ds <- local({
-  
-  #dat_tte <- tar_read(data_tte) #%>% head(200)
   dat_tte <- dat_tte$training %>% filter(T_evt > 0)
-  
   dat_int <- dat_tte %>% filter(Recovered)
   dat_cen <- dat_tte %>% filter(!Recovered) %>% filter(!is.na(Age))
   
@@ -74,9 +86,7 @@ ds <- local({
 })
 
 
-ds$ba1 <- coef(fit)[1]
-
-
+#ds$ba1 <- coef(fit)[1]
 
 
 model_e <- stan_model(here::here("models", "t2z_haz_baseline_exp.stan"))
@@ -85,76 +95,53 @@ model_l <- stan_model(here::here("models", "t2z_haz_baseline_lognorm.stan"))
 model_w <- stan_model(here::here("models", "t2z_haz_baseline_weibull.stan"))
 
 
-samples_e <- sampling(model_e, ds, pars = c("r0"), iter = n_iter, warmup = n_warmup)
-samples_g <- sampling(model_g, ds, pars = c("alpha", "r0"), iter = n_iter, warmup = n_warmup)
-samples_l <- sampling(model_l, ds, pars = c("mu", "sigma"), iter = n_iter, warmup = n_warmup)
-samples_w <- sampling(model_w, ds, pars = c("alpha", "sigma"), iter = n_iter, warmup = n_warmup)
+samples_e <- sampling(model_e, ds, pars = c("ba0", "ba1", "r0", "tte_sim"), iter = n_iter, warmup = n_warmup)
+samples_g <- sampling(model_g, ds, pars = c("ba0", "ba1", "alpha", "r0", "tte_sim"), iter = n_iter, warmup = n_warmup)
+#samples_l <- sampling(model_l, ds, pars = c("ba1", "mu", "sigma", "tte_sim"), iter = n_iter, warmup = n_warmup)
+samples_w <- sampling(model_w, ds, pars = c("ba0", "ba1", "alpha", "sigma", "tte_sim"), iter = n_iter, warmup = n_warmup)
 
 l_e <- extract_log_lik(samples_e, "lp__", F)
 l_g <- extract_log_lik(samples_g, "lp__", F)
-l_l <- extract_log_lik(samples_l, "lp__", F)
+# l_l <- extract_log_lik(samples_l, "lp__", F)
 l_w <- extract_log_lik(samples_w, "lp__", F)
 
 
-library(survstan)
-fit <- survstan::phreg(Surv(futime, fustat) ~ ecog.ps + rx, data = ovarian, baseline = "weibull")
-summary(fit)
-
-
-# model_e <- stan_model(here::here("models", "t2z_surv_exp.stan"))
-# samples_e <- sampling(model_e, ds, pars = c("r0", "ba1"), iter = n_iter, warmup = n_warmup, cores = 4)
-# 
-# model_g <- stan_model(here::here("models", "t2z_surv_gamma.stan"))
-# samples_g <- sampling(model_g, ds, pars = c("alpha", "r0", "ba1"), iter = n_iter, warmup = n_warmup, cores = 4)
-# 
-# model_l <- stan_model(here::here("models", "t2z_surv_lognorm.stan"))
-# samples_l <- sampling(model_l, ds, pars = c("mu", "sigma", "ba1"), iter = n_iter, warmup = n_warmup, cores = 4)
-# 
-# l_e <- extract_log_lik(samples_e, "lp__")
-# l_g <- extract_log_lik(samples_g, "lp__")
-# l_l <- extract_log_lik(samples_l, "lp__")
-
-cbind(
+tab_waic <- cbind(
   waic(l_e)$estimates[, 1],
   waic(l_g)$estimates[, 1],
-  waic(l_l)$estimates[, 1],
+  # waic(l_l)$estimates[, 1],
   waic(l_w)$estimates[, 1]
 )
 
-
-cbind(
+tab_loo <- cbind(
   loo(l_e)$estimates[, 1],
   loo(l_g)$estimates[, 1],
-  loo(l_l)$estimates[, 1],
+  #loo(l_l)$estimates[, 1],
   loo(l_w)$estimates[, 1]
 )
 
 
+tab_gof <- rbind(tab_waic, tab_loo)
+tab_gof <- data.frame(tab_gof)
+colnames(tab_gof) <- c("Exponential", "Gamma", "Weibull")
+
+write_csv(tab_gof, here::here("docs", "tabs", "explore_tte_gof.csv"))
+
+tab_gof
+
 bind_rows(
-  extract(samples_g) %>% as_tibble() %>% 
-    mutate(
-      tte = rgamma(n(), alpha, r0),
-      Dist = "Gamma"
-    ) %>% 
-    select(tte, Dist),
-  extract(samples_e) %>% as_tibble() %>% 
-    mutate(
-      tte = rexp(n(), r0),
+  tibble(
+      tte = extract(samples_e, pars = "tte_sim")[[1]],
       Dist = "Exp"
-    ) %>% 
-    select(tte, Dist),
-  extract(samples_l) %>% as_tibble() %>% 
-    mutate(
-      tte = rlnorm(n(), log(mu), (sigma)),
-      Dist = "lnorm"
-    ) %>% 
-    select(tte, Dist),
-  extract(samples_w) %>% as_tibble() %>% 
-    mutate(
-      tte = rweibull(n(), alpha, sigma),
-      Dist = "Weibull"
-    ) %>% 
-    select(tte, Dist)
+  ),
+  tibble(
+    tte = extract(samples_g, pars = "tte_sim")[[1]],
+    Dist = "Gamma"
+  ),
+  tibble(
+    tte = extract(samples_w, pars = "tte_sim")[[1]],
+    Dist = "Weibull"
+  )
 ) %>% 
   group_by(Dist) %>% 
   summarise(

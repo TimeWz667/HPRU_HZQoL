@@ -7,14 +7,14 @@ data {
   int<lower=0> N_Cen;
   real Ts_Cen[N_Cen];
   int As_Cen[N_Cen];
-  
-  real ba1;
+
 }
 
 parameters {
   // hyper parameters
   real<lower = 0> r0;
-
+  real ba0; # dummy, non-identifiable from r0
+  real ba1;  
 }
 
 transformed parameters {
@@ -28,6 +28,7 @@ transformed parameters {
 
 model {
   r0 ~ exponential(1);
+  ba0 ~ normal(0, 1);
   ba1 ~ normal(0, 1);
   
   // target += sum(lp);
@@ -39,5 +40,7 @@ model {
 }
 
 generated quantities {
-   // ... declarations ... statements ...
+  real<lower = 0> tte_sim;
+  
+  tte_sim = exponential_rng(r0);
 }

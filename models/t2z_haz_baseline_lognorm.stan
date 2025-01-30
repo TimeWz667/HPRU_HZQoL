@@ -7,15 +7,14 @@ data {
   int<lower=0> N_Cen;
   real Ts_Cen[N_Cen];
   int As_Cen[N_Cen];
-  
-  real ba1;
 }
 
 parameters {
   // hyper parameters
   real mu;
   real<lower=0> sigma;
-
+  real ba0;
+  real ba1;
 }
 
 transformed parameters {
@@ -24,8 +23,8 @@ transformed parameters {
   mu_e = exp(mu + sigma^2/2);
 
   for (i in 1:N) {
-    prob[i] = (1 - (1 - lognormal_cdf(Ts1[i], mu, sigma)) ^ exp(ba1 * As[i]));
-    prob[i] -= (1 - (1 - lognormal_cdf(Ts0[i], mu, sigma)) ^ exp(ba1 * As[i]));
+    prob[i] = (1 - (1 - lognormal_cdf(Ts1[i], mu, sigma)) ^ exp(ba0 + ba1 * As[i]));
+    prob[i] -= (1 - (1 - lognormal_cdf(Ts0[i], mu, sigma)) ^ exp(ba0 + ba1 * As[i]));
   }
 }
 
@@ -38,6 +37,12 @@ model {
   target += log_sum_exp(prob);
   
   for (i in 1:N_Cen) {
-    target += lognormal_lccdf(Ts_Cen[i] | mu, sigma) * exp(ba1 * As_Cen[i]);
+    target += lognormal_lccdf(Ts_Cen[i] | mu, sigma) * exp(ba0 + ba1 * As_Cen[i]);
   }
+}
+
+generated quantities {
+  real<lower = 0> tte_sim;
+  
+  tte_sim = lognormal_rng(mu, sigma);
 }
