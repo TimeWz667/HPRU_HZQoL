@@ -1,5 +1,5 @@
 library(targets)
-#library(survival)
+library(survival)
 library(loo)
 library(tidyverse)
 library(rstan)
@@ -25,18 +25,19 @@ training <- dat_tte$training %>%
 
 mean(resid(fit_cox) ^ 2)
 
-fit_cox <- coxreg(Surv(time, status) ~ Age, training)
+fit_cox <- coxph(Surv(time, status) ~ Age, training)
 fit_cox
 plot(basehaz(fit_cox))
 
 
-for (key in c("exponential", "weibull", "lognormal", "loglogistic", "gamma", "gompertz")) {
+for (key in c("weibull", "gamma", "lognormal", "gompertz")) {
   cat("Distribution: ", key)
   
   fit_phreg <- survstan::phreg(Surv(time, status) ~ Age, training, baseline = key)
   
   cat(", coef(age) = ", fit_phreg$estimates[1])
   cat(", mse = ", mean(log(fit_phreg$residuals) ^ 2))
+  cat(", aic = ", AIC(fit_phreg))
   cat("\n")
 }
 

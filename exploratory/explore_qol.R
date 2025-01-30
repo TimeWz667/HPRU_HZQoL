@@ -86,13 +86,88 @@ plot(resid(fit))
 
 
 
+# prob(severe)
+
+ds_clu <- ds_nz %>% mutate(
+    cluster = cluster - 1,
+    d15 = (ti < 15 / 365.25),
+    d30 = (ti < 30 / 365.25),
+    d45 = (ti < 45 / 365.25),
+    d60 = (ti < 60 / 365.25)
+  )
+
+glmer(cluster ~ ti + (1 | PID) + (1 | SID), data = ds_clu, family = binomial)
+
+glmer(cluster ~ 1 + (ti | PID) + (ti | SID), data = ds_clu, family = binomial)
+
+glmer(cluster ~ Age + (1 | PID) + (1 | SID), data = ds_clu, family = binomial)
+
+fit <- glmer(cluster ~ 1 + (ti | PID) + (ti | SID), data = ds_clu, family = binomial)
+summary(fit)
+
+fit <- glmer(cluster ~ d15 + d30 + d60 + Age + (1 | SID), data = ds_clu, family = binomial)
+summary(fit)
+
+
+
+nd <- crossing(Age = c(50, 60, 70, 80), ti = seq(0, 1, 0.02)) %>% 
+  mutate(
+    d15 = (ti < 15 / 365.25),
+    d30 = (ti < 30 / 365.25),
+    d45 = (ti < 45 / 365.25),
+    d60 = (ti < 60 / 365.25)
+  ) %>% 
+  mutate(
+    prob = predict(fit, re.form = NA, newdata = ., type = "response")
+  )
+
+
+nd %>% 
+  ggplot() +
+  geom_line(aes(y = prob, x = ti, colour = as.character(Age))) +
+  expand_limits(y = 0:1)
+
+
+plot(predict(fit, re.form = NA, newdata = nd, type = "response"), ylim = 0:1)
+fit
+
+
+ds_clu %>% 
+  ggplot() +
+  geom_density(aes(x = ti, fill = as.character(cluster)), alpha = 0.3)
 
 
 
 
+# prob(zero)
+ds_zero <- training %>% 
+  mutate(
+    cluster = (EQ5D < 1),
+    d15 = (ti < 15 / 365.25),
+    d30 = (ti < 30 / 365.25),
+    d45 = (ti < 45 / 365.25),
+    d60 = (ti < 60 / 365.25)
+  )
+
+fit <- glmer(cluster ~ d15 + d30 + (1 | SID), data = ds_zero, family = binomial)
+summary(fit)
 
 
+nd <- tibble(Age = 70, ti = seq(0, 1, 0.02)) %>% 
+  mutate(
+    d15 = (ti < 15 / 365.25),
+    d30 = (ti < 30 / 365.25),
+    d45 = (ti < 45 / 365.25),
+    d60 = (ti < 60 / 365.25)
+  ) %>% 
+  mutate(
+    prob = predict(fit, re.form = NA, newdata = ., type = "response")
+  )
 
 
+nd %>% 
+  ggplot() +
+  geom_line(aes(y = prob, x = ti, colour = as.character(Age))) +
+  expand_limits(y = 0:1)
 
 
