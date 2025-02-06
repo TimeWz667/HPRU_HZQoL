@@ -60,8 +60,8 @@ plot(resid(fit))
 
 
 # Severely discomfort
-fit <- lmer(EQ5D ~ ti + (ti | PID) + (ti | SID), data = ds_c2); AIC(fit)
-fit <- lmer(EQ5D ~ ti + (ti | PID), data = ds_c2); AIC(fit)
+fit <- lmer(EQ5D ~ 1 + (ti | PID) + (ti | SID), data = ds_c2); AIC(fit)
+fit <- lmer(EQ5D ~ ti + (1 | PID) + (ti | SID), data = ds_c2); AIC(fit)
 fit <- lm(EQ5D ~ ti, data = ds_c2); AIC(fit)
 
 fit <- lmer(EQ5D ~ Age + (1 | PID) + (1 | SID), data = ds_c2); AIC(fit)
@@ -72,9 +72,6 @@ fit <- lmer(EQ5D ~ (1 | PID) + (1 | SID), data = ds_c2); AIC(fit)
 fit <- lmer(EQ5D ~ (1 | PID), data = ds_c2); AIC(fit)
 
 fit <- lmer(EQ5D ~ ti + (ti | PID) + (ti | SID), data = ds_c2); AIC(fit)
-fit <- lmer(EQ5D ~ t30 + (1 | PID) + (1 | SID), data = ds_c2 %>% mutate(t30 = (ti > 30) + 0)); AIC(fit)
-fit <- lmer(EQ5D ~ poly(ti, 2) + (ti | PID) + (ti | SID), data = ds_c2); AIC(fit)
-
 
 fit <- lmer(EQ5D ~ ti + (1 | PID) + (1 | SID), data = ds_c2)
 AIC(fit)
