@@ -1,0 +1,373 @@
+---
+title: "Exploring QoL model"
+author: "Chu-Chang Ku"
+date: "2025-02-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+library(tidyverse)
+library(rstan)
+library(lme4)
+
+
+load("../data/sub_qol.rdata")
+
+## Frequentist approach
+
+training <- dat_qol$training 
+
+ds_nz <- training %>% filter(EQ5D < 1)
+
+
+clu <- kmeans(ds_nz$EQ5D, 2)
+
+if (clu$centers[1] > clu$centers[2]) {
+  ds_nz <- ds_nz %>% 
+    mutate(
+      cluster = clu$cluster
+    )
+} else {
+  ds_nz <- ds_nz %>% 
+    mutate(
+      cluster = 3 - clu$cluster
+    )
+}
+
+
+ds_c1 <- ds_nz %>% filter(cluster == 1)
+ds_c2 <- ds_nz %>% filter(cluster == 2)
+ds_zero <- training %>% 
+  mutate(
+    cluster = (EQ5D >= 1) + 0,
+    d15 = (ti < 15 / 365.25),
+    d30 = (ti < 30 / 365.25),
+    d45 = (ti < 45 / 365.25),
+    d60 = (ti < 60 / 365.25)
+  )
+
+ds_clu1 <- ds_nz %>% 
+  mutate(
+    cluster = (cluster == 1) + 0,
+    d15 = (ti < 15 / 365.25),
+    d30 = (ti < 30 / 365.25),
+    d45 = (ti < 45 / 365.25),
+    d60 = (ti < 60 / 365.25)
+  )
+
+```
+
+
+
+# Dynamics of EQ-5D scores
+
+Firstly, we identified there were three clusters in the EQ-5D scores before the end of disutility period. Since there are clear boundary between the clusters, we simply used the K-means to classify the data points by temporal well-off, mild discomfort, and severe discomfort. Within each cluster, we identified models separately and the proportions of the clusters are modelled separately as well. In total, there are four sub-models for the dynamics of EQ-5D scores: (1) the dynamics of mild discomfort, (2) the dynamics of severe discomfort, (3) the probability of temporal well-off, and (4) the probability of severe discomfort within those has QALY-loss.  
+
+```{r, echo=FALSE}
+ds_nz %>% 
+  mutate(Cluster = as.character(cluster)) %>% 
+  ggplot() +
+  geom_histogram(aes(x = EQ5D, fill = Cluster), bins = 40) +
+  expand_limits(y = 1)
+```
+
+
+
+## Variables
+
+- **ti**: time in year
+- **d'x'**: indicating the time before 'x'; 'x' $\in$ {15, 30, 45, 60} days, 
+- **age**: age of rash onset
+
+
+## Submodels {.tabset}
+
+### Mild discomfort 
+
+Function of time
+```{r}
+fit <- lmer(EQ5D ~ ti + (1 | PID) + (1 | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~      (1 | PID) + (1 | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~ ti             + (1 | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
+fit <- lm(  EQ5D ~ ti,                         data = ds_c1); print(formula(fit)); print(AIC(fit))
+
+fit <- lmer(EQ5D ~ 1 + (ti | PID) + (ti | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~ 1 +            + (ti | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
+fit <- lm(  EQ5D ~ 1,                         data = ds_c1); print(formula(fit)); print(AIC(fit))
+```
+
+
+Adding Age
+```{r}
+fit <- lmer(EQ5D ~            1 + (ti | PID) + (ti | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~          Age + (ti | PID) + (ti | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~ poly(Age, 2) + (ti | PID) + (ti | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
+```
+
+
+
+#### Best fit
+```{r}
+fit_c1 <- lmer(EQ5D ~ 1 + (ti | PID) + (ti | SID), data = ds_c1)
+
+plot(resid(fit_c1))
+abline(h = 0)
+```
+
+#### Model vs. data
+```{r}
+ds_c1 %>% 
+  mutate(
+    pred = predict(fit_c1, .)
+  ) %>% 
+  ggplot()  +
+  geom_histogram(aes(x = pred, fill = "Sim"), alpha = 0.6, bins = 30) +
+  geom_histogram(aes(x = EQ5D, fill = "Data"), alpha = 0.6, bins = 30)
+```
+
+
+
+
+
+
+### Severe discomfort 
+####Function of time
+```{r}
+fit <- lmer(EQ5D ~ ti + (1 | PID) + (1 | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~      (1 | PID) + (1 | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~ ti             + (1 | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
+fit <- lm(  EQ5D ~ ti,                         data = ds_c2); print(formula(fit)); print(AIC(fit))
+
+fit <- lmer(EQ5D ~ 1 + (ti | PID) + (ti | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~ 1 +            + (ti | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
+fit <- lm(  EQ5D ~ 1,                         data = ds_c2); print(formula(fit)); print(AIC(fit))
+```
+
+
+#### Adding Age
+```{r}
+fit <- lmer(EQ5D ~            1 + (ti | PID) + (ti | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
+# fail to converge for a linear age term
+# fit <- lmer(EQ5D ~          Age + (ti | PID) + (ti | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
+fit <- lmer(EQ5D ~ poly(Age, 2) + (ti | PID) + (ti | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
+```
+
+
+
+#### Best fit
+```{r}
+fit_c2 <- lmer(EQ5D ~ 1 + (ti | PID) + (ti | SID), data = ds_c2)
+
+plot(resid(fit_c2))
+abline(h = 0)
+```
+
+#### Model vs. data
+```{r}
+ds_c2 %>% 
+  mutate(
+    pred = predict(fit_c2, .)
+  ) %>% 
+  ggplot()  +
+  geom_histogram(aes(x = pred, fill = "Sim"), alpha = 0.6, bins = 30) +
+  geom_histogram(aes(x = EQ5D, fill = "Data"), alpha = 0.6, bins = 30)
+```
+
+ 
+### Probability of temporal well-off 
+
+#### Temporal pattern
+```{r}
+# fit <- glmer(cluster ~ ti + (1 | PID) + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+# fit <- glmer(cluster ~ 1 + (ti | PID) + (ti | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+
+
+fit <- glmer(cluster ~ ti + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+# fit <- glmer(cluster ~ 1 + (ti | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glm(cluster ~ ti, data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glm(cluster ~ 1, data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+
+
+fit <- glmer(cluster ~ ti + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + d30 + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + d30 + d45 + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + d30 + d45 + d60 + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+```
+
+
+#### Adding Age
+```{r}
+fit <- glmer(cluster ~ d15 + d30 + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + d30 + Age + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + d30 + poly(Age, 2) + (1 | SID), data = ds_zero, family = binomial); print(formula(fit)); print(AIC(fit))
+```
+
+#### Best fit
+```{r}
+fit_pz <- glmer(cluster ~ d15 + d30 + Age + (1 | SID), data = ds_zero, family = binomial)
+
+plot(resid(fit_pz, type = "deviance"))
+```
+
+#### Model vs. data
+```{r}
+
+tibble(Age = 70, ti = seq(0, 1, 0.02)) %>% 
+  mutate(
+    d15 = (ti < 15 / 365.25),
+    d30 = (ti < 30 / 365.25),
+    d45 = (ti < 45 / 365.25),
+    d60 = (ti < 60 / 365.25)
+  ) %>% 
+  mutate(
+    prob = predict(fit_pz, re.form = NA, newdata = ., type = "response")
+  ) %>% 
+  ggplot() +
+  geom_line(aes(y = prob, x = ti, colour = as.character(Age))) +
+  geom_line(data = ds_zero %>% 
+              mutate(
+                tig = cut(ti * 365.25, seq(0, 365, 15), right = F)
+              ) %>% 
+              group_by(tig) %>% 
+              summarise(prop = mean(cluster)) %>% 
+              mutate(
+                ti = seq(0, 300 - 15, 15) / 365.25
+              ), 
+            aes(x = ti, y = prop, colour = "Data")) +
+  expand_limits(y = 0:1)
+```
+
+
+### Probability of mild discomfort within those has QALY-loss 
+#### Temporal pattern
+```{r}
+# fit <- glmer(cluster ~ ti + (1 | PID) + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+# fit <- glmer(cluster ~ 1 + (ti | PID) + (ti | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+
+fit <- glmer(cluster ~ ti + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ 1 + (ti | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+
+fit <- glm(cluster ~ ti, data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glm(cluster ~ 1, data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+
+# fit <- glmer(cluster ~ Age + (ti | PID) + (ti | SID), data = ds_clu1, family = binomial); ; print(formula(fit)); print(AIC(fit))
+
+fit <- glmer(cluster ~ d15 + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + d30 + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + d30 + d45 + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ d15 + d30 + d45 + d60  + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+
+```
+
+
+#### Adding Age
+```{r}
+fit <- glmer(cluster ~ d15 + d30 + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ Age + d15 + d30 + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+fit <- glmer(cluster ~ poly(Age, 2) + d15 + d30 + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+```
+
+#### Best fit
+```{r}
+fit_pc1 <- glmer(cluster ~ poly(Age, 2) + d15 + d30 + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
+
+plot(resid(fit_pc1, type = "deviance"))
+```
+
+#### Model vs. data
+```{r}
+
+tibble(Age = 70, ti = seq(0, 1, 0.02)) %>% 
+  mutate(
+    d15 = (ti < 15 / 365.25),
+    d30 = (ti < 30 / 365.25)
+  ) %>% 
+  mutate(
+    prob = predict(fit_pc1, re.form = NA, newdata = ., type = "response")
+  ) %>% 
+  ggplot() +
+  geom_line(aes(y = prob, x = ti, colour = as.character(Age))) +
+  geom_line(data = ds_clu1 %>% 
+              mutate(
+                tig = cut(ti * 365.25, seq(0, 365, 15), right = F)
+              ) %>% 
+              group_by(tig) %>% 
+              summarise(prop = mean(cluster)) %>% 
+              mutate(
+                ti = seq(0, 300 - 30, 15) / 365.25
+              ), 
+            aes(x = ti, y = prop, colour = "Data")) +
+  expand_limits(y = 0:1)
+```
+
+
+
+## Overall predictivities
+
+```{r}
+ms_fin <- list()
+ms_fin$c1 <- lmer(EQ5D ~ 1 + (ti | PID) + (ti | SID), data = ds_c1)
+ms_fin$c2 <- lmer(EQ5D ~ 1 + (ti | PID) + (ti | SID), data = ds_c2)
+ms_fin$pz <- glmer(cluster ~ d15 + d30 + Age + (1 | SID), data = ds_zero, family = binomial)
+ms_fin$pc1 <-  glmer(cluster ~ poly(Age, 2) + d15 + d30 + (1 | SID), data = ds_clu1, family = binomial)
+
+## reduced model
+ms_red <- ms_fin
+ms_red$pz <- glm(cluster ~ 1, data = ds_zero, family = binomial)
+ms_red$pc1 <-  glm(cluster ~ 1, data = ds_clu1, family = binomial)
+
+
+
+ms_fin %>% lapply(AIC) %>% unlist() %>% sum
+ms_red %>% lapply(AIC) %>% unlist() %>% sum
+
+
+gen_pred <- \(ms) {
+  crossing(Age = c(60, 70, 80, 90), ti = seq(0, 1, 1 / 100)) %>% 
+    mutate(
+      d15 = (ti < 15 / 365.25),
+      d30 = (ti < 30 / 365.25)
+    ) %>% 
+    mutate(
+      p_z = predict(ms$pz, ., re.form = NA, type = "response"),
+      p_c1 = predict(ms$pc1, ., re.form = NA, type = "response") * (1 - p_z),
+      p_c2 = 1 - p_z - p_c1,
+      q_c1 = predict(ms$c1, ., re.form = NA),
+      q_c2 = predict(ms$c2, ., re.form = NA),
+      avg = p_c1 * q_c1 + p_c2 * q_c2
+    )
+}
+
+
+
+pred_bind <- bind_rows(
+  ms_fin %>% gen_pred %>% mutate(Model = "Final"),
+  ms_red %>% gen_pred %>% mutate(Model = "Reduced"),
+)
+```
+
+
+#### QALY for first 6 mo
+```{r}
+pred_bind %>% 
+  filter(ti < 0.5) %>% 
+  group_by(Age, Model) %>% 
+  summarise(QALY = mean(avg)) %>% 
+  pivot_wider(names_from = Model, values_from = QALY)
+```
+
+
+#### QALY for first year 
+```{r}
+pred_bind %>% 
+  group_by(Age, Model) %>% 
+  summarise(QALY = mean(avg)) %>% 
+  pivot_wider(names_from = Model, values_from = QALY)
+```
+
+
+
