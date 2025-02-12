@@ -87,7 +87,7 @@ ds_nz %>%
 
 ### Mild discomfort 
 
-Function of time
+#### Function of time
 ```{r}
 fit <- lmer(EQ5D ~ ti + (1 | PID) + (1 | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
 fit <- lmer(EQ5D ~      (1 | PID) + (1 | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
@@ -100,7 +100,7 @@ fit <- lm(  EQ5D ~ 1,                         data = ds_c1); print(formula(fit))
 ```
 
 
-Adding Age
+#### Adding Age
 ```{r}
 fit <- lmer(EQ5D ~            1 + (ti | PID) + (ti | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
 fit <- lmer(EQ5D ~          Age + (ti | PID) + (ti | SID), data = ds_c1); print(formula(fit)); print(AIC(fit))
@@ -134,7 +134,7 @@ ds_c1 %>%
 
 
 ### Severe discomfort 
-####Function of time
+#### Function of time
 ```{r}
 fit <- lmer(EQ5D ~ ti + (1 | PID) + (1 | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
 fit <- lmer(EQ5D ~      (1 | PID) + (1 | SID), data = ds_c2); print(formula(fit)); print(AIC(fit))
@@ -177,7 +177,7 @@ ds_c2 %>%
 ```
 
  
-### Probability of temporal well-off 
+### Probability of temporal well
 
 #### Temporal pattern
 ```{r}
@@ -242,7 +242,7 @@ tibble(Age = 70, ti = seq(0, 1, 0.02)) %>%
 ```
 
 
-### Probability of mild discomfort within those has QALY-loss 
+### Probability of mild discomfort within those has QALY loss 
 #### Temporal pattern
 ```{r}
 # fit <- glmer(cluster ~ ti + (1 | PID) + (1 | SID), data = ds_clu1, family = binomial); print(formula(fit)); print(AIC(fit))
@@ -279,6 +279,7 @@ plot(resid(fit_pc1, type = "deviance"))
 ```
 
 #### Model vs. data
+
 ```{r}
 
 tibble(Age = 70, ti = seq(0, 1, 0.02)) %>% 
@@ -306,7 +307,7 @@ tibble(Age = 70, ti = seq(0, 1, 0.02)) %>%
 
 
 
-## Overall predictivities
+### Summary
 
 ```{r}
 ms_fin <- list()
@@ -319,12 +320,6 @@ ms_fin$pc1 <-  glmer(cluster ~ poly(Age, 2) + d15 + d30 + (1 | SID), data = ds_c
 ms_red <- ms_fin
 ms_red$pz <- glm(cluster ~ 1, data = ds_zero, family = binomial)
 ms_red$pc1 <-  glm(cluster ~ 1, data = ds_clu1, family = binomial)
-
-
-
-ms_fin %>% lapply(AIC) %>% unlist() %>% sum
-ms_red %>% lapply(AIC) %>% unlist() %>% sum
-
 
 gen_pred <- \(ms) {
   crossing(Age = c(60, 70, 80, 90), ti = seq(0, 1, 1 / 100)) %>% 
@@ -342,8 +337,6 @@ gen_pred <- \(ms) {
     )
 }
 
-
-
 pred_bind <- bind_rows(
   ms_fin %>% gen_pred %>% mutate(Model = "Final"),
   ms_red %>% gen_pred %>% mutate(Model = "Reduced"),
@@ -351,7 +344,7 @@ pred_bind <- bind_rows(
 ```
 
 
-#### QALY for first 6 mo
+#### QALY for first 6 mo.
 ```{r}
 pred_bind %>% 
   filter(ti < 0.5) %>% 
