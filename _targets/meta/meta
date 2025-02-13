@@ -46,11 +46,6 @@ vis_tte|function|846fecc9e48e5025|||||||||||||||
 vset|stem|a08550935dcca6a3|4f00e0423dabb358|2c530c1562a7fbd1|1607844257||t20112.7428522911s|s61b|61|rds|local|vector||vset_003c01a3a8452731*vset_4569be510f4f8783|0.59||
 file_norm|stem|6eca346ff643a39d|5feb2e7c57808ad0|2c530c1562a7fbd1|164554510|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/external/qale_shortfall.csv|t20112.3984142662s|s19285b|19285|file|local|vector|||0||
 data_norm|stem|296499dbe0009005|e7e922217b54f771|aa3406e765fdb7f9|528001548||t20112.7428651803s|s129567b|129567|rds|local|vector|||1.04||
-file_qol_387b59a5eb0be5cd|branch|08f4ea4f55abc1a6|b0a26d68924c0d57|2c530c1562a7fbd1|-1340806544|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_uk.csv|t20112.7525974732s|s557164b|557164|file|local|vector|file_qol||0.01||
-file_qol_c099b9bdf0fc30fc|branch|e1925bb7aa1bb63d|b0a26d68924c0d57|2c530c1562a7fbd1|-960363958|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_orig.csv|t20112.7526017109s|s560409b|560409|file|local|vector|file_qol||0||
-file_qol|pattern|0e78621cfbe808e7|b0a26d68924c0d57||771708187||||1117573|file|local|vector||file_qol_387b59a5eb0be5cd*file_qol_c099b9bdf0fc30fc|0.01||
-data_raw_fa6bddd639031fc4|branch|ee85454a68fe8d36|52df58838b26989f|880773c914e7ee5f|892328321||t20112.7571909798s|s42206b|42206|rds|local|vector|data_raw||0.28||
-data_raw_51858ed0da6c8d5a|branch|65063776aa0bded9|52df58838b26989f|2eb0d1c009b94711|-2036505950||t20112.7571933648s|s42780b|42780|rds|local|vector|data_raw||0.19||
 data_raw|pattern|b958eff40cb0f3ce|52df58838b26989f||-644868125||||84986|rds|local|vector||data_raw_fa6bddd639031fc4*data_raw_51858ed0da6c8d5a|0.47||
 data_qol_ee64f2f6047e377a|branch|3a7950946d2d371c|2f87b54211f448f3|e605819b82185456|-112162931||t20112.757194013s|s31616b|31616|rds|local|vector|data_qol||0.03||
 data_qol_1c11c94f373ce396|branch|dbf81c4313059b5d|2f87b54211f448f3|10df1c5192390c15|-1953460836||t20112.7571944899s|s31928b|31928|rds|local|vector|data_qol||0.03||
@@ -62,7 +57,6 @@ subdata_tte|stem|46308b804543ce5c|f2eac96b090af829|9ee168ba463dcd9a|806383235||t
 file_model_tte|stem|ec1d35e068f867a0|37b9f4c90a3c16d9|2c530c1562a7fbd1|-508233647|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/models/time2zero_surv_age.stan|t20031.562796305s|s791b|791|file|local|vector|||0.35||
 model_tte|stem|4743cbe3568b2fb4|6d58dc69dfc2a3cd|51c85dc6b6d68da4|1423656442||t20112.7672327308s|s1470888b|1470888|rds|local|vector|||43.67||
 pars_tte|stem|a0c3552edfd9fd49|619081ef22f6a365|8f4830da61191b6a|-250904775||t20112.7678776694s|s43988b|43988|rds|local|vector|||55.56|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
-file_pars_qol_k_f26501a37f1c67bc|branch|47ca89d48ecb1ed9|7723989db778cf15|a4b715da4a74640d|1327781588|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_k_orig.csv|t20112.7678789541s|s2824b|2824|file|local|vector|file_pars_qol_k||0.02||
 file_pars_tte|stem|974e86f82ca08e48|2e79bfe6f608a2db|402b8b974d60194e|-1646548341|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_time2zero.csv|t20112.7685010862s|s118706b|118706|file|local|vector|||0.24||
 pars_shortfall_17d30507d122fb7f|branch|f846dfadecf011cf|e20b84bde643ea9f|1421c8af18b63cd6|-622314572||t20112.7685038272s|s40387b|40387|rds|local|vector|pars_shortfall||0.09||
 js_shortfall_afac729bfa5b7307|branch|09a58bbe25035130|e6440a15a925188c|7902f79311f7feca|-2020645248|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/pars/pars_qol_orig.json|t20112.7685068497s|s143029b|143029|file|local|vector|js_shortfall||0.11||
@@ -73,7 +67,6 @@ plot_shortfall_3ad6675bf9c42e0a|branch|e507bbe4ff0dfc52|eb0ec8473dcd6f7d|b53a790
 pars_qol_k_f2e51a82b8122e9f|branch|3045c3db1e526836|3f4bc46482f8fc87|7e6a68fec6060351|-254136897||t20112.7802387035s|s49592b|49592|rds|local|vector|pars_qol_k||0.08||
 pars_qol_k_6d4870ae7dfe1a8e|branch|3ef4d0c1379d03b1|3f4bc46482f8fc87|c61522877d0e9a89|-810686288||t20112.7802393723s|s49970b|49970|rds|local|vector|pars_qol_k||0.05||
 pars_qol_k|pattern|415ca07825f90de3|3f4bc46482f8fc87||1187637843||||99562|rds|local|vector||pars_qol_k_f2e51a82b8122e9f*pars_qol_k_6d4870ae7dfe1a8e|0.13||
-file_pars_qol_k_94f40f59ccf65d67|branch|5216cbb767ba56e5|7723989db778cf15|a4efaf8fd65059b6|1392381880|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_k_uk.csv|t20112.7802403611s|s2801b|2801|file|local|vector|file_pars_qol_k||0.07||
 file_pars_qol_k|pattern|a2ddc3550cc1e5cc|7723989db778cf15||-1639549524||||2801|file|local|vector||file_pars_qol_k_94f40f59ccf65d67*file_pars_qol_k_f26501a37f1c67bc|0.07||
 plot_qol_0b0a5426d50dc26b|branch|43b73cf009d0d7e2|d1141efd482d1e53|cb39b55994033925|1550465050||t20112.7802626033s|s2676340b|2676340|rds|local|vector|plot_qol||1.55||
 plot_qol_dc36770b71064efd|branch|048e48283953540c|d1141efd482d1e53|d72edfa33605b0e4|823206712||t20112.7802824384s|s2679209b|2679209|rds|local|vector|plot_qol||1.35||
@@ -90,6 +83,12 @@ tab_shortfall_60e8605e17fd905c|branch|8b816a0aefd593ea|5557097ffba8b575|393861cf
 tab_shortfall|pattern|2ca0e0d774f15c20|5557097ffba8b575||170634571||||12492|rds|local|vector||tab_shortfall_60e8605e17fd905c*tab_shortfall_d8eaa6dc83412333|0.18||
 plot_shortfall_dc602edac5d947bf|branch|8827bfa35c687776|eb0ec8473dcd6f7d|348468a80cc99cac|-1727214897||t20112.7804365431s|s6761427b|6761427|rds|local|vector|plot_shortfall||1.58||
 plot_shortfall|pattern|fa46d2d1fbec0edc|eb0ec8473dcd6f7d||1324589521||||6761427|rds|local|vector||plot_shortfall_dc602edac5d947bf*plot_shortfall_3ad6675bf9c42e0a|1.58||
+plot_tte|stem|10a7850d652d199a|844e847c06dfc343|49c07184b667dd12|1222683081||t20112.9599272277s|s111b|111|rds|local|vector|||1.54|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 1 row containing missing values or values outside the scale rangegeom_point.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 1 row containing missing values or values outside the scale rangegeom_point.|
+file_qol_387b59a5eb0be5cd|branch|dc78f810319bd2a3|b0a26d68924c0d57|2c530c1562a7fbd1|-1340806544|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_uk.csv|t20118.0569890112s|s566975b|566975|file|local|vector|file_qol||0.05||
+file_qol_c099b9bdf0fc30fc|branch|3aa1e5a702af3934|b0a26d68924c0d57|2c530c1562a7fbd1|-960363958|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_orig.csv|t20118.0569889996s|s570220b|570220|file|local|vector|file_qol||0||
+file_qol|pattern|b844052edf73a12f|b0a26d68924c0d57||771708187||||1137195|file|local|vector||file_qol_387b59a5eb0be5cd*file_qol_c099b9bdf0fc30fc|0.05||
+data_raw_fa6bddd639031fc4|branch|ee85454a68fe8d36|52df58838b26989f|aab1f616c21bf9a0|892328321||t20132.0575035418s|s42206b|42206|rds|local|vector|data_raw||0.49||
+data_raw_51858ed0da6c8d5a|branch|65063776aa0bded9|52df58838b26989f|06f419676017feb1|-2036505950||t20132.0575061412s|s42780b|42780|rds|local|vector|data_raw||0.2||
 calc_timing|function|e94bd7a5fb48f4ca
 sim_ql|function|41ffd10116c1f033
 restructure_stan|function|5f51b2b00b777379
@@ -110,12 +109,18 @@ visualise_tte|function|a71673e57a8d52e3
 format_qol|function|2549105362a72b4f
 visualise_qol|function|86433b2b0fc3902a
 split_training_qol|function|98234a5a66385fb5
+simulate_shortfall_alt|function|aa14bdc81a65f8cb
 vis_qol_t|function|39f7a154ed4e6737
 get_data_norm|function|94c4ffd6debda126
+fit_qol_freq|function|6fd78ef68eb2a205
 simulate_shortfall|function|bca9107b419f3f16
 fit_tte|function|8e0952e1e91e9267
 fit_qol|function|31744dcfd056d45d
 empirical_surv|function|18b044ab39a0adbb
 summarise_shortfall|function|d807171ab5dd6450
 format_tte|function|98b4275be2892d9d
-plot_tte|stem|10a7850d652d199a|844e847c06dfc343|49c07184b667dd12|1222683081||t20112.9599272277s|s111b|111|rds|local|vector|||1.54|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 1 row containing missing values or values outside the scale rangegeom_point.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 1 row containing missing values or values outside the scale rangegeom_point.|
+pars_qol_f_f2e51a82b8122e9f|branch|514fda62b6f29eda|de21bf97785f2ac9|964d26f9a3c5243c|22321743||t20132.0673134538s|s855863b|855863|rds|local|vector|pars_qol_f||2.08||
+pars_qol_f_6d4870ae7dfe1a8e|branch|e9dc46e8e8b05568|de21bf97785f2ac9|275709f7e1190693|-1938498941||t20132.0673381214s|s858098b|858098|rds|local|vector|pars_qol_f||2||
+pars_qol_f|pattern|4a5f6d48cbd4bef1|de21bf97785f2ac9||1719327465||||1713961|rds|local|vector||pars_qol_f_f2e51a82b8122e9f*pars_qol_f_6d4870ae7dfe1a8e|4.08||
+file_pars_qol_k_94f40f59ccf65d67|branch|5216cbb767ba56e5|7723989db778cf15|a4efaf8fd65059b6|1392381880|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_k_uk.csv|t20132.0673393484s|s2801b|2801|file|local|vector|file_pars_qol_k||0.08||
+file_pars_qol_k_f26501a37f1c67bc|branch|47ca89d48ecb1ed9|7723989db778cf15|a4b715da4a74640d|1327781588|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_k_orig.csv|t20132.0673397423s|s2824b|2824|file|local|vector|file_pars_qol_k||0||
