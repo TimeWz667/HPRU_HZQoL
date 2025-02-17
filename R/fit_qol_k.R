@@ -76,11 +76,6 @@ fit_qol_kmeans <- function(dat) {
 }
 
 
-summarise_qol_kmeans <- function(fit) {
-  
-}
-
-
 fit_qol <- function(model, dat_qol, n_iter = 2e4, n_collect = 500, n_chains = 4) {
   n_warmup <- floor(n_iter - n_collect)
   

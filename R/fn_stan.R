@@ -1,5 +1,4 @@
 
-
 restructure_stan <- function(post) {
   su <- summary(post)$summary
   su <- data.frame(su) %>% 

@@ -1,9 +1,11 @@
-
 library(targets)
 
 # library(tarchetypes) # Load other packages as needed.
 library(rstan)
 library(ggplot2)
+library(ggpubr)
+library(lme4)
+library(lmeresampler)
 
 tar_option_set(
   packages = c("tibble", "tidyverse", "tidybayes", "rstan", "readxl", "glue", "lme4")
@@ -30,34 +32,33 @@ list(
     
     tar_target(vset, c("uk", "orig")),
     tar_target(file_qol, here::here("data", "processed", paste0("eq5d_", vset, ".csv")), format = "file", pattern = map(vset)),
-    
+
     ## extraction
     tar_target(data_raw, get_data_qol(file_qol, vset), pattern = map(file_qol, vset)),
     tar_target(data_norm, get_data_norm(file_norm)),
-    
+
     tar_target(data_tte, format_tte(data_raw), pattern = slice(data_raw, 1)),
     tar_target(data_qol, format_qol(data_raw), pattern = map(data_raw)),
     ## split training sets
-    
+
     tar_target(subdata_tte, split_training_tte(data_tte, prop = 0.5, prop_training = 0.5, seed = 11667 + 100)),
     tar_target(subdata_qol, split_training_qol(data_qol, prop = 0.5, prop_training = 0.5, seed = 11667 + 200)),
-    
-    ## exploratory analyses
-    
-    
-    ## modelling, TTE
-    # tar_target(file_model_tte, here::here("models", "time2zero_surv_age.stan"), format = "file"),
-    # tar_target(model_tte, stan_model(file_model_tte)),
-    # tar_target(pars_tte, fit_tte(model_tte, data_tte)),
-    # tar_target(file_pars_tte, summarise_tte(pars_tte), format = "file"),
-    # tar_target(plot_tte, visualise_tte(data_tte, pars_tte)),
+
+    # modelling, TTE
+    tar_target(file_model_tte, here::here("models", "time2zero_surv_age.stan"), format = "file"),
+    tar_target(model_tte, stan_model(file_model_tte)),
+    tar_target(pars_tte, fit_tte(model_tte, data_tte)),
+    tar_target(file_pars_tte, summarise_tte(pars_tte), format = "file"),
+    tar_target(plot_tte, visualise_tte(data_tte, pars_tte)),
 
     ## modelling, QoL
-    tar_target(pars_qol_k, fit_qol_kmeans(data_qol), pattern = map(data_qol)),
-    tar_target(file_pars_qol_k, summarise_qol_kmeans(pars_qol_k, vset), pattern = map(pars_qol_k, vset), format = "file"),
-    tar_target(plot_qol, visualise_qol(data_qol, pars_qol_k, vset), pattern = map(data_qol, pars_qol_k, vset)),
-    
-    tar_target(pars_qol_f, fit_qol_freq(data_qol), pattern = map(data_qol))
+    # tar_target(pars_qol_k, fit_qol_kmeans(data_qol), pattern = map(data_qol)),
+    # tar_target(file_pars_qol_k, summarise_qol_kmeans(pars_qol_k, vset), pattern = map(pars_qol_k, vset), format = "file"),
+    # tar_target(plot_qol, visualise_qol(data_qol, pars_qol_k, vset), pattern = map(data_qol, pars_qol_k, vset)),
+
+    tar_target(pars_qol_f, fit_qol_freq(data_qol), pattern = map(data_qol)),
+    tar_target(file_pars_qol_f, summarise_qol_freq(pars_qol_f, vset), pattern = map(pars_qol_f, vset), format = "file")
+    # tar_target(plot_qol, visualise_qol(data_qol, pars_qol_k, vset), pattern = map(data_qol, pars_qol_k, vset)),
 
     ## simulation
 
