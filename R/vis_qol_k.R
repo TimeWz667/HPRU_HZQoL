@@ -1,5 +1,5 @@
 
-visualise_qol <- function(dat_qol, pars_qol_k, vset) {
+visualise_qol_k <- function(dat_qol, pars_qol_k, vset) {
   require(tidyverse)
   
   #pars_qol_k <- tar_read(pars_qol_k, 1)
