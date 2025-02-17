@@ -59,15 +59,15 @@ list(
     tar_target(pars_qol_f, fit_qol_freq(data_qol), pattern = map(data_qol)),
     tar_target(file_pars_qol_f, summarise_qol_freq(pars_qol_f, vset), pattern = map(pars_qol_f, vset), format = "file"),
     tar_target(plot_qol_f, visualise_qol_freq(data_qol, pars_qol_f, vset, drf = F), pattern = map(data_qol, pars_qol_f, vset)),
-    tar_target(plot_qol_f_apx, visualise_qol_freq(data_qol, pars_qol_f, vset, drf = T), pattern = map(data_qol, pars_qol_f, vset))
+    tar_target(plot_qol_f_apx, visualise_qol_freq(data_qol, pars_qol_f, vset, drf = T), pattern = map(data_qol, pars_qol_f, vset)),
 
     ## simulation
-    # tar_target(pars_shortfall, boot_pars(file_pars_tte, file_pars_qol_k, n_sim = 1000), pattern = map(file_pars_qol_k)),
+    tar_target(pars_shortfall, boot_pars(file_pars_tte, file_pars_qol_f, n_sim = 1000), pattern = map(file_pars_qol_f)),
     # tar_target(sim_shortfall, simulate_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset)),
     # tar_target(tab_shortfall, summarise_shortfall(sim_shortfall, vset), pattern = map(sim_shortfall, vset)),
     # tar_target(plot_shortfall, vis_shortfall(sim_shortfall, tab_shortfall, vset), pattern = map(sim_shortfall, tab_shortfall, vset)),
     # tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset)),
     # 
-    # tar_target(js_shortfall, output_pars_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset), format = "file")
+    tar_target(js_shortfall, output_pars_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset), format = "file")
 )
 

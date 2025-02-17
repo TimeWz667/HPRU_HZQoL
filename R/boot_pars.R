@@ -1,18 +1,36 @@
 
 boot_pars <- function(file_pars_tte, file_pars_qol, n_sim = 1000) {
-  boot_qol <- read_csv(file_pars_qol) %>%
-    filter(Agp == "All") %>% 
+  boot_qol <- read_csv(file_pars_qol) %>% 
+    mutate(
+      Parameter = recode(Parameter, 
+                         `(Intercept)` = "b0", 
+                         `poly(Age, 2)1` = "ba1", 
+                         `poly(Age, 2)2` = "ba2",
+                         d15TRUE = "bd15",
+                         d30TRUE = "bd30"),
+      Model = recode(Model, `Pr(C0)` = "PZ", `Pr(C1|~C0)` = "PC1")
+    ) %>% 
     crossing(Key = 1:n_sim) %>% 
     mutate(
-      std = ifelse(is.na(std), 0, std),
-      Q = rnorm(n(), mu, std),
-      Q = pmin(Q, 1)
+      value = rnorm(n(), Estimate, Std),
+      name = paste0(Model, "_", Parameter)
     ) %>% 
-    relocate(Key) %>% 
-    select(Key, Q, Prop, Cluster) %>% 
-    pivot_wider(names_from = Cluster, values_from = c(Q, Prop))
+    select(Key, value, name) %>% 
+    pivot_wider()
+   
+  # boot_qol <- read_csv(file_pars_qol) %>%
+  #   filter(Agp == "All") %>% 
+  #   crossing(Key = 1:n_sim) %>% 
+  #   mutate(
+  #     std = ifelse(is.na(std), 0, std),
+  #     Q = rnorm(n(), mu, std),
+  #     Q = pmin(Q, 1)
+  #   ) %>% 
+  #   relocate(Key) %>% 
+  #   select(Key, Q, Prop, Cluster) %>% 
+  #   pivot_wider(names_from = Cluster, values_from = c(Q, Prop))
   
-  boot_tte <- read_csv(file_pars_tte) %>% mutate(ID = 1:n())
+  boot_tte <- read_csv(file_pars_tte) %>% select(r0, ba1) %>% mutate(ID = 1:n()) 
   
   boot_tte <- tibble(Key = 1:n_sim, ID = sample.int(nrow(boot_tte), n_sim, replace = n_sim > nrow(boot_tte))) %>% 
     left_join(boot_tte, by = "ID") %>% 
