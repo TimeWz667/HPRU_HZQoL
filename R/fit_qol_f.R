@@ -45,7 +45,7 @@ fit_qol_freq <- function(dat_qol) {
   ms <- list()
   ms$c1 <- lmer(EQ5D ~ 1 + (ti | SID), data = ds_c1)
   ms$c2 <- lmer(EQ5D ~ 1 + (ti | SID), data = ds_c2)
-  ms$pz <- glmer(cluster ~ d15 + d30 + poly(Age, 2) + (1 | SID), data = ds_zero, family = binomial)
+  ms$pz <- glmer(cluster ~ d15 + d30 + (1 | SID), data = ds_zero, family = binomial)
   ms$pc1 <-  glmer(cluster ~ d15 + d30 + (1 | SID), data = ds_clu1, family = binomial)
   
   dat_labelled <- dat_qol %>% 

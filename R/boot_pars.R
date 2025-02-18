@@ -4,8 +4,8 @@ boot_pars <- function(file_pars_tte, file_pars_qol, n_sim = 1000) {
     mutate(
       Parameter = recode(Parameter, 
                          `(Intercept)` = "b0", 
-                         `poly(Age, 2)1` = "ba1", 
-                         `poly(Age, 2)2` = "ba2",
+                         `poly(Age, 2, raw = T)1` = "ba1", 
+                         `poly(Age, 2, raw = T)2` = "ba2",
                          d15TRUE = "bd15",
                          d30TRUE = "bd30"),
       Model = recode(Model, `Pr(C0)` = "PZ", `Pr(C1|~C0)` = "PC1")
@@ -13,6 +13,10 @@ boot_pars <- function(file_pars_tte, file_pars_qol, n_sim = 1000) {
     crossing(Key = 1:n_sim) %>% 
     mutate(
       value = rnorm(n(), Estimate, Std),
+      value = case_when(
+        Parameter %in% c("ba1", "ba2") ~ Estimate,
+        T ~ value
+      ),
       name = paste0(Model, "_", Parameter)
     ) %>% 
     select(Key, value, name) %>% 
