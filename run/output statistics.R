@@ -28,5 +28,3 @@ tab_wider %>%
     `From population norm, d = 15%` = QL15
   ) %>% 
   write_csv(here::here("docs", "tabs", "QALY_loss_summary.csv"))
-
-
