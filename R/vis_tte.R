@@ -130,5 +130,6 @@ visualise_tte <- function(dat_tte, pars_tte) {
   ggsave(gs$g_tte_data, file = here::here("docs", "figs", "g_tte_data.png"), width = 6, height = 4)
   ggsave(gs$g_tte_pred, filename = here::here("docs", "figs", "g_tte_cri.png"), width = 7, height = 4)
   ggsave(gs$g_tte_bind, file = here::here("docs", "figs", "g_tte_bind.png"), width = 9, height = 12)
-
+  
+  return(gs)
 }

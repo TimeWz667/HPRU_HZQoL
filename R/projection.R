@@ -1,46 +1,109 @@
-
-boot_pars <- function(file_pars_tte, file_pars_qol, n_sim = 1000) {
-  boot_qol <- read_csv(file_pars_qol) %>%
-    filter(Agp == "All") %>% 
-    crossing(Key = 1:n_sim) %>% 
-    mutate(
-      std = ifelse(is.na(std), 0, std),
-      Q = rnorm(n(), mu, std),
-      Q = pmin(Q, 1)
-    ) %>% 
-    relocate(Key) %>% 
-    select(Key, Q, Prop, Cluster) %>% 
-    pivot_wider(names_from = Cluster, values_from = c(Q, Prop))
-  
-  boot_tte <- read_csv(file_pars_tte) %>% mutate(ID = 1:n())
-  
-  boot_tte <- tibble(Key = 1:n_sim, ID = sample.int(nrow(boot_tte), n_sim, replace = n_sim > nrow(boot_tte))) %>% 
-    left_join(boot_tte, by = "ID") %>% 
-    select(- ID)
-  
-  pars <- merge(boot_qol, boot_tte)
-  return(pars)
-}
-
-
-sim_ql <- \(age0 = 50, pars, pars_demo) {
+sim_pre_ql_k <- function(age0 = 50, pars, pars_demo) {
   n_sim <- max(pars$Key)
-
+  
   crossing(Key = 1:n_sim, Age = age0, ti = 0:(100 - age0)) %>% 
     mutate(
       AgeT = floor(Age + ti)
     ) %>% 
     left_join(pars, by = "Key") %>% 
     left_join(pars_demo %>% rename(AgeT = Age), by = "AgeT") %>% 
-    group_by(Key) %>% 
     mutate(
       rate = r0 * exp(Age * ba1),
       p_health = 1 + (exp(-rate * (ti + 1)) - exp(-rate * ti)) / rate,
-      p_hz = 1 - p_health,
+      p_hz = 1 - p_health
+    )
+      
+}
+
+
+sim_pre_ql_f <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
+  n_sim <- max(pars$Key)
+  #n_sim = 100
+  df <- crossing(Key = 1:n_sim, Age = age0, ti = seq(0, 100-age0, dt)) %>% 
+    mutate(
+      AgeT = floor(Age + ti)
+    ) %>% 
+    left_join(pars, by = "Key")  %>% 
+    left_join(pars_demo %>% rename(AgeT = Age), by = "AgeT") %>% 
+    mutate(
+      rate = r0 * exp(Age * ba1),
+      p_hz = (exp(-rate * ti) - exp(-rate * (ti + dt))) / rate,
+      p_health = dt - p_hz,
+      Q_0 = 1,
+      Q_1 = C1_b0,
+      Q_2 = C2_b0,
+      #PZ = PZ_ba2 * Age ^2 + PZ_ba1 * Age + PZ_b0 + PZ_bd15 * (ti <= 15 / 365.25) + PZ_bd30 * (ti <= 30 / 365.25),
+      PZ = PZ_b0 + PZ_bd15 * (ti <= 15 / 365.25) + PZ_bd30 * (ti <= 30 / 365.25),
+      PZ = 1 / (1 + exp(-PZ)),
+      PC1 = PC1_b0 + PC1_bd15 * (ti <= 15 / 365.25) + PC1_bd30 * (ti <= 30 / 365.25),
+      PC1 = 1 / (1 + exp(-PC1)),
+      Prop_0 = PZ,
+      Prop_1 = PC1 * (1 - PZ),
+      Prop_2 = 1 - Prop_0 - Prop_1,
       ql_ph = Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2,
       ql_ph = (1 - ql_ph) * p_hz,
       ql_pn = pmin(Q_0, norm) * Prop_0 + pmin(Q_1, norm) * Prop_1 + pmin(Q_2, norm) * Prop_2,
-      ql_pn = (norm - ql_pn) * p_hz,
+      ql_pn = (norm - ql_pn) * p_hz
+    ) %>% 
+    group_by(Key, Age, AgeT) %>% 
+    #select(Key, Age, AgeT, ti, ql_ph, ql_pn, rate, p_health, p_hz)
+    summarise(
+      across(c(p_hz, p_health, ql_ph, ql_pn), sum),
+      across(c(mr, norm), mean)
+    )
+  
+  return(df)
+  
+}
+
+
+sim_pre_ql_b <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
+  n_sim <- max(pars$Key)
+  #n_sim = 100
+  df <- crossing(Key = 1:n_sim, Age = age0, ti = seq(0, 100-age0, dt)) %>% 
+    mutate(
+      AgeT = floor(Age + ti)
+    ) %>% 
+    left_join(pars, by = "Key")  %>% 
+    left_join(pars_demo %>% rename(AgeT = Age), by = "AgeT") %>% 
+    mutate(
+      rate = r0 * exp(Age * ba1),
+      p_hz = (exp(-rate * ti) - exp(-rate * (ti + dt))) / rate,
+      p_health = dt - p_hz,
+      Q_0 = 1,
+      Q_1 = C1_b0,
+      Q_2 = C2_b0,
+      # PZ = PZ_ba2 * Age ^2 + PZ_ba1 * Age + PZ_b0 + PZ_bd15 * (ti <= 15 / 365.25) + PZ_bd30 * (ti <= 30 / 365.25),
+      PZ = PZ_b0 + PZ_bd15 * (ti <= 15 / 365.25) + PZ_bd30 * (ti <= 30 / 365.25),
+      PZ = 1 / (1 + exp(-PZ)),
+      cAge = (Age - 75) / 50,
+      #PC1 = PC1_b0 + PC1_bd15 * (ti <= 15 / 365.25) + PC1_bd30 * (ti <= 30 / 365.25) + PC1_ba1 * cAge + PC1_ba2 * cAge ^2,
+      PC1 = PC1_b0 + PC1_bd15 * (ti <= 15 / 365.25) + PC1_bd30 * (ti <= 30 / 365.25),
+      PC1 = 1 / (1 + exp(-PC1)),
+      Prop_0 = PZ,
+      Prop_1 = PC1 * (1 - PZ),
+      Prop_2 = 1 - Prop_0 - Prop_1,
+      ql_ph = Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2,
+      ql_ph = (1 - ql_ph) * p_hz,
+      ql_pn = pmin(Q_0, norm) * Prop_0 + pmin(Q_1, norm) * Prop_1 + pmin(Q_2, norm) * Prop_2,
+      ql_pn = (norm - ql_pn) * p_hz
+    ) %>% 
+    group_by(Key, Age, AgeT) %>% 
+    #select(Key, Age, AgeT, ti, ql_ph, ql_pn, rate, p_health, p_hz)
+    summarise(
+      across(c(p_hz, p_health, ql_ph, ql_pn), sum),
+      across(c(mr, norm), mean)
+    )
+  
+  return(df)
+  
+}
+
+
+sim_ql <- function(df) {
+  df %>% 
+    group_by(Key) %>% 
+    mutate(
       surv = cumprod(1 - mr),
       surv = (surv + c(1, surv[-n()])) / 2,
       d15 = (1 + 0.015) ^ -(AgeT - Age),
@@ -62,13 +125,27 @@ sim_ql <- \(age0 = 50, pars, pars_demo) {
 }
 
 
-simulate_shortfall <- function(pars, data_norm, vset = "uk", age0 = 50, age1 = 99) {
+simulate_shortfall <- function(pars, data_norm, vset = "uk", age0 = 50, age1 = 99, year = 2024, mod = c("k", "f", "b")) {
+  # pars <- tar_read(pars_shortfall, 1)
+  # data_norm <- tar_read(data_norm)
+  
   pars_demo <- data_norm %>% 
-    filter(Year == 2023) %>% 
+    filter(Year == year) %>% 
     ungroup() %>% 
     select(Age, mr = mortality, norm = norm_leoss) 
   
-  sim <- bind_rows(lapply(age0:age1, \(a0) sim_ql(age0 = a0, pars = pars, pars_demo = pars_demo)))
+  mod <- match.arg(mod)
+  sim <- bind_rows(lapply(age0:age1, \(a0) {
+    if (mod == "k") {
+      df <- sim_pre_ql_k(age0 = a0, pars = pars, pars_demo = pars_demo)
+    } else if (mod == "f") {
+      df <- sim_pre_ql_f(age0 = a0, pars = pars, pars_demo = pars_demo, dt = 0.01)
+    } else {
+      df <- sim_pre_ql_b(age0 = a0, pars = pars, pars_demo = pars_demo, dt = 0.01)
+    }
+    
+    df %>% sim_ql()
+  }))
   
   write_csv(sim, here::here("posteriors", paste0("QALY_loss_sims_", vset, ".csv")))
   
@@ -88,165 +165,5 @@ summarise_shortfall <- function(sim, vset) {
   write_csv(stats, here::here("docs", "tabs", paste0("QALY_loss_stats_", vset, ".csv")))
   
   return(stats)
-}
-
-
-vis_qol_t <- function(pars, pars_demo, vset, age = 50) {
-  theme_set(theme_bw())
-  
-  norm0 <- pars_demo %>% filter(Year == 2023 & Age == age) %>% pull(norm)
-  
-  sim_qol <- pars %>% 
-    filter(Key < 100) %>% 
-    crossing(ti = seq(0, 1, 0.01)) %>% 
-    mutate(
-      Age = age, 
-      rate = r0 * exp(Age * ba1),
-      pr_hz = 1 - pexp(ti, rate),
-      Cluster = runif(n()),
-      Cluster = case_when(
-        Cluster < Prop_0 ~ "0",
-        Cluster < Prop_0 + Prop_1 ~ "1",
-        T ~ "2",
-      ),
-      Q = case_when(
-        Cluster == "0" ~ Q_0,
-        Cluster == "1" ~ Q_1,
-        T ~ Q_2
-      ),
-      Q_norm = pmin(Q, norm0),
-      qol = (Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2),
-      qol_norm = (pmin(Q_0, norm0) * Prop_0 + pmin(Q_1, norm0) * Prop_1 + pmin(Q_2, norm0) * Prop_2),
-      Cluster = factor(Cluster)
-    )
-  
-  gs <- list()
-  
-  gs$g_qol <- sim_qol %>% 
-    ggplot() +
-    geom_point(aes(x = ti, y = Q, colour = Cluster, alpha = pr_hz), pch = 19) +
-    geom_hline(yintercept = norm0, linetype = 2) +
-    geom_text(x = 1, y = norm0, vjust = -.5, hjust = 1.1, label = "Population norm") +
-    scale_alpha("Probability of \ndisutility", range = c(0, 0.5), label = scales::percent) +
-    scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
-    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
-    expand_limits(y = c(-0.5, 1)) +
-    labs(caption = paste0("Age: ", age))
-  
-  
-  gs$g_qol_a <- sim_qol %>% 
-    mutate(qol_t = qol * pr_hz + (1 - pr_hz)) %>% 
-    ggplot() +
-    geom_point(aes(x = ti, y = qol_t, colour = Cluster), alpha = 0.1, pch = 19) +
-    geom_hline(yintercept = norm0, linetype = 2) +
-    geom_text(x = 1, y = norm0, vjust = -.5, hjust = 1.1, label = "Population norm") +
-    scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
-    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
-    expand_limits(y = c(-0.5, 1)) +
-    labs(caption = paste0("Age: ", age))
-  
-  
-  gs$g_qol_t <- sim_qol %>% 
-    mutate(qol_t = qol * pr_hz + (1 - pr_hz)) %>% 
-    ggplot() +
-    stat_lineribbon(aes(x = ti, y = qol_t)) +
-    geom_hline(yintercept = norm0, linetype = 2) +
-    geom_text(x = 1, y = norm0, vjust = -.5, hjust = 1.1, label = "Population norm") +
-    #geom_point(aes(x = ti, y = qol_t), pch = 19) +
-    scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
-    scale_fill_brewer() +
-    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
-    expand_limits(y = c(-0.5, 1)) +
-    labs(caption = paste0("Age: ", age))
-  
-  
-  gs$g_qol_norm <- sim_qol %>% 
-    mutate(pr_hz = ifelse(Q <= norm0, pr_hz, 0)) %>% 
-    ggplot() +
-    geom_point(aes(x = ti, y = Q_norm, colour = Cluster, alpha = pr_hz), pch = 19) +
-    geom_hline(yintercept = norm0, linetype = 2) +
-    geom_text(x = 1, y = norm0, vjust = -.5, hjust = 1.1, label = "Population norm") +
-    scale_alpha("Probability of \ndisutility", range = c(0, 0.5), label = scales::percent) +
-    scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
-    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
-    expand_limits(y = c(-0.5, 1)) +
-    labs(caption = paste0("Age: ", age))
-  
-  
-  gs$g_qol_a_norm <- sim_qol %>% 
-    mutate(qol_t = qol_norm * pr_hz + norm0 * (1 - pr_hz)) %>% 
-    ggplot() +
-    geom_point(aes(x = ti, y = qol_t, colour = Cluster), alpha = 0.1, pch = 19) +
-    geom_hline(yintercept = norm0, linetype = 2) +
-    geom_text(x = 1, y = norm0, vjust = -.5, hjust = 1.1, label = "Population norm") +
-    scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
-    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
-    expand_limits(y = c(-0.5, 1)) +
-    labs(caption = paste0("Age: ", age))
-  
-  
-  gs$g_qol_t_norm <- sim_qol %>% 
-    mutate(qol_t = qol_norm * pr_hz + norm0 * (1 - pr_hz)) %>% 
-    ggplot() +
-    stat_lineribbon(aes(x = ti, y = qol_t)) +
-    geom_hline(yintercept = norm0, linetype = 2) +
-    geom_text(x = 1, y = norm0, vjust = -.5, hjust = 1.1, label = "Population norm") +
-    #geom_point(aes(x = ti, y = qol_t), pch = 19) +
-    scale_y_continuous("Health-related quality of life", breaks = seq(-0.5, 1, 0.5)) +
-    scale_fill_brewer() +
-    scale_x_continuous("Months since rash onset", label = scales::number_format(scale = 12)) +
-    expand_limits(y = c(-0.5, 1)) +
-    labs(caption = paste0("Age: ", age))
-  
-  ggsave(gs$g_qol, filename = here::here("docs", "figs", paste0("g_qol_", age, "_", vset, ".png")), width = 8, height = 5)
-  ggsave(gs$g_qol_a, filename = here::here("docs", "figs", paste0("g_qol_avg_", age, "_", vset, ".png")), width = 8, height = 5)
-  ggsave(gs$g_qol_t, filename = here::here("docs", "figs", paste0("g_qol(", age, ")_", vset, ".png")), width = 8, height = 5)
-  ggsave(gs$g_qol_norm, filename = here::here("docs", "figs", paste0("g_qol_", age, "_norm_", vset, ".png")), width = 8, height = 5)
-  ggsave(gs$g_qol_a_norm, filename = here::here("docs", "figs", paste0("g_qol_avg_", age, "_norm_", vset, ".png")), width = 8, height = 5)
-  ggsave(gs$g_qol_t_norm, filename = here::here("docs", "figs", paste0("g_qol(", age, ")_norm_", vset, ".png")), width = 8, height = 5)
-  
-  return(gs)
-}
-
-
-vis_shortfall <- function(sim, stats, vset) {
-  gs <- list()
-  gs$g_ql <- stats %>% 
-    filter(startsWith(Index, "QL")) %>% 
-    filter(endsWith(Index, "35")) %>% 
-    filter(Age <= 99) %>% 
-    mutate(Index = factor(Index, c("QLH35", "QL35"))) %>% 
-    ggplot(aes(x = Age)) +
-    geom_ribbon(aes(ymin = L, ymax = U), alpha = 0.2) +
-    geom_line(aes(y = M)) +
-    scale_y_continuous("QALY loss") +
-    scale_x_continuous("Age at onset of HZ rash") +
-    facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
-    expand_limits(y = 0) +
-    labs(caption = "discounting: 3.5%") +
-    theme_bw()
-  
-  
-  gs$g_ql_grad <- sim %>% 
-    select(Age, QL35, QLH35) %>% 
-    filter(Age <= 99) %>%  
-    pivot_longer(-Age, names_to = "Index") %>% 
-    mutate(Index = factor(Index, c("QLH35", "QL35"))) %>% 
-    ggplot(aes(x = Age, y = value)) +
-    stat_lineribbon() +
-    scale_fill_brewer() +
-    scale_y_continuous("QALY loss") +
-    scale_x_continuous("Age at onset of HZ rash") +
-    facet_wrap(.~Index, labeller = labeller(Index = c(QL35 = "From population norm", QLH35 = "From perfect health"))) +
-    expand_limits(y = 0) +
-    labs(caption = "discounting: 3.5%") +
-    theme_bw()
-  
-  
-  ggsave(gs$g_ql, filename = here::here("docs", "figs", paste0("g_ql_", vset, ".png")), width = 7, height = 4)
-  ggsave(gs$g_ql_grad, filename = here::here("docs", "figs", paste0("g_ql_grad_", vset, ".png")), width = 7.3, height = 4)
-  
-  return(gs)
-
 }
 
