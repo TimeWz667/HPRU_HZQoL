@@ -5,7 +5,7 @@ visualise_qol_freq <- function(dat_qol, pars_qol_f, vset, drf = FALSE) {
   
   require(tidyverse)
   
-  tags <- c("0" = "temporal well", "1" = "mild discomfort", "2" = "severe discomfort")
+  tags <- c("0" = "temporally well", "1" = "mild discomfort", "2" = "severe discomfort")
 
   
   dat <- pars_qol_f[[2]] %>% 

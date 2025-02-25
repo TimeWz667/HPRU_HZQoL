@@ -82,7 +82,10 @@ list(
     
 
     # tar_target(sim_shortfall, simulate_shortfall(pars_shortfall, data_norm, vset, mod = "f"), pattern = map(pars_shortfall, vset)),
-
+    
+    # Meta regression
+    
+    
     # 
     tar_target(stats, describe_basic(data_raw, data_tte, pars_qol_f, vset), pattern = map(data_raw, pars_qol_f, vset))
 

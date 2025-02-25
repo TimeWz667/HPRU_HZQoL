@@ -99,19 +99,10 @@ data_qol_ee64f2f6047e377a|branch|3a7950946d2d371c|2f87b54211f448f3|e605819b82185
 data_qol_1c11c94f373ce396|branch|dbf81c4313059b5d|2f87b54211f448f3|10df1c5192390c15|-1953460836||t20112.7571944899s|s31928b|31928|rds|local|vector|data_qol||0.43||
 pars_tte|stem|fa5c1fbe13989961|619081ef22f6a365|50c1a3ed6948f69b|-250904775||t20137.5933551105s|s43996b|43996|rds|local|vector|||61.24|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
 plot_tte|stem|ded6e7be9bc90333|844e847c06dfc343|01ba4e82e67aeef0|1222683081||t20137.5934390791s|s5800482b|5800482|rds|local|vector|||1.5|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 2 rows containing missing values or values outside the scale rangegeom_point.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 2 rows containing missing values or values outside the scale rangegeom_point.|
-file_pars_tte|stem|b72dc4a820e9b63c|2e79bfe6f608a2db|60f1121f4ba19836|-1646548341|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_time2zero.csv|t20137.5934425509s|s118706b|118706|file|local|vector|||0.28||
 pars_qol_f_f2e51a82b8122e9f|branch|298fd3af5c36c162|de21bf97785f2ac9|78f05448b702ca43|22321743||t20137.6390272303s|s900465b|900465|rds|local|vector|pars_qol_f||1.51||
 pars_qol_f_6d4870ae7dfe1a8e|branch|a23a141e59ae914f|de21bf97785f2ac9|0309286bbd0b5a33|-1938498941||t20137.6390455385s|s902771b|902771|rds|local|vector|pars_qol_f||1.42||
 pars_qol_f|pattern|3f4f51d1c8f296e4|de21bf97785f2ac9||1719327465||||1803236|rds|local|vector||pars_qol_f_f2e51a82b8122e9f*pars_qol_f_6d4870ae7dfe1a8e|2.93||
-file_pars_qol_f_3619ed07f1799905|branch|5b36ca9973bcff2c|100f598af79660b2|ab04058a9ca2dd07|1483275476|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_f_uk.csv|t20137.6390479396s|s487b|487|file|local|vector|file_pars_qol_f||0.15||
-file_pars_qol_f_f5cf3a3966e5b81c|branch|730ad697023d94f8|100f598af79660b2|b964ed3b2db19859|-1133743525|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_f_orig.csv|t20137.639048768s|s489b|489|file|local|vector|file_pars_qol_f||0.03||
 file_pars_qol_f|pattern|68b874fbb544b09e|100f598af79660b2||454274780||||976|file|local|vector||file_pars_qol_f_3619ed07f1799905*file_pars_qol_f_f5cf3a3966e5b81c|0.18||
-plot_qol_f_b5853a8488e20adb|branch|954eabb9dd0e9203|f69d46cd2d8acebc|3a768358709ef4cf|-1566542533||t20137.6390748205s|s4127065b|4127065|rds|local|vector|plot_qol_f||1.59||
-plot_qol_f_7e1ce92bd4c8d0b7|branch|b2ee00ae7c64518e|f69d46cd2d8acebc|80f8417de2036019|-10777633||t20137.6390983983s|s4146513b|4146513|rds|local|vector|plot_qol_f||1.37||
-plot_qol_f|pattern|c2b54456cb590537|f69d46cd2d8acebc||-785126589||||8273578|rds|local|vector||plot_qol_f_b5853a8488e20adb*plot_qol_f_7e1ce92bd4c8d0b7|2.96||
-plot_qol_f_apx_b5853a8488e20adb|branch|7123364164b322be|45b5b8027597d3b7|3a768358709ef4cf|-2020579622||t20137.6391270734s|s5557420b|5557420|rds|local|vector|plot_qol_f_apx||1.7|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
-plot_qol_f_apx_7e1ce92bd4c8d0b7|branch|beb6783ca6d2d7aa|45b5b8027597d3b7|80f8417de2036019|1122851500||t20137.639158237s|s5555195b|5555195|rds|local|vector|plot_qol_f_apx||1.91|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
-plot_qol_f_apx|pattern|8af173427b4868cc|45b5b8027597d3b7||-913051541||||11112615|rds|local|vector||plot_qol_f_apx_b5853a8488e20adb*plot_qol_f_apx_7e1ce92bd4c8d0b7|3.61||
 pars_shortfall_542fcb6de5c487a4|branch|4f5339e6b4681856|a31a6ad585fca0aa|cfe4dde2215510f8|932308039||t20137.63915991s|s78203b|78203|rds|local|vector|pars_shortfall||0.12||
 pars_shortfall_054fc20f3170af18|branch|1763a6948d253824|a31a6ad585fca0aa|f116799337cb8747|-310420843||t20137.6391611702s|s78247b|78247|rds|local|vector|pars_shortfall||0.09||
 pars_shortfall|pattern|1603f90f9e02c3bf|a31a6ad585fca0aa||-1547213787||||156450|rds|local|vector||pars_shortfall_542fcb6de5c487a4*pars_shortfall_054fc20f3170af18|0.21||
@@ -145,8 +136,6 @@ plot_shortfall_f|pattern|d8d341c104495d5c|8e3c75fa1cc71472||1082448524||||131680
 pars_qol_b_f2e51a82b8122e9f|branch|53ca9828c95e64b6|9e2f6e4d4f3c222f|cc4d55cbd0b92e38|1198304100||t20138.4523455926s|s209484b|209484|rds|local|vector|pars_qol_b||282.39||
 pars_qol_b_6d4870ae7dfe1a8e|branch|891b17f86550ab5f|9e2f6e4d4f3c222f|ab8381a455e9f0a6|1092024217||t20138.4555191158s|s209305b|209305|rds|local|vector|pars_qol_b||274.16||
 pars_qol_b|pattern|49e339b9d8ab2624|9e2f6e4d4f3c222f||715514433||||418789|rds|local|vector||pars_qol_b_f2e51a82b8122e9f*pars_qol_b_6d4870ae7dfe1a8e|556.55||
-file_pars_qol_b_b71a640e8144c504|branch|1e05f0505e8ea59d|d672286752f89f3b|33f88a9dc2bab1ae|-1221354472|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_uk.csv|t20138.455524463s|s633067b|633067|file|local|vector|file_pars_qol_b||0.44||
-file_pars_qol_b_8b6eb3b0951831f3|branch|4dc3c02a84cfc301|d672286752f89f3b|0d21ce8ecce7a65f|-1998132391|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_orig.csv|t20138.4555268682s|s632147b|632147|file|local|vector|file_pars_qol_b||0.2||
 file_pars_qol_b|pattern|6ebb2dfdbb72ba11|d672286752f89f3b||2035719473||||1265214|file|local|vector||file_pars_qol_b_b71a640e8144c504*file_pars_qol_b_8b6eb3b0951831f3|0.64||
 pars_shortfall_b_7abb799ab9791acd|branch|433e7380d311895a|dc8152b888a4bb1b|3d4daa1694f43983|-1201747842||t20138.4555301948s|s93369b|93369|rds|local|vector|pars_shortfall_b||0.26||
 pars_shortfall_b_1b5dbf0e60daeb2a|branch|9d56545e630cc6d3|dc8152b888a4bb1b|d762d08dac8bcf63|-1796839030||t20138.4555318314s|s93074b|93074|rds|local|vector|pars_shortfall_b||0.13||
@@ -160,7 +149,10 @@ tab_shortfall_b|pattern|f61388e39707789e|f61ca31fe7499cc0||789916601||||24711|rd
 plot_shortfall_b_9dd25502ec339dae|branch|2a98a2274cd2999b|ec210f269a411898|19a2cedf9c70e902|-754165582||t20138.4577484749s|s6548646b|6548646|rds|local|vector|plot_shortfall_b||2.48||
 plot_shortfall_b_2d9ed8024ce7cc3f|branch|3ca2a39b8784faca|ec210f269a411898|2f386d3ba5c02ce1|-1021071939||t20138.4577681011s|s6554422b|6554422|rds|local|vector|plot_shortfall_b||1.35||
 plot_shortfall_b|pattern|fee56fc1300fb842|ec210f269a411898||1489883111||||13103068|rds|local|vector||plot_shortfall_b_9dd25502ec339dae*plot_shortfall_b_2d9ed8024ce7cc3f|3.83||
-visualise_qol_freq|function|e76a68e9a5eafdca
+stats_c6f3e6d2808f1e12|branch|ce6f4ce880fa05ef|5d6ac161c74e1071|3d0eb7277bf9875f|1473155910||t20138.6696806226s|s757b|757|rds|local|vector|stats||0.11||
+stats_1427dcb56853cebc|branch|5ff276975b5270e7|5d6ac161c74e1071|541c366821a3dc61|2091313071||t20138.6696818625s|s759b|759|rds|local|vector|stats||0.05||
+stats|pattern|ddc2bd9d8965dbae|5d6ac161c74e1071||1215092283||||1516|rds|local|vector||stats_c6f3e6d2808f1e12*stats_1427dcb56853cebc|0.16||
+visualise_qol_freq|function|51b7a134dc83fd49
 summarise_tte|function|784820d3d02ac0c8
 get_data_norm|function|94c4ffd6debda126
 summarise_qol_kmeans|function|12585f482f0015aa
@@ -187,7 +179,7 @@ fit_qol_freq|function|b5cce917e68c7e7c
 vis_shortfall|function|a536198eb2ca3c21
 split_training_qol|function|98234a5a66385fb5
 summarise_qol_freq|function|5ca4b61d1d85059d
-visualise_qol_k|function|86433b2b0fc3902a
+visualise_qol_k|function|7039bae48825e1f0
 visualise_tte|function|84391800a176c8c6
 split_training_tte|function|76c6c8798135dc9e
 reload_pars|function|ae86d7eb3a15bfd2
@@ -199,6 +191,14 @@ empirical_surv|function|18b044ab39a0adbb
 simulate_shortfall|function|06a673e08f7ffd0d
 summarise_shortfall|function|339c85e464b1ecd5
 format_tte|function|98b4275be2892d9d
-stats_c6f3e6d2808f1e12|branch|ce6f4ce880fa05ef|5d6ac161c74e1071|3d0eb7277bf9875f|1473155910||t20138.6696806226s|s757b|757|rds|local|vector|stats||0.11||
-stats_1427dcb56853cebc|branch|5ff276975b5270e7|5d6ac161c74e1071|541c366821a3dc61|2091313071||t20138.6696818625s|s759b|759|rds|local|vector|stats||0.05||
-stats|pattern|ddc2bd9d8965dbae|5d6ac161c74e1071||1215092283||||1516|rds|local|vector||stats_c6f3e6d2808f1e12*stats_1427dcb56853cebc|0.16||
+plot_qol_f_b5853a8488e20adb|branch|2eff98a52c2271b4|f69d46cd2d8acebc|a9eabe4a4f8b2538|-1566542533||t20144.9833117093s|s4127073b|4127073|rds|local|vector|plot_qol_f||1.75||
+plot_qol_f_7e1ce92bd4c8d0b7|branch|6ec2d5810b1b95c6|f69d46cd2d8acebc|56d24c381a6e7f06|-10777633||t20144.9833331912s|s4146535b|4146535|rds|local|vector|plot_qol_f||1.19||
+plot_qol_f|pattern|f9ba885479edf908|f69d46cd2d8acebc||-785126589||||8273608|rds|local|vector||plot_qol_f_b5853a8488e20adb*plot_qol_f_7e1ce92bd4c8d0b7|2.94||
+file_pars_qol_f_3619ed07f1799905|branch|5b36ca9973bcff2c|100f598af79660b2|ab04058a9ca2dd07|1483275476|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_f_uk.csv|t20144.983335251s|s487b|487|file|local|vector|file_pars_qol_f||0.11||
+file_pars_qol_f_f5cf3a3966e5b81c|branch|730ad697023d94f8|100f598af79660b2|b964ed3b2db19859|-1133743525|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_f_orig.csv|t20144.9833362508s|s489b|489|file|local|vector|file_pars_qol_f||0.05||
+plot_qol_f_apx_b5853a8488e20adb|branch|56e0fe2913264ac8|45b5b8027597d3b7|a9eabe4a4f8b2538|-2020579622||t20144.9833676872s|s5557408b|5557408|rds|local|vector|plot_qol_f_apx||1.94|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
+plot_qol_f_apx_7e1ce92bd4c8d0b7|branch|e7a5b6cbd42a78bb|45b5b8027597d3b7|56d24c381a6e7f06|1122851500||t20144.9833966829s|s5555201b|5555201|rds|local|vector|plot_qol_f_apx||1.74|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
+plot_qol_f_apx|pattern|4d6fdc7926700084|45b5b8027597d3b7||-913051541||||11112609|rds|local|vector||plot_qol_f_apx_b5853a8488e20adb*plot_qol_f_apx_7e1ce92bd4c8d0b7|3.68||
+file_pars_qol_b_b71a640e8144c504|branch|1e05f0505e8ea59d|d672286752f89f3b|33f88a9dc2bab1ae|-1221354472|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_uk.csv|t20144.9833988818s|s633067b|633067|file|local|vector|file_pars_qol_b||0.15||
+file_pars_qol_b_8b6eb3b0951831f3|branch|4dc3c02a84cfc301|d672286752f89f3b|0d21ce8ecce7a65f|-1998132391|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_orig.csv|t20144.9834012197s|s632147b|632147|file|local|vector|file_pars_qol_b||0.18||
+file_pars_tte|stem|b72dc4a820e9b63c|2e79bfe6f608a2db|60f1121f4ba19836|-1646548341|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_time2zero.csv|t20144.9834037759s|s118706b|118706|file|local|vector|||0.21||
