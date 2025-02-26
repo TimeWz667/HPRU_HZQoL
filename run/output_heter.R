@@ -86,7 +86,7 @@ res <- bind_rows(
   rstan::extract(post_c1, pars = c("b0", "bg")) %>% 
   data.frame() %>% 
   as_tibble() %>% 
-  mutate(bg.0 = b0) %>% 
+  mutate(bg.0 = 0) %>% 
   pivot_longer(-b0) %>% 
   mutate(
     pred = value + b0,
@@ -95,7 +95,7 @@ res <- bind_rows(
   rstan::extract(post_c2, pars = c("b0", "bg")) %>% 
   data.frame() %>% 
   as_tibble() %>% 
-  mutate(bg.0 = b0) %>% 
+  mutate(bg.0 = 0) %>% 
   pivot_longer(-b0) %>% 
   mutate(
     pred = value + b0,
@@ -117,6 +117,30 @@ write_csv(res, here::here("docs", "tabs", "tab_hetero.csv"))
 
 
 
+dat <- read_csv(here::here("docs", "tabs", "tab_hetero.csv")) %>% 
+  mutate(
+    SID = sprintf("%s %s\n%s", Author, Year, Country),
+    SID = ifelse(is.na(Year), "Pooled", SID), 
+    SID = factor(SID)
+  )
 
 
+dat
+
+theme_set(theme_bw())
+
+g_heter <- dat %>% 
+  filter(SID != "Pooled") %>% 
+  ggplot(aes(y = SID)) +
+  geom_point(aes(x = M)) +
+  geom_errorbar(aes(xmin = L, xmax = U), width = 0.3) +
+  geom_pointrange(data = dat %>% filter(SID == "Pooled"), aes(y = SID, x = M, xmin = L, xmax = U)) +
+  facet_grid(.~sub, labeller = labeller(sub = c(C1 = "mild discomfort", C2 = "severe discomfort"))) +
+  scale_x_continuous("EQ-5D score") +
+  scale_y_discrete("", limits = rev) +
+  expand_limits(x = 1) +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+
+
+ggsave(g_heter, filename = here::here("docs", "figs", paste0("g_qol_heter.png")), width = 7, height = 4)
 
