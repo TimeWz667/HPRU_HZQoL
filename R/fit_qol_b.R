@@ -25,7 +25,7 @@ fit_qol_bayes <- function(dat_qol, n_iter = 5e3, n_collect = 500, n_chains = 4) 
   
 #  model_logit <- stan_model(here::here("models", "reff_logistic_0.stan"))
   model_logit_d <- stan_model(here::here("models", "reff_logistic_d.stan"))
-  model_logit_ad <- stan_model(here::here("models", "reff_logistic_ad.stan"))
+  # model_logit_ad <- stan_model(here::here("models", "reff_logistic_ad.stan"))
   
   # m_c1 <- lmer(EQ5D ~ 1 + (ti | SID), data = ds_nz %>% filter(cluster == 1))
   # ms$c2 <- lmer(EQ5D ~ 1 + (ti | SID), data = ds_c2)
@@ -89,10 +89,10 @@ fit_qol_bayes <- function(dat_qol, n_iter = 5e3, n_collect = 500, n_chains = 4) 
     ds$N_gp <- length(unique(ds$Gs))
     ds
   })
-  # post_pc1 <- sampling(model_logit_d, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts")], 
-  #                      pars = c("b0", "bd15", "bd30"), chains = n_chains, iter = n_iter, warmup = n_warmup)
-  post_pc1 <- sampling(model_logit_ad, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts", "As")],
-                       pars = c("b0", "bd15", "bd30", "ba1", "ba2"), chains = n_chains, iter = n_iter, warmup = n_warmup)
+  post_pc1 <- sampling(model_logit_d, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts")],
+                       pars = c("b0", "bd15", "bd30"), chains = n_chains, iter = n_iter, warmup = n_warmup)
+  # post_pc1 <- sampling(model_logit_ad, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts", "As")],
+  #                      pars = c("b0", "bd15", "bd30", "ba1", "ba2"), chains = n_chains, iter = n_iter, warmup = n_warmup)
 
 
   res_c1 <- restructure_stan(post_c1)

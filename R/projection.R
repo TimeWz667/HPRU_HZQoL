@@ -77,7 +77,7 @@ sim_pre_ql_b <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
       PZ = PZ_b0 + PZ_bd15 * (ti <= 15 / 365.25) + PZ_bd30 * (ti <= 30 / 365.25),
       PZ = 1 / (1 + exp(-PZ)),
       cAge = (Age - 75) / 50,
-      #PC1 = PC1_b0 + PC1_bd15 * (ti <= 15 / 365.25) + PC1_bd30 * (ti <= 30 / 365.25) + PC1_ba1 * cAge + PC1_ba2 * cAge ^2,
+      # PC1 = PC1_b0 + PC1_bd15 * (ti <= 15 / 365.25) + PC1_bd30 * (ti <= 30 / 365.25) + PC1_ba1 * cAge + PC1_ba2 * cAge ^2,
       PC1 = PC1_b0 + PC1_bd15 * (ti <= 15 / 365.25) + PC1_bd30 * (ti <= 30 / 365.25),
       PC1 = 1 / (1 + exp(-PC1)),
       Prop_0 = PZ,
