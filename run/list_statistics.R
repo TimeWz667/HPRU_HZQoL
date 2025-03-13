@@ -61,6 +61,7 @@ dat %>%
     max(nt),
     median(t1) * 365.25,
     mean(nt == max(nt)),
+    sum(nt == max(nt)),
     mean(nt >= (max(nt) - 0))
   )
 
@@ -81,4 +82,11 @@ dat %>% pull(EQ5D) %>% summary
 
 dat %>% filter(EQ5D < 1) %>% pull(EQ5D) %>% summary
 
+
+
+pars_qol <- tar_read(pars_qol_b, 1)[[2]]
+
+pars_qol %>% 
+  filter(Var == "b0") %>% 
+  select(Model, mean, `X2.5.`, `X97.5.`)
 
