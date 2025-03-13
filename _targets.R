@@ -64,6 +64,7 @@ list(
     ## modelling, QoL, Bayes
     tar_target(pars_qol_b, fit_qol_bayes(data_qol), pattern = map(data_qol)),
     tar_target(file_pars_qol_b, summarise_qol_bayes(pars_qol_b, vset), pattern = map(pars_qol_b, vset), format = "file"),
+    tar_target(plot_qol_b, visualise_qol_bayes(data_qol, pars_qol_f, pars_qol_b, vset, drf = T), pattern = map(data_qol, pars_qol_b, pars_qol_f, vset)),
     
     ## simulation, Freq
     tar_target(pars_shortfall_f, boot_pars(file_pars_tte, file_pars_qol_f, n_sim = 1000), pattern = map(file_pars_qol_f)),

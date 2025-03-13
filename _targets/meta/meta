@@ -157,6 +157,12 @@ sim_shortfall_f_fb58315ae1026d8c|branch|1bfe999d633adc67|44b89a27aab3f698|5082d4
 tab_shortfall_b_1060b52c66e1d56c|branch|2abdbe6ef3a8e6db|f61ca31fe7499cc0|9eff889f7be70494|880530077||t20147.513926195s|s12345b|12345|rds|local|vector|tab_shortfall_b||0.14||
 tab_shortfall_b_7bc7dd14ad14d96a|branch|60cf8ae7e895189e|f61ca31fe7499cc0|b4c234e30e1177e3|426492181||t20147.5139279824s|s12374b|12374|rds|local|vector|tab_shortfall_b||0.14||
 tab_shortfall_b|pattern|3d3f4b816a2b5daa|f61ca31fe7499cc0||789916601||||24719|rds|local|vector||tab_shortfall_b_1060b52c66e1d56c*tab_shortfall_b_7bc7dd14ad14d96a|0.28||
+plot_shortfall_b_9dd25502ec339dae|branch|eae408665f13e911|ec210f269a411898|96ba14c45b072d18|-754165582||t20160.3947710555s|s6546780b|6546780|rds|local|vector|plot_shortfall_b||1.77||
+plot_shortfall_b_2d9ed8024ce7cc3f|branch|563702b57101f18a|ec210f269a411898|7870c1d717e7da2b|-1021071939||t20160.3947938432s|s6547666b|6547666|rds|local|vector|plot_shortfall_b||1.58||
+plot_shortfall_b|pattern|a4bba25e70bd912f|ec210f269a411898||1489883111||||13094446|rds|local|vector||plot_shortfall_b_9dd25502ec339dae*plot_shortfall_b_2d9ed8024ce7cc3f|3.35||
+plot_shortfall_f_2aeb731d29de8a67|branch|a349a0a8d47a5d9d|8e3c75fa1cc71472|6596fa4efe96fb89|904429761||t20160.3948171619s|s6577101b|6577101|rds|local|vector|plot_shortfall_f||1.63||
+plot_shortfall_f_1d12ee3d0468d56b|branch|85a7118d4fe0f77a|8e3c75fa1cc71472|ea486a6c032f0b00|506247265||t20160.3948372564s|s6591099b|6591099|rds|local|vector|plot_shortfall_f||1.37||
+plot_shortfall_f|pattern|83c05dda16ac753f|8e3c75fa1cc71472||1082448524||||13168200|rds|local|vector||plot_shortfall_f_2aeb731d29de8a67*plot_shortfall_f_1d12ee3d0468d56b|3||
 visualise_qol_freq|function|51b7a134dc83fd49
 summarise_tte|function|784820d3d02ac0c8
 get_data_norm|function|94c4ffd6debda126
@@ -170,6 +176,7 @@ sim_pre_ql_k|function|2830d1176816ef0e
 sim_ql|function|e0cfa7ae3f1bf51a
 amlu|object|b9a2d490f8dcb9cb
 explore_qol|function|816c0e6a2500d543
+visualise_qol_bayes|function|e373e3ba6324aa92
 calc_timing|function|e94bd7a5fb48f4ca
 format_qol|function|2549105362a72b4f
 output_pars_shortfall|function|194a962e52ff78f2
@@ -196,9 +203,6 @@ empirical_surv|function|18b044ab39a0adbb
 simulate_shortfall|function|06a673e08f7ffd0d
 summarise_shortfall|function|339c85e464b1ecd5
 format_tte|function|98b4275be2892d9d
-plot_shortfall_b_9dd25502ec339dae|branch|eae408665f13e911|ec210f269a411898|96ba14c45b072d18|-754165582||t20160.3947710555s|s6546780b|6546780|rds|local|vector|plot_shortfall_b||1.77||
-plot_shortfall_b_2d9ed8024ce7cc3f|branch|563702b57101f18a|ec210f269a411898|7870c1d717e7da2b|-1021071939||t20160.3947938432s|s6547666b|6547666|rds|local|vector|plot_shortfall_b||1.58||
-plot_shortfall_b|pattern|a4bba25e70bd912f|ec210f269a411898||1489883111||||13094446|rds|local|vector||plot_shortfall_b_9dd25502ec339dae*plot_shortfall_b_2d9ed8024ce7cc3f|3.35||
-plot_shortfall_f_2aeb731d29de8a67|branch|a349a0a8d47a5d9d|8e3c75fa1cc71472|6596fa4efe96fb89|904429761||t20160.3948171619s|s6577101b|6577101|rds|local|vector|plot_shortfall_f||1.63||
-plot_shortfall_f_1d12ee3d0468d56b|branch|85a7118d4fe0f77a|8e3c75fa1cc71472|ea486a6c032f0b00|506247265||t20160.3948372564s|s6591099b|6591099|rds|local|vector|plot_shortfall_f||1.37||
-plot_shortfall_f|pattern|83c05dda16ac753f|8e3c75fa1cc71472||1082448524||||13168200|rds|local|vector||plot_shortfall_f_2aeb731d29de8a67*plot_shortfall_f_1d12ee3d0468d56b|3||
+plot_qol_b_6fba258bcf161527|branch|282be9753fee71ae|d9592705c0e4dc79|4bb337f45afb78af|-634072737||t20160.6570330972s|s5425541b|5425541|rds|local|vector|plot_qol_b||2.52|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+plot_qol_b_d7ececbd2310377a|branch|fd4d5c75410ec430|d9592705c0e4dc79|7d8726e09618846d|1030656989||t20160.6570657426s|s5432920b|5432920|rds|local|vector|plot_qol_b||2.05|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+plot_qol_b|pattern|ae559651100a1faf|d9592705c0e4dc79||307000187||||10858461|rds|local|vector||plot_qol_b_6fba258bcf161527*plot_qol_b_d7ececbd2310377a|4.57||
