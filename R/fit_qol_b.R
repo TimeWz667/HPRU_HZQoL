@@ -46,7 +46,7 @@ fit_qol_bayes <- function(dat_qol, n_iter = 5e3, n_collect = 500, n_chains = 4) 
   })
   
   post_c1 <- sampling(model_norm_tg, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts")], 
-                      pars = c("b0"), chains = n_chains, iter = n_iter, warmup = n_warmup)
+                      pars = c("b0", "bg", "sigma"), chains = n_chains, iter = n_iter, warmup = n_warmup)
   
   
   # Q, cluster 2
@@ -61,7 +61,7 @@ fit_qol_bayes <- function(dat_qol, n_iter = 5e3, n_collect = 500, n_chains = 4) 
     ds
   })
   post_c2 <- sampling(model_norm_tg, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts")], 
-                      pars = c("b0"), chains = n_chains, iter = n_iter, warmup = n_warmup)
+                      pars = c("b0", "bg", "sigma"), chains = n_chains, iter = n_iter, warmup = n_warmup)
   
   
   # P(zero)
@@ -75,7 +75,7 @@ fit_qol_bayes <- function(dat_qol, n_iter = 5e3, n_collect = 500, n_chains = 4) 
     ds
   })
   post_pz <- sampling(model_logit_d, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts")], 
-                      pars = c("b0", "bd15", "bd30"), chains = n_chains, iter = n_iter, warmup = n_warmup)
+                      pars = c("b0", "bd15", "bd30", "bg"), chains = n_chains, iter = n_iter, warmup = n_warmup)
   #post_pz <- sampling(model_logit_ad, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts", "As")], chains = 3, pars = c("b0", "bd15", "bd30", "ba1", "ba2"))
   
   
@@ -90,7 +90,7 @@ fit_qol_bayes <- function(dat_qol, n_iter = 5e3, n_collect = 500, n_chains = 4) 
     ds
   })
   post_pc1 <- sampling(model_logit_d, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts")],
-                       pars = c("b0", "bd15", "bd30"), chains = n_chains, iter = n_iter, warmup = n_warmup)
+                       pars = c("b0", "bd15", "bd30", "bg"), chains = n_chains, iter = n_iter, warmup = n_warmup)
   # post_pc1 <- sampling(model_logit_ad, data = ds[c("Ys", "N", "Gs", "N_gp", "Ts", "As")],
   #                      pars = c("b0", "bd15", "bd30", "ba1", "ba2"), chains = n_chains, iter = n_iter, warmup = n_warmup)
 
@@ -102,16 +102,28 @@ fit_qol_bayes <- function(dat_qol, n_iter = 5e3, n_collect = 500, n_chains = 4) 
   
   res <- list(
     Ext = bind_rows(
-      C1 = res_c1$Ext %>% mutate(Model = "C1"),
-      C2 = res_c2$Ext %>% mutate(Model = "C2"),
-      PZ = res_pz$Ext %>% mutate(Model = "PZ"),
-      PC1 = res_pc1$Ext %>% mutate(Model = "PC1")
+      C1 = res_c1$Ext %>% select(!starts_with("bg")) %>% mutate(Model = "C1"),
+      C2 = res_c2$Ext %>% select(!starts_with("bg")) %>% mutate(Model = "C2"),
+      PZ = res_pz$Ext %>% select(!starts_with("bg")) %>% mutate(Model = "PZ"),
+      PC1 = res_pc1$Ext %>% select(!starts_with("bg")) %>% mutate(Model = "PC1")
     ), 
+    ExtBG = bind_rows(
+      C1 = res_c1$Ext %>% select(starts_with("bg")) %>% mutate(Model = "C1"),
+      C2 = res_c2$Ext %>% select(starts_with("bg")) %>% mutate(Model = "C2"),
+      PZ = res_pz$Ext %>% select(starts_with("bg")) %>% mutate(Model = "PZ"),
+      PC1 = res_pc1$Ext %>% select(starts_with("bg")) %>% mutate(Model = "PC1")
+    ),
     Summary = bind_rows(
-      res_c1$Summary %>% mutate(Model = "C1"),
-      res_c2$Summary %>% mutate(Model = "C2"),
-      res_pz$Summary %>% mutate(Model = "PZ"),
-      res_pc1$Summary %>% mutate(Model = "PC1")
+      res_c1$Summary %>% filter(!startsWith(Var, "bg")) %>%  mutate(Model = "C1"),
+      res_c2$Summary %>% filter(!startsWith(Var, "bg")) %>% mutate(Model = "C2"),
+      res_pz$Summary %>% filter(!startsWith(Var, "bg")) %>% mutate(Model = "PZ"),
+      res_pc1$Summary %>% filter(!startsWith(Var, "bg")) %>% mutate(Model = "PC1")
+    ) %>% relocate(Model, Var),
+    SummaryBG = bind_rows(
+      res_c1$Summary %>% filter(startsWith(Var, "bg")) %>%  mutate(Model = "C1"),
+      res_c2$Summary %>% filter(startsWith(Var, "bg")) %>% mutate(Model = "C2"),
+      res_pz$Summary %>% filter(startsWith(Var, "bg")) %>% mutate(Model = "PZ"),
+      res_pc1$Summary %>% filter(startsWith(Var, "bg")) %>% mutate(Model = "PC1")
     ) %>% relocate(Model, Var)
   )
   
@@ -123,5 +135,8 @@ summarise_qol_bayes <- function(fit, vset) {
   #fit <- tar_read(pars_qol_b, 1)
   write_csv(fit$Summary, file = here::here("docs", "tabs", paste0("stats_qol_b_", vset, ".csv")))
   write_csv(fit$Ext, file = here::here("posteriors", paste0("post_qol_b_", vset, ".csv")))
+  
+  write_csv(fit$SummaryBG, file = here::here("docs", "tabs", paste0("stats_qol_b_bg_", vset, ".csv")))
+  write_csv(fit$ExtBG, file = here::here("posteriors", paste0("post_qol_b_bg_", vset, ".csv")))
   return(here::here("posteriors", paste0("post_qol_b_", vset, ".csv")))
 }

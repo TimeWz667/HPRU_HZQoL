@@ -64,7 +64,7 @@ list(
     ## modelling, QoL, Bayes
     tar_target(pars_qol_b, fit_qol_bayes(data_qol), pattern = map(data_qol)),
     tar_target(file_pars_qol_b, summarise_qol_bayes(pars_qol_b, vset), pattern = map(pars_qol_b, vset), format = "file"),
-    tar_target(plot_qol_b, visualise_qol_bayes(data_qol, pars_qol_f, pars_qol_b, vset, drf = T), pattern = map(data_qol, pars_qol_b, pars_qol_f, vset)),
+    # tar_target(plot_qol_b, visualise_qol_bayes(data_qol, pars_qol_f, pars_qol_b, vset, drf = T), pattern = map(data_qol, pars_qol_b, pars_qol_f, vset)),
     
     ## simulation, Freq
     tar_target(pars_shortfall_f, boot_pars(file_pars_tte, file_pars_qol_f, n_sim = 1000), pattern = map(file_pars_qol_f)),
@@ -75,16 +75,14 @@ list(
     tar_target(plot_shortfall_f, vis_shortfall(sim_shortfall_f, tab_shortfall_f, paste0("f_", vset)), pattern = map(sim_shortfall_f, tab_shortfall_f, vset)),
     
     ## simulation, Bayes
-    tar_target(pars_shortfall_b, boot_pars_bayes(file_pars_tte, file_pars_qol_b, n_sim = 1000), pattern = map(file_pars_qol_b)),
-    tar_target(sim_shortfall_b, simulate_shortfall(pars_shortfall_b, data_norm, vset, mod = "b"), pattern = map(pars_shortfall_b, vset)),
-    tar_target(tab_shortfall_b, summarise_shortfall(sim_shortfall_b, vset), pattern = map(sim_shortfall_b, vset)),
-    tar_target(plot_shortfall_b, vis_shortfall(sim_shortfall_b, tab_shortfall_b, vset), pattern = map(sim_shortfall_b, tab_shortfall_b, vset)),
+    # tar_target(pars_shortfall_b, boot_pars_bayes(file_pars_tte, file_pars_qol_b, n_sim = 1000), pattern = map(file_pars_qol_b)),
+    # tar_target(sim_shortfall_b, simulate_shortfall(pars_shortfall_b, data_norm, vset, mod = "b"), pattern = map(pars_shortfall_b, vset)),
+    # tar_target(tab_shortfall_b, summarise_shortfall(sim_shortfall_b, vset), pattern = map(sim_shortfall_b, vset)),
+    # tar_target(plot_shortfall_b, vis_shortfall(sim_shortfall_b, tab_shortfall_b, vset), pattern = map(sim_shortfall_b, tab_shortfall_b, vset)),
     # tar_target(plot_qol_t, vis_qol_t(pars_shortfall, data_norm, vset, age = 80), pattern = map(pars_shortfall, vset)),    
     
 
     # tar_target(sim_shortfall, simulate_shortfall(pars_shortfall, data_norm, vset, mod = "f"), pattern = map(pars_shortfall, vset)),
-    
-    # Meta regression
     
     
     # 

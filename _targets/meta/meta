@@ -140,12 +140,6 @@ plot_qol_f_apx_b5853a8488e20adb|branch|56e0fe2913264ac8|45b5b8027597d3b7|a9eabe4
 plot_qol_f_apx_7e1ce92bd4c8d0b7|branch|e7a5b6cbd42a78bb|45b5b8027597d3b7|56d24c381a6e7f06|1122851500||t20144.9833966829s|s5555201b|5555201|rds|local|vector|plot_qol_f_apx||1.74|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 plot_qol_f_apx|pattern|4d6fdc7926700084|45b5b8027597d3b7||-913051541||||11112609|rds|local|vector||plot_qol_f_apx_b5853a8488e20adb*plot_qol_f_apx_7e1ce92bd4c8d0b7|3.68||
 file_pars_tte|stem|b72dc4a820e9b63c|2e79bfe6f608a2db|60f1121f4ba19836|-1646548341|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_time2zero.csv|t20144.9834037759s|s118706b|118706|file|local|vector|||0.21||
-pars_qol_b_f2e51a82b8122e9f|branch|01a7dfea7e8c7e9e|9e2f6e4d4f3c222f|0e5bb1da4e89335f|1198304100||t20147.5085177534s|s178579b|178579|rds|local|vector|pars_qol_b||124.49||
-pars_qol_b_6d4870ae7dfe1a8e|branch|1baa46f15c7c2fb2|9e2f6e4d4f3c222f|56a68a24fccfffa9|1092024217||t20147.5098285103s|s178379b|178379|rds|local|vector|pars_qol_b||113.22||
-pars_qol_b|pattern|833bb8821b3df3bf|9e2f6e4d4f3c222f||715514433||||356958|rds|local|vector||pars_qol_b_f2e51a82b8122e9f*pars_qol_b_6d4870ae7dfe1a8e|237.71||
-file_pars_qol_b_b71a640e8144c504|branch|6fe6e7cacedb3551|d672286752f89f3b|420348a2cd81584e|-1221354472|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_uk.csv|t20147.5098315264s|s517812b|517812|file|local|vector|file_pars_qol_b||0.23||
-file_pars_qol_b_8b6eb3b0951831f3|branch|a3eafb437c7fd166|d672286752f89f3b|0569a774ad1ef5e5|-1998132391|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_orig.csv|t20147.509833609s|s517067b|517067|file|local|vector|file_pars_qol_b||0.16||
-file_pars_qol_b|pattern|aed095e5c62e2be8|d672286752f89f3b||2035719473||||1034879|file|local|vector||file_pars_qol_b_b71a640e8144c504*file_pars_qol_b_8b6eb3b0951831f3|0.39||
 pars_shortfall_b_7abb799ab9791acd|branch|1c5d2ba4d23a10c3|dc8152b888a4bb1b|b30e1959e4f40913|-1201747842||t20147.5098367169s|s78288b|78288|rds|local|vector|pars_shortfall_b||0.25||
 pars_shortfall_b_1b5dbf0e60daeb2a|branch|a6c2e23d70d516e5|dc8152b888a4bb1b|b5456234e4ec9200|-1796839030||t20147.5098379973s|s78029b|78029|rds|local|vector|pars_shortfall_b||0.11||
 pars_shortfall_b|pattern|ace7d8f5853b83d3|dc8152b888a4bb1b||-373877460||||156317|rds|local|vector||pars_shortfall_b_7abb799ab9791acd*pars_shortfall_b_1b5dbf0e60daeb2a|0.36||
@@ -163,6 +157,12 @@ plot_shortfall_b|pattern|a4bba25e70bd912f|ec210f269a411898||1489883111||||130944
 plot_shortfall_f_2aeb731d29de8a67|branch|a349a0a8d47a5d9d|8e3c75fa1cc71472|6596fa4efe96fb89|904429761||t20160.3948171619s|s6577101b|6577101|rds|local|vector|plot_shortfall_f||1.63||
 plot_shortfall_f_1d12ee3d0468d56b|branch|85a7118d4fe0f77a|8e3c75fa1cc71472|ea486a6c032f0b00|506247265||t20160.3948372564s|s6591099b|6591099|rds|local|vector|plot_shortfall_f||1.37||
 plot_shortfall_f|pattern|83c05dda16ac753f|8e3c75fa1cc71472||1082448524||||13168200|rds|local|vector||plot_shortfall_f_2aeb731d29de8a67*plot_shortfall_f_1d12ee3d0468d56b|3||
+plot_qol_b_6fba258bcf161527|branch|282be9753fee71ae|d9592705c0e4dc79|4bb337f45afb78af|-634072737||t20160.6570330972s|s5425541b|5425541|rds|local|vector|plot_qol_b||2.52|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+plot_qol_b_d7ececbd2310377a|branch|fd4d5c75410ec430|d9592705c0e4dc79|7d8726e09618846d|1030656989||t20160.6570657426s|s5432920b|5432920|rds|local|vector|plot_qol_b||2.05|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+plot_qol_b|pattern|ae559651100a1faf|d9592705c0e4dc79||307000187||||10858461|rds|local|vector||plot_qol_b_6fba258bcf161527*plot_qol_b_d7ececbd2310377a|4.57||
+pars_qol_b_f2e51a82b8122e9f|branch|de0acba8b6e6bc01|9e2f6e4d4f3c222f|f928506394a341cd|1198304100||t20166.4634630279s|s761075b|761075|rds|local|vector|pars_qol_b||133.46||
+pars_qol_b_6d4870ae7dfe1a8e|branch|4810b4ca7096826f|9e2f6e4d4f3c222f|96e4f0a71d052254|1092024217||t20166.4649406894s|s760029b|760029|rds|local|vector|pars_qol_b||127.62||
+pars_qol_b|pattern|996edbfa368ffa23|9e2f6e4d4f3c222f||715514433||||1521104|rds|local|vector||pars_qol_b_f2e51a82b8122e9f*pars_qol_b_6d4870ae7dfe1a8e|261.08||
 visualise_qol_freq|function|51b7a134dc83fd49
 summarise_tte|function|784820d3d02ac0c8
 get_data_norm|function|94c4ffd6debda126
@@ -176,13 +176,13 @@ sim_pre_ql_k|function|2830d1176816ef0e
 sim_ql|function|e0cfa7ae3f1bf51a
 amlu|object|b9a2d490f8dcb9cb
 explore_qol|function|816c0e6a2500d543
-visualise_qol_bayes|function|e373e3ba6324aa92
+visualise_qol_bayes|function|a60cdaa738f31153
 calc_timing|function|e94bd7a5fb48f4ca
 format_qol|function|2549105362a72b4f
 output_pars_shortfall|function|194a962e52ff78f2
 boot_pars_bayes|function|1b658441bfb6c87b
 vis_qol_t|function|39f7a154ed4e6737
-summarise_qol_bayes|function|e6239a01239a360b
+summarise_qol_bayes|function|6719925d1234bb85
 vis_qol|function|5fb11dd124e6cfe2
 get_data_qol|function|b103524d83fa3b7f
 describe_basic|function|d8eaefbec52a80c9
@@ -198,11 +198,11 @@ reload_pars|function|ae86d7eb3a15bfd2
 boot_pars|function|a10261b3aa902fa0
 fit_qol|function|31744dcfd056d45d
 fit_tte|function|8e0952e1e91e9267
-fit_qol_bayes|function|e1cd0b68dbaeef86
+fit_qol_bayes|function|90cbd6e2c16f15ef
 empirical_surv|function|18b044ab39a0adbb
 simulate_shortfall|function|06a673e08f7ffd0d
 summarise_shortfall|function|339c85e464b1ecd5
 format_tte|function|98b4275be2892d9d
-plot_qol_b_6fba258bcf161527|branch|282be9753fee71ae|d9592705c0e4dc79|4bb337f45afb78af|-634072737||t20160.6570330972s|s5425541b|5425541|rds|local|vector|plot_qol_b||2.52|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
-plot_qol_b_d7ececbd2310377a|branch|fd4d5c75410ec430|d9592705c0e4dc79|7d8726e09618846d|1030656989||t20160.6570657426s|s5432920b|5432920|rds|local|vector|plot_qol_b||2.05|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
-plot_qol_b|pattern|ae559651100a1faf|d9592705c0e4dc79||307000187||||10858461|rds|local|vector||plot_qol_b_6fba258bcf161527*plot_qol_b_d7ececbd2310377a|4.57||
+file_pars_qol_b_b71a640e8144c504|branch|f249507f4c935dde|d672286752f89f3b|755d1cfd72870342|-1221354472|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_uk.csv|t20167.0418492189s|s608840b|608840|file|local|vector|file_pars_qol_b||0.42||
+file_pars_qol_b_8b6eb3b0951831f3|branch|19fa1b30b76c7d3c|d672286752f89f3b|20ef32715bcdcfc6|-1998132391|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_orig.csv|t20167.0418532837s|s608089b|608089|file|local|vector|file_pars_qol_b||0.35||
+file_pars_qol_b|pattern|f2c5f0a273b67fbb|d672286752f89f3b||2035719473||||1216929|file|local|vector||file_pars_qol_b_b71a640e8144c504*file_pars_qol_b_8b6eb3b0951831f3|0.77||

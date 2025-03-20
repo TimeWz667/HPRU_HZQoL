@@ -1,5 +1,5 @@
 
-visualise_qol_bayes <- function(dat_qol, pars_qol_f, pars_qol_b, vset, drf = FALSE) {
+visualise_qol_bayes <- function(dat_qol, pars_qol_f, pars_qol_b, vset, drf = FALSE, ext = ".png") {
   # pars_qol_f <- tar_read(pars_qol_f, 1)
   # pars_qol_b <- tar_read(pars_qol_b, 1)
   # dat_qol <- tar_read(data_qol)
@@ -169,15 +169,15 @@ visualise_qol_bayes <- function(dat_qol, pars_qol_f, pars_qol_b, vset, drf = FAL
   )
   
   if (drf) {
-    ggsave(g_sim_q, filename = here::here("docs", "figs", paste0("g_qol_sim_drf_b_", vset, ".png")), width = 10, height = 4)
-    ggsave(g_sim_qt, filename = here::here("docs", "figs", paste0("g_qol_t_sim_drf_b_", vset, ".png")), width = 10, height = 4)
-    ggsave(g_sim_qp, filename = here::here("docs", "figs", paste0("g_qol_p_sim_drf_b_", vset, ".png")), width = 10, height = 4)
-    ggsave(g_sim_qbind, filename = here::here("docs", "figs", paste0("g_qol_b_sim_drf_b_", vset, ".png")), width = 10, height = 7)
+    ggsave(g_sim_q, filename = here::here("docs", "figs", paste0("g_qol_sim_drf_b_", vset, ext)), width = 10, height = 4)
+    ggsave(g_sim_qt, filename = here::here("docs", "figs", paste0("g_qol_t_sim_drf_b_", vset, ext)), width = 10, height = 4)
+    ggsave(g_sim_qp, filename = here::here("docs", "figs", paste0("g_qol_p_sim_drf_b_", vset, ext)), width = 10, height = 4)
+    ggsave(g_sim_qbind, filename = here::here("docs", "figs", paste0("g_qol_b_sim_drf_b_", vset, ext)), width = 10, height = 7)
   } else {
-    ggsave(g_sim_q, filename = here::here("docs", "figs", paste0("g_qol_sim_b_", vset, ".png")), width = 7, height = 4)
-    ggsave(g_sim_qt, filename = here::here("docs", "figs", paste0("g_qol_t_sim_b_", vset, ".png")), width = 7, height = 4)
-    ggsave(g_sim_qp, filename = here::here("docs", "figs", paste0("g_qol_p_sim_b_", vset, ".png")), width = 7, height = 4)
-    ggsave(g_sim_qbind, filename = here::here("docs", "figs", paste0("g_qol_b_sim_b_", vset, ".png")), width = 7, height = 7)
+    ggsave(g_sim_q, filename = here::here("docs", "figs", paste0("g_qol_sim_b_", vset, ext)), width = 7, height = 4)
+    ggsave(g_sim_qt, filename = here::here("docs", "figs", paste0("g_qol_t_sim_b_", vset, ext)), width = 7, height = 4)
+    ggsave(g_sim_qp, filename = here::here("docs", "figs", paste0("g_qol_p_sim_b_", vset, ext)), width = 7, height = 4)
+    ggsave(g_sim_qbind, filename = here::here("docs", "figs", paste0("g_qol_b_sim_b_", vset, ext)), width = 7, height = 7)
   }
   
   
