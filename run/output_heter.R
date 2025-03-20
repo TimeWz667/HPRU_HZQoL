@@ -33,6 +33,45 @@ theme_set(theme_bw())
 # write_csv(map_gp, here::here("docs", "map_studies.csv"))
 
 map_gp <- read_csv(here::here("docs", "map_studies.csv"))
+map_gp
+
+
+
+pars_base <- read_csv(here::here("docs", "tabs", "stats_qol_b_orig.csv"))
+pars_gp <- read_csv(here::here("docs", "tabs", "stats_qol_b_bg_orig.csv"))
+
+heter_beta <- pars_gp %>% 
+  tidyr::extract(Var, "Gs", "bg\\[(\\d+)\\]", convert = T) %>% 
+  left_join(map_gp) %>% 
+  arrange(Model, Gs) %>% 
+  mutate(
+    SID = sprintf("%s %s\n%s", Author, Year, Country),
+    SID = ifelse(is.na(Year), "Pooled", SID), 
+    SID = factor(SID)
+  )
+  
+  
+labs_models <- c(
+  C1 = "Model 1: mild discomfort", 
+  C2 = "Model 2: severe discomfort",
+  PZ = "Model 3: Pr(temporally well)", 
+  PC1 = "Model 4: Pr(mild discomfort|not temporally well)"
+)
+  
+g_heter_beta <- heter_beta %>% 
+  select(Model, SID, M = mean, L = `X2.5.`, U = `X97.5.`) %>%
+  mutate(Model = factor(Model, levels = names(labs_models))) %>% 
+  ggplot(aes(y = SID)) +
+  geom_vline(xintercept = 0, linetype = 2) +
+  geom_point(aes(x = M)) +
+  geom_errorbar(aes(xmin = L, xmax = U), width = 0.3) +
+  facet_wrap(.~Model, labeller = labeller(Model = labs_models)) +
+  scale_x_continuous("Random-effect term") +
+  scale_y_discrete("", limits = rev) +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+
+ggsave(g_heter_beta, filename = here::here("docs", "figs", paste0("g_qol_heter_beta.png")), width = 7, height = 8)
+
 
 
 res <- bind_rows(
@@ -76,10 +115,6 @@ dat <- read_csv(here::here("docs", "tabs", "tab_hetero.csv")) %>%
     SID = ifelse(is.na(Year), "Pooled", SID), 
     SID = factor(SID)
   )
-
-
-dat
-
 
 
 g_heter <- dat %>% 
