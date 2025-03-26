@@ -1,11 +1,12 @@
 
 
-vis_shortfall <- function(sim, stats, vset) {
+vis_shortfall <- function(sim, stats, vset, age0 = 50, age1 = 98) {
   gs <- list()
   gs$g_ql <- stats %>% 
     filter(startsWith(Index, "QL")) %>% 
     filter(endsWith(Index, "15")) %>% 
-    filter(Age <= 98) %>% 
+    filter(Age <= age1) %>% 
+    filter(Age >= age0) %>% 
     mutate(Index = factor(Index, c("QLH15", "QL15"))) %>% 
     ggplot(aes(x = Age)) +
     geom_ribbon(aes(ymin = L, ymax = U), alpha = 0.2) +
@@ -20,7 +21,8 @@ vis_shortfall <- function(sim, stats, vset) {
   
   gs$g_ql_grad <- sim %>% 
     select(Age, QL15, QLH15) %>% 
-    filter(Age <= 98) %>%  
+    filter(Age <= age1) %>%  
+    filter(Age >= age0) %>%  
     pivot_longer(-Age, names_to = "Index") %>% 
     mutate(Index = factor(Index, c("QLH15", "QL15"))) %>% 
     ggplot(aes(x = Age, y = value)) +

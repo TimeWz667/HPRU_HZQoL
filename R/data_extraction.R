@@ -170,3 +170,22 @@ get_data_qol <- function(file, tag = "uk") {
   return(dat_qol)
 }
 
+
+get_data_qol_shift <- function(data_raw, file, tag = "uk") {
+  ## QoL with uk value sets
+  # file <- here::here("data","processed", "eq5d_baseline_orig.csv")
+  raw <- read_csv(file) %>% 
+    select(PID = Patient.ID, EQ5D0 = EQ5D)
+  
+  dat_qol_shift <- data_raw %>% 
+    inner_join(raw) %>%
+    rename(EQ5D1 = EQ5D) %>% 
+    mutate(
+      EQ5D = 1 - pmax(EQ5D0 - EQ5D1, 0),
+    )
+  
+  return(dat_qol_shift)
+}
+
+
+

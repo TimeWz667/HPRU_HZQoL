@@ -97,8 +97,6 @@ model_tte|stem|5449164a14167584|6d58dc69dfc2a3cd|51c85dc6b6d68da4|1423656442||t2
 data_tte_ee64f2f6047e377a|branch|83e5b2736e18c4ba|152104bc9428ff37|ff534b51598a4968|-1929104443||t20112.7571974875s|s29274b|29274|rds|local|vector|data_tte||1.15|There were 60 warnings in summarise.The first warning wasℹ In argument T_last  maxtiEnd.ℹ In group 22 PID  Argentina 001031.Caused by warning in max no nonmissing arguments to max returning Infℹ Run dplyrlast_dplyr_warnings to see the 59 remaining warnings.|
 data_qol_ee64f2f6047e377a|branch|3a7950946d2d371c|2f87b54211f448f3|e605819b82185456|-112162931||t20112.757194013s|s31616b|31616|rds|local|vector|data_qol||0.1||
 data_qol_1c11c94f373ce396|branch|dbf81c4313059b5d|2f87b54211f448f3|10df1c5192390c15|-1953460836||t20112.7571944899s|s31928b|31928|rds|local|vector|data_qol||0.43||
-pars_tte|stem|fa5c1fbe13989961|619081ef22f6a365|50c1a3ed6948f69b|-250904775||t20137.5933551105s|s43996b|43996|rds|local|vector|||61.24|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
-plot_tte|stem|ded6e7be9bc90333|844e847c06dfc343|01ba4e82e67aeef0|1222683081||t20137.5934390791s|s5800482b|5800482|rds|local|vector|||1.5|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 2 rows containing missing values or values outside the scale rangegeom_point.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 2 rows containing missing values or values outside the scale rangegeom_point.|
 pars_qol_f_f2e51a82b8122e9f|branch|298fd3af5c36c162|de21bf97785f2ac9|78f05448b702ca43|22321743||t20137.6390272303s|s900465b|900465|rds|local|vector|pars_qol_f||1.51||
 pars_qol_f_6d4870ae7dfe1a8e|branch|a23a141e59ae914f|de21bf97785f2ac9|0309286bbd0b5a33|-1938498941||t20137.6390455385s|s902771b|902771|rds|local|vector|pars_qol_f||1.42||
 pars_qol_f|pattern|3f4f51d1c8f296e4|de21bf97785f2ac9||1719327465||||1803236|rds|local|vector||pars_qol_f_f2e51a82b8122e9f*pars_qol_f_6d4870ae7dfe1a8e|2.93||
@@ -139,30 +137,62 @@ file_pars_qol_f_f5cf3a3966e5b81c|branch|730ad697023d94f8|100f598af79660b2|b964ed
 plot_qol_f_apx_b5853a8488e20adb|branch|56e0fe2913264ac8|45b5b8027597d3b7|a9eabe4a4f8b2538|-2020579622||t20144.9833676872s|s5557408b|5557408|rds|local|vector|plot_qol_f_apx||1.94|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 plot_qol_f_apx_7e1ce92bd4c8d0b7|branch|e7a5b6cbd42a78bb|45b5b8027597d3b7|56d24c381a6e7f06|1122851500||t20144.9833966829s|s5555201b|5555201|rds|local|vector|plot_qol_f_apx||1.74|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
 plot_qol_f_apx|pattern|4d6fdc7926700084|45b5b8027597d3b7||-913051541||||11112609|rds|local|vector||plot_qol_f_apx_b5853a8488e20adb*plot_qol_f_apx_7e1ce92bd4c8d0b7|3.68||
-file_pars_tte|stem|b72dc4a820e9b63c|2e79bfe6f608a2db|60f1121f4ba19836|-1646548341|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_time2zero.csv|t20144.9834037759s|s118706b|118706|file|local|vector|||0.21||
-pars_shortfall_b_7abb799ab9791acd|branch|1c5d2ba4d23a10c3|dc8152b888a4bb1b|b30e1959e4f40913|-1201747842||t20147.5098367169s|s78288b|78288|rds|local|vector|pars_shortfall_b||0.25||
-pars_shortfall_b_1b5dbf0e60daeb2a|branch|a6c2e23d70d516e5|dc8152b888a4bb1b|b5456234e4ec9200|-1796839030||t20147.5098379973s|s78029b|78029|rds|local|vector|pars_shortfall_b||0.11||
-pars_shortfall_b|pattern|ace7d8f5853b83d3|dc8152b888a4bb1b||-373877460||||156317|rds|local|vector||pars_shortfall_b_7abb799ab9791acd*pars_shortfall_b_1b5dbf0e60daeb2a|0.36||
-sim_shortfall_b_59e9febb0e6d5afc|branch|13436f037db06285|6003a0d0dc13c699|8216bae5018778d8|-1311569569||t20147.5108726087s|s2549573b|2549573|rds|local|vector|sim_shortfall_b||89.25||
-sim_shortfall_b_70ed59c04c7ae002|branch|8d4e26df7e19cc99|6003a0d0dc13c699|ae0606b41fa0a4d8|627616532||t20147.511924892s|s2548529b|2548529|rds|local|vector|sim_shortfall_b||90.79||
-sim_shortfall_b|pattern|8263a938dc306fac|6003a0d0dc13c699||-835862458||||5098102|rds|local|vector||sim_shortfall_b_59e9febb0e6d5afc*sim_shortfall_b_70ed59c04c7ae002|180.04||
 sim_shortfall_f_73dabf9ebbfdd33f|branch|d50c52786ed5c4ec|44b89a27aab3f698|9d8098a7cee98397|491833176||t20147.5129609077s|s2566961b|2566961|rds|local|vector|sim_shortfall_f||89.39||
 sim_shortfall_f_fb58315ae1026d8c|branch|1bfe999d633adc67|44b89a27aab3f698|5082d490dabf8638|-1928647171||t20147.5139243798s|s2573266b|2573266|rds|local|vector|sim_shortfall_f||83.12||
-tab_shortfall_b_1060b52c66e1d56c|branch|2abdbe6ef3a8e6db|f61ca31fe7499cc0|9eff889f7be70494|880530077||t20147.513926195s|s12345b|12345|rds|local|vector|tab_shortfall_b||0.14||
-tab_shortfall_b_7bc7dd14ad14d96a|branch|60cf8ae7e895189e|f61ca31fe7499cc0|b4c234e30e1177e3|426492181||t20147.5139279824s|s12374b|12374|rds|local|vector|tab_shortfall_b||0.14||
-tab_shortfall_b|pattern|3d3f4b816a2b5daa|f61ca31fe7499cc0||789916601||||24719|rds|local|vector||tab_shortfall_b_1060b52c66e1d56c*tab_shortfall_b_7bc7dd14ad14d96a|0.28||
-plot_shortfall_b_9dd25502ec339dae|branch|eae408665f13e911|ec210f269a411898|96ba14c45b072d18|-754165582||t20160.3947710555s|s6546780b|6546780|rds|local|vector|plot_shortfall_b||1.77||
-plot_shortfall_b_2d9ed8024ce7cc3f|branch|563702b57101f18a|ec210f269a411898|7870c1d717e7da2b|-1021071939||t20160.3947938432s|s6547666b|6547666|rds|local|vector|plot_shortfall_b||1.58||
-plot_shortfall_b|pattern|a4bba25e70bd912f|ec210f269a411898||1489883111||||13094446|rds|local|vector||plot_shortfall_b_9dd25502ec339dae*plot_shortfall_b_2d9ed8024ce7cc3f|3.35||
-plot_shortfall_f_2aeb731d29de8a67|branch|a349a0a8d47a5d9d|8e3c75fa1cc71472|6596fa4efe96fb89|904429761||t20160.3948171619s|s6577101b|6577101|rds|local|vector|plot_shortfall_f||1.63||
-plot_shortfall_f_1d12ee3d0468d56b|branch|85a7118d4fe0f77a|8e3c75fa1cc71472|ea486a6c032f0b00|506247265||t20160.3948372564s|s6591099b|6591099|rds|local|vector|plot_shortfall_f||1.37||
-plot_shortfall_f|pattern|83c05dda16ac753f|8e3c75fa1cc71472||1082448524||||13168200|rds|local|vector||plot_shortfall_f_2aeb731d29de8a67*plot_shortfall_f_1d12ee3d0468d56b|3||
-plot_qol_b_6fba258bcf161527|branch|282be9753fee71ae|d9592705c0e4dc79|4bb337f45afb78af|-634072737||t20160.6570330972s|s5425541b|5425541|rds|local|vector|plot_qol_b||2.52|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
-plot_qol_b_d7ececbd2310377a|branch|fd4d5c75410ec430|d9592705c0e4dc79|7d8726e09618846d|1030656989||t20160.6570657426s|s5432920b|5432920|rds|local|vector|plot_qol_b||2.05|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
-plot_qol_b|pattern|ae559651100a1faf|d9592705c0e4dc79||307000187||||10858461|rds|local|vector||plot_qol_b_6fba258bcf161527*plot_qol_b_d7ececbd2310377a|4.57||
 pars_qol_b_f2e51a82b8122e9f|branch|de0acba8b6e6bc01|9e2f6e4d4f3c222f|f928506394a341cd|1198304100||t20166.4634630279s|s761075b|761075|rds|local|vector|pars_qol_b||133.46||
 pars_qol_b_6d4870ae7dfe1a8e|branch|4810b4ca7096826f|9e2f6e4d4f3c222f|96e4f0a71d052254|1092024217||t20166.4649406894s|s760029b|760029|rds|local|vector|pars_qol_b||127.62||
 pars_qol_b|pattern|996edbfa368ffa23|9e2f6e4d4f3c222f||715514433||||1521104|rds|local|vector||pars_qol_b_f2e51a82b8122e9f*pars_qol_b_6d4870ae7dfe1a8e|261.08||
+file_pars_qol_b_b71a640e8144c504|branch|f249507f4c935dde|d672286752f89f3b|755d1cfd72870342|-1221354472|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_uk.csv|t20167.0418492189s|s608840b|608840|file|local|vector|file_pars_qol_b||0.42||
+file_pars_qol_b_8b6eb3b0951831f3|branch|19fa1b30b76c7d3c|d672286752f89f3b|20ef32715bcdcfc6|-1998132391|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_orig.csv|t20167.0418532837s|s608089b|608089|file|local|vector|file_pars_qol_b||0.35||
+file_pars_qol_b|pattern|f2c5f0a273b67fbb|d672286752f89f3b||2035719473||||1216929|file|local|vector||file_pars_qol_b_b71a640e8144c504*file_pars_qol_b_8b6eb3b0951831f3|0.77||
+file_qol_baseline_387b59a5eb0be5cd|branch|f1dd31758af3a6b1|61fd532726d3ffda|2c530c1562a7fbd1|513065445|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_baseline_uk.csv|t20112.7526517857s|s70166b|70166|file|local|vector|file_qol_baseline||0.01||
+file_qol_baseline_c099b9bdf0fc30fc|branch|f1dd31758af3a6b1|61fd532726d3ffda|2c530c1562a7fbd1|655353219|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_baseline_orig.csv|t20112.7526552636s|s70166b|70166|file|local|vector|file_qol_baseline||0||
+file_qol_baseline|pattern|a4138507346ba6a8|61fd532726d3ffda||-1773741282||||140332|file|local|vector||file_qol_baseline_387b59a5eb0be5cd*file_qol_baseline_c099b9bdf0fc30fc|0.01||
+data_raw0_ed4053161bd07f2a|branch||4e3f75015b52bdd3|19221066e57fbb47|-475812173||t20172.5238457994s||0|rds|local|vector|data_raw0||0.22||ℹ In argument ti  time_points365.25.Caused by error object time_points not found
+pars_shortfall_b_7abb799ab9791acd|branch|e55613b49f4bc144|dc8152b888a4bb1b|5c40a24553572096|-1201747842||t20172.5729899233s|s92975b|92975|rds|local|vector|pars_shortfall_b||0.36||
+pars_shortfall_b_1b5dbf0e60daeb2a|branch|444a02c4853984f5|dc8152b888a4bb1b|d8aa2b06eecca9d2|-1796839030||t20172.5729915306s|s92688b|92688|rds|local|vector|pars_shortfall_b||0.12||
+pars_shortfall_b|pattern|87bab9cddc61ce8b|dc8152b888a4bb1b||-373877460||||185663|rds|local|vector||pars_shortfall_b_7abb799ab9791acd*pars_shortfall_b_1b5dbf0e60daeb2a|0.48||
+sim_shortfall_b_59e9febb0e6d5afc|branch|e77623433be05429|6003a0d0dc13c699|f2cb1aeba735688f|-1311569569||t20172.5740487498s|s2547766b|2547766|rds|local|vector|sim_shortfall_b||90.98||
+sim_shortfall_b_70ed59c04c7ae002|branch|35914cf61985708d|6003a0d0dc13c699|714d1337cafc914c|627616532||t20172.5750931168s|s2549632b|2549632|rds|local|vector|sim_shortfall_b||90.11||
+sim_shortfall_b|pattern|c962fa74b9c714b7|6003a0d0dc13c699||-835862458||||5097398|rds|local|vector||sim_shortfall_b_59e9febb0e6d5afc*sim_shortfall_b_70ed59c04c7ae002|181.09||
+tab_shortfall_b_1060b52c66e1d56c|branch|eed1aa4be5a72e6b|f61ca31fe7499cc0|68ac313bf04841fa|880530077||t20172.5750983212s|s12361b|12361|rds|local|vector|tab_shortfall_b||0.15||
+tab_shortfall_b_7bc7dd14ad14d96a|branch|be89d7cce689f434|f61ca31fe7499cc0|0d764e6b0ad9f2e2|426492181||t20172.575100252s|s12346b|12346|rds|local|vector|tab_shortfall_b||0.14||
+tab_shortfall_b|pattern|a2717c516be13a70|f61ca31fe7499cc0||789916601||||24707|rds|local|vector||tab_shortfall_b_1060b52c66e1d56c*tab_shortfall_b_7bc7dd14ad14d96a|0.29||
+plot_shortfall_b_9dd25502ec339dae|branch|5316707e545fad9d|ec210f269a411898|1ec97cd129ab0a11|-754165582||t20172.5825724269s|s6542215b|6542215|rds|local|vector|plot_shortfall_b||1.86||
+plot_shortfall_b_2d9ed8024ce7cc3f|branch|fdf60036eea6b37b|ec210f269a411898|7f479be145336c58|-1021071939||t20172.5825919762s|s6549933b|6549933|rds|local|vector|plot_shortfall_b||1.32||
+plot_shortfall_b|pattern|0765f1132b560738|ec210f269a411898||1489883111||||13092148|rds|local|vector||plot_shortfall_b_9dd25502ec339dae*plot_shortfall_b_2d9ed8024ce7cc3f|3.18||
+plot_shortfall_f_2aeb731d29de8a67|branch|4d40e5a25a648780|8e3c75fa1cc71472|5df883a7e7634a89|904429761||t20172.5826117681s|s6577739b|6577739|rds|local|vector|plot_shortfall_f||1.34||
+plot_shortfall_f_1d12ee3d0468d56b|branch|a4b8fd175341fd27|8e3c75fa1cc71472|63f7ddcdfa464796|506247265||t20172.5826334763s|s6591497b|6591497|rds|local|vector|plot_shortfall_f||1.52||
+plot_shortfall_f|pattern|c5b88af3fa055ed1|8e3c75fa1cc71472||1082448524||||13169236|rds|local|vector||plot_shortfall_f_2aeb731d29de8a67*plot_shortfall_f_1d12ee3d0468d56b|2.86||
+data_raw0|pattern|72cd2d91d8f7f133|d363ea3ee5053c4d||-547709924||||61377|rds|local|vector||data_raw0_898bcac1aa49e030*data_raw0_abfed90f9bff7260|0.21||
+data_tte0_ee64f2f6047e377a|branch|e7f6dcf912d01e4f|5e56c4df71a5ecfe|24095223f9895e76|1411618311||t20172.6164151371s|s16510b|16510|rds|local|vector|data_tte0||0.2|There were 94 warnings in summarise.The first warning wasℹ In argument T_last  maxtiEnd.ℹ In group 11 PID  Argentina 001017.Caused by warning in max no nonmissing arguments to max returning Infℹ Run dplyrlast_dplyr_warnings to see the 93 remaining warnings.|
+data_raw0_898bcac1aa49e030|branch|3772c657d976e2bb|d363ea3ee5053c4d|bd930813bdf067f9|-2070885159||t20172.6193353672s|s30654b|30654|rds|local|vector|data_raw0||0.14||
+data_raw0_abfed90f9bff7260|branch|da4a3978202be8f4|d363ea3ee5053c4d|9a886763ed9c5df6|2083854423||t20172.6193362255s|s30723b|30723|rds|local|vector|data_raw0||0.04||
+data_tte0_e54fb74b16d67a77|branch|3698d8c23aa4d9af|5e56c4df71a5ecfe|7baa854ddf5bb527|1579735811||t20172.6304052041s|s16341b|16341|rds|local|vector|data_tte0||0.21|There were 94 warnings in summarise.The first warning wasℹ In argument T_last  maxtiEnd.ℹ In group 11 PID  Argentina 001017.Caused by warning in max no nonmissing arguments to max returning Infℹ Run dplyrlast_dplyr_warnings to see the 93 remaining warnings.|
+data_tte0|pattern|8afa1d424f2066bd|5e56c4df71a5ecfe||-758965447||||16341|rds|local|vector||data_tte0_e54fb74b16d67a77|0.21||
+pars_tte|stem|cee1933448d3e645|619081ef22f6a365|36aa936046b1cb4c|-250904775||t20172.6598865086s|s43982b|43982|rds|local|vector|||55.5|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
+pars_tte0|stem|7271d3fbd7ba2866|3c82ed88bdef2066|e1183f5f61c89a29|2018228737||t20172.6602041318s|s44145b|44145|rds|local|vector|||27.43|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
+plot_tte|stem|868aa37858443c67|844e847c06dfc343|ca18d70f7b5bb58d|1222683081||t20172.6602288106s|s5800387b|5800387|rds|local|vector|||1.3|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 1 row containing missing values or values outside the scale rangegeom_point.. Removed 40 rows containing missing values or values outside the scale rangegeom_line.. Removed 1 row containing missing values or values outside the scale rangegeom_point.|
+pars_shortfall_0_7abb799ab9791acd|branch|283767b79d05b25e|c2c387cfe355e49e|ea01cf2a22732402|-1812848216||t20172.6602336749s|s92999b|92999|rds|local|vector|pars_shortfall_0||0.17||
+pars_shortfall_0_1b5dbf0e60daeb2a|branch|5ce32f03bacda32b|c2c387cfe355e49e|ad43641a5a04f815|847277840||t20172.6602352054s|s92683b|92683|rds|local|vector|pars_shortfall_0||0.11||
+pars_shortfall_0|pattern|cf4c539bd670d4ff|c2c387cfe355e49e||-331290774||||185682|rds|local|vector||pars_shortfall_0_7abb799ab9791acd*pars_shortfall_0_1b5dbf0e60daeb2a|0.28||
+sim_shortfall_0_40e46c8df0208631|branch|e2f5fb5800b68def|9ec5e2e3e84db372|ef69cea982f20d42|655664916||t20172.6612832876s|s2553958b|2553958|rds|local|vector|sim_shortfall_0||90.44||
+sim_shortfall_0_aed90d18466229dc|branch|a0b21491dbb6f726|9ec5e2e3e84db372|7c628ff590c8e1ee|2036776951||t20172.6623302439s|s2552304b|2552304|rds|local|vector|sim_shortfall_0||90.33||
+sim_shortfall_0|pattern|13021ca2fd34e29b|9ec5e2e3e84db372||1897314556||||5106262|rds|local|vector||sim_shortfall_0_40e46c8df0208631*sim_shortfall_0_aed90d18466229dc|180.77||
+tab_shortfall_0_7fd91c3e3eb8b479|branch|b97783a5ae6d4d5c|5154449cff287eca|d42e4abab15d5742|-1528198111||t20172.662332276s|s12356b|12356|rds|local|vector|tab_shortfall_0||0.16||
+tab_shortfall_0_f2899e0ae7badb5f|branch|3f562c1a3bb6514c|5154449cff287eca|37cb536384366096|-655392635||t20172.6623343109s|s12350b|12350|rds|local|vector|tab_shortfall_0||0.15||
+tab_shortfall_0|pattern|dcd828a440f55e02|5154449cff287eca||1314614939||||24706|rds|local|vector||tab_shortfall_0_7fd91c3e3eb8b479*tab_shortfall_0_f2899e0ae7badb5f|0.31||
+file_pars_tte0|stem|f3befee3c7695018|e35f3755bc30537a|a298b7edfbb1fe71|1274207129|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_time2zero.csv|t20172.6631934031s|s119169b|119169|file|local|vector|||0.2||
+plot_shortfall_0_e6d657cc0a82def8|branch|0665cc3a0700551f|31428bb410c484bf|843ec1fa1d40822d|846418439||t20172.6632186277s|s6556385b|6556385|rds|local|vector|plot_shortfall_0||1.83||
+plot_shortfall_0_fe2f79d3a518c182|branch|24b1bfd6423b0f42|31428bb410c484bf|b9cf568b56fc593f|-1154413073||t20172.6632376339s|s6555293b|6555293|rds|local|vector|plot_shortfall_0||1.29||
+plot_shortfall_0|pattern|ab421c5d6c51dbad|31428bb410c484bf||-460815619||||13111678|rds|local|vector||plot_shortfall_0_e6d657cc0a82def8*plot_shortfall_0_fe2f79d3a518c182|3.12||
+data_qol0_e54fb74b16d67a77|branch|6c11cf7c6232e14b|bc9b9ce2ff07a773|d33b898107d10e23|1644244193||t20172.9595130814s|s18688b|18688|rds|local|vector|data_qol0||0.02||
+data_qol0_b3e2a0775e30cfd5|branch|6c11cf7c6232e14b|bc9b9ce2ff07a773|ffa52cc0557b90b5|2016170602||t20172.959513434s|s18688b|18688|rds|local|vector|data_qol0||0.02||
+data_qol0|pattern|9bae318f0df8c680|bc9b9ce2ff07a773||-1190901710||||37376|rds|local|vector||data_qol0_e54fb74b16d67a77*data_qol0_b3e2a0775e30cfd5|0.04||
+file_pars_tte|stem|703429a851121e84|2e79bfe6f608a2db|816e263e664cbf14|-1646548341|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_time2zero.csv|t20172.96048531s|s118706b|118706|file|local|vector|||0.31||
+plot_qol_b_6fba258bcf161527|branch|058615aa6788a8bb|d9592705c0e4dc79|6ddecc1b727bc86e|-634072737||t20172.9689820512s|s6617294b|6617294|rds|local|vector|plot_qol_b||2.46|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+plot_qol_b_d7ececbd2310377a|branch|e2659d0f59edc7bd|d9592705c0e4dc79|e41c2b4cb8453aa7|1030656989||t20172.9690150736s|s6625506b|6625506|rds|local|vector|plot_qol_b||2.03|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.. Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+plot_qol_b|pattern|4f6844788a2e2e64|d9592705c0e4dc79||307000187||||13242800|rds|local|vector||plot_qol_b_6fba258bcf161527*plot_qol_b_d7ececbd2310377a|4.49||
 visualise_qol_freq|function|51b7a134dc83fd49
 summarise_tte|function|784820d3d02ac0c8
 get_data_norm|function|94c4ffd6debda126
@@ -176,7 +206,8 @@ sim_pre_ql_k|function|2830d1176816ef0e
 sim_ql|function|e0cfa7ae3f1bf51a
 amlu|object|b9a2d490f8dcb9cb
 explore_qol|function|816c0e6a2500d543
-visualise_qol_bayes|function|a60cdaa738f31153
+visualise_qol_bayes|function|1937994ec047f248
+get_data_qol_shift|function|b3882766b58f1973
 calc_timing|function|e94bd7a5fb48f4ca
 format_qol|function|2549105362a72b4f
 output_pars_shortfall|function|194a962e52ff78f2
@@ -188,7 +219,7 @@ get_data_qol|function|b103524d83fa3b7f
 describe_basic|function|d8eaefbec52a80c9
 summarise_qol|function|8d3eaa9cee0fa482
 fit_qol_freq|function|b5cce917e68c7e7c
-vis_shortfall|function|62920d18962a15f1
+vis_shortfall|function|32d5725b609b87ea
 split_training_qol|function|98234a5a66385fb5
 summarise_qol_freq|function|5ca4b61d1d85059d
 visualise_qol_k|function|7039bae48825e1f0
@@ -197,12 +228,9 @@ split_training_tte|function|76c6c8798135dc9e
 reload_pars|function|ae86d7eb3a15bfd2
 boot_pars|function|a10261b3aa902fa0
 fit_qol|function|31744dcfd056d45d
-fit_tte|function|8e0952e1e91e9267
+fit_tte|function|fdca9f3338b01cac
 fit_qol_bayes|function|90cbd6e2c16f15ef
 empirical_surv|function|18b044ab39a0adbb
 simulate_shortfall|function|06a673e08f7ffd0d
 summarise_shortfall|function|339c85e464b1ecd5
 format_tte|function|98b4275be2892d9d
-file_pars_qol_b_b71a640e8144c504|branch|f249507f4c935dde|d672286752f89f3b|755d1cfd72870342|-1221354472|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_uk.csv|t20167.0418492189s|s608840b|608840|file|local|vector|file_pars_qol_b||0.42||
-file_pars_qol_b_8b6eb3b0951831f3|branch|19fa1b30b76c7d3c|d672286752f89f3b|20ef32715bcdcfc6|-1998132391|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_orig.csv|t20167.0418532837s|s608089b|608089|file|local|vector|file_pars_qol_b||0.35||
-file_pars_qol_b|pattern|f2c5f0a273b67fbb|d672286752f89f3b||2035719473||||1216929|file|local|vector||file_pars_qol_b_b71a640e8144c504*file_pars_qol_b_8b6eb3b0951831f3|0.77||

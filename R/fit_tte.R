@@ -4,7 +4,7 @@ fit_tte <- function(model, dat_tte, n_iter = 2e4, n_collect = 500, n_chains = 4)
 
   ds <- local({
     #dat_tte <- tar_read(data_tte) #%>% head(200)
-    dat_tte <- dat_tte %>% filter(T_evt > 0)
+    dat_tte <- dat_tte %>% filter(T_evt > 0) %>% filter(T_last < T_end)
     
     dat_int <- dat_tte %>% filter(Recovered)
     dat_cen <- dat_tte %>% filter(!Recovered) %>% filter(!is.na(Age))

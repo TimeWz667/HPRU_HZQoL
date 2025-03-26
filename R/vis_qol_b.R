@@ -1,7 +1,7 @@
 
-visualise_qol_bayes <- function(dat_qol, pars_qol_f, pars_qol_b, vset, drf = FALSE, ext = ".png") {
-  # pars_qol_f <- tar_read(pars_qol_f, 1)
-  # pars_qol_b <- tar_read(pars_qol_b, 1)
+visualise_qol_bayes <- function(dat_qol, pars_qol_f, pars_qol_b, vset, drf = FALSE, extension = ".png") {
+  # pars_qol_f <- tar_read(pars_qol_f, 2)
+  # pars_qol_b <- tar_read(pars_qol_b, 2)
   # dat_qol <- tar_read(data_qol)
   
   require(tidyverse)
@@ -157,7 +157,7 @@ visualise_qol_bayes <- function(dat_qol, pars_qol_f, pars_qol_b, vset, drf = FAL
     facet_grid(.~Source) +
     theme(legend.position = "bottom", axis.text.y = element_text(angle = 70, hjust = 0.5))
   
-  g_sim_qbind = ggpubr::ggarrange(g_sim_qt + labs(subtitle = "(A)"), 
+  g_sim_qbind <- ggpubr::ggarrange(g_sim_qt + labs(subtitle = "(A)"), 
                                   g_sim_qp + labs(subtitle = "(B)"), 
                                   nrow = 2, align = "v")  
   
@@ -167,17 +167,17 @@ visualise_qol_bayes <- function(dat_qol, pars_qol_f, pars_qol_b, vset, drf = FAL
     g_sim_qp = g_sim_qp,
     g_sim_qbind = g_sim_qbind
   )
-  
+
   if (drf) {
-    ggsave(g_sim_q, filename = here::here("docs", "figs", paste0("g_qol_sim_drf_b_", vset, ext)), width = 10, height = 4)
-    ggsave(g_sim_qt, filename = here::here("docs", "figs", paste0("g_qol_t_sim_drf_b_", vset, ext)), width = 10, height = 4)
-    ggsave(g_sim_qp, filename = here::here("docs", "figs", paste0("g_qol_p_sim_drf_b_", vset, ext)), width = 10, height = 4)
-    ggsave(g_sim_qbind, filename = here::here("docs", "figs", paste0("g_qol_b_sim_drf_b_", vset, ext)), width = 10, height = 7)
+    ggsave(g_sim_q, filename = here::here("docs", "figs", paste0("g_qol_sim_drf_b_", vset, extension)), width = 10, height = 4)
+    ggsave(g_sim_qt, filename = here::here("docs", "figs", paste0("g_qol_t_sim_drf_b_", vset, extension)), width = 10, height = 4)
+    ggsave(g_sim_qp, filename = here::here("docs", "figs", paste0("g_qol_p_sim_drf_b_", vset, extension)), width = 10, height = 4)
+    ggsave(g_sim_qbind, filename = here::here("docs", "figs", paste0("g_qol_b_sim_drf_b_", vset, extension)), width = 10, height = 7)
   } else {
-    ggsave(g_sim_q, filename = here::here("docs", "figs", paste0("g_qol_sim_b_", vset, ext)), width = 7, height = 4)
-    ggsave(g_sim_qt, filename = here::here("docs", "figs", paste0("g_qol_t_sim_b_", vset, ext)), width = 7, height = 4)
-    ggsave(g_sim_qp, filename = here::here("docs", "figs", paste0("g_qol_p_sim_b_", vset, ext)), width = 7, height = 4)
-    ggsave(g_sim_qbind, filename = here::here("docs", "figs", paste0("g_qol_b_sim_b_", vset, ext)), width = 7, height = 7)
+    ggsave(g_sim_q, filename = here::here("docs", "figs", paste0("g_qol_sim_b_", vset, extension)), width = 7, height = 4)
+    ggsave(g_sim_qt, filename = here::here("docs", "figs", paste0("g_qol_t_sim_b_", vset, extension)), width = 7, height = 4)
+    ggsave(g_sim_qp, filename = here::here("docs", "figs", paste0("g_qol_p_sim_b_", vset, extension)), width = 7, height = 4)
+    ggsave(g_sim_qbind, filename = here::here("docs", "figs", paste0("g_qol_b_sim_b_", vset, extension)), width = 7, height = 7)
   }
   
   
