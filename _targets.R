@@ -59,8 +59,6 @@ list(
 
     ## simulation, Freq
     # tar_target(pars_shortfall_f, boot_pars(file_pars_tte, file_pars_qol_f, n_sim = 1000), pattern = map(file_pars_qol_f)),
-    # tar_target(js_shortfall, output_pars_shortfall(pars_shortfall, data_norm, vset), pattern = map(pars_shortfall, vset), format = "file"),
-    # tar_target(pars_shortfall_f, reload_pars(vset), pattern = map(vset)),
     # tar_target(sim_shortfall_f, simulate_shortfall(pars_shortfall_f, data_norm, vset, mod = "f"), pattern = map(pars_shortfall_f, vset)),
     # tar_target(tab_shortfall_f, summarise_shortfall(sim_shortfall_f, paste0("f_", vset)), pattern = map(sim_shortfall_f, vset)),
     # tar_target(plot_shortfall_f, vis_shortfall(sim_shortfall_f, tab_shortfall_f, paste0("f_", vset)), pattern = map(sim_shortfall_f, tab_shortfall_f, vset)),
@@ -94,11 +92,6 @@ list(
     tar_target(sim_shortfall_f0, simulate_shortfall(pars_shortfall_f0, data_norm, vset, mod = "f"), pattern = map(pars_shortfall_f0, vset)),
     tar_target(tab_shortfall_f0, summarise_shortfall(sim_shortfall_f0, paste0("f0_", vset)), pattern = map(sim_shortfall_f0, vset)),
     tar_target(plot_shortfall_f0, vis_shortfall(sim_shortfall_f0, tab_shortfall_f0, glue::as_glue("baseline_") + vset), pattern = map(sim_shortfall_f0, tab_shortfall_f0, vset)),
-    # 
-    # tar_target(pars_shortfall_0, boot_pars_bayes(file_pars_tte0, file_pars_qol_b, n_sim = 1000), pattern = map(file_pars_qol_b)),
-    # tar_target(sim_shortfall_0, simulate_shortfall(pars_shortfall_0, data_norm, vset, mod = "b"), pattern = map(pars_shortfall_0, vset)),
-    # tar_target(tab_shortfall_0, summarise_shortfall(sim_shortfall_0, vset), pattern = map(sim_shortfall_0, vset)),
-    # tar_target(plot_shortfall_0, vis_shortfall(sim_shortfall_0, tab_shortfall_0, glue::as_glue("baseline_") + vset), pattern = map(sim_shortfall_0, tab_shortfall_0, vset)),
 
     # 
     tar_target(stats, describe_basic(data_raw, data_tte, pars_qol_f, vset), pattern = map(data_raw, pars_qol_f, vset))
