@@ -1,4 +1,4 @@
-visualise_tte <- function(dat_tte, pars_tte) {
+visualise_tte <- function(dat_tte, pars_tte, modifier = '') {
   require(tidyverse)
   require(tidybayes)
   
@@ -126,10 +126,10 @@ visualise_tte <- function(dat_tte, pars_tte) {
     ncol = 1
   )
   
-  ggsave(gs$g_imp, file = here::here("docs", "figs", "g_tte_imputed.png"), width = 6, height = 4)
-  ggsave(gs$g_tte_data, file = here::here("docs", "figs", "g_tte_data.png"), width = 6, height = 4)
-  ggsave(gs$g_tte_pred, filename = here::here("docs", "figs", "g_tte_cri.png"), width = 7, height = 4)
-  ggsave(gs$g_tte_bind, file = here::here("docs", "figs", "g_tte_bind.png"), width = 9, height = 12)
+  ggsave(gs$g_imp, file = here::here("docs", "figs", paste0("g_tte_imputed", modifier, ".png")), width = 6, height = 4)
+  ggsave(gs$g_tte_data, file = here::here("docs", "figs", paste0("g_tte_data", modifier, ".png")), width = 6, height = 4)
+  ggsave(gs$g_tte_pred, filename = here::here("docs", "figs", paste0("g_tte_cri", modifier, ".png")), width = 7, height = 4)
+  ggsave(gs$g_tte_bind, file = here::here("docs", "figs", paste0("g_tte_bind", modifier, ".png")), width = 9, height = 12)
   
   return(gs)
 }

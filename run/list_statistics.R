@@ -1,5 +1,6 @@
 library(tidyverse)
 library(xtable)
+library(targets)
 
 
 pars <- tar_read(pars_shortfall, 1)
@@ -13,7 +14,7 @@ pars %>%
     u = quantile(value, 0.75)
   )
 
-
+dat <- tar_read(data_raw, 2)
 
 
 
@@ -30,9 +31,12 @@ tabs <- bind_rows(
 
 xtable(tabs)
 
+dat %>% 
+  filter(ti >= 0) %>% 
+  filter(ti * 14 < 1) %>% 
+  filter(EQ5D < 1) %>% 
+  summarise(mean(EQ5D))
 
-
-dat <- tar_read(data_raw, 2)
 
 dat %>% 
   select(SID, PID) %>% 

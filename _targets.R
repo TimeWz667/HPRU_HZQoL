@@ -82,6 +82,7 @@ list(
     tar_target(data_raw0, get_data_qol_shift(data_raw, file_qol_baseline, vset), pattern = map(data_raw, file_qol_baseline, vset)),
     tar_target(data_tte0, format_tte(data_raw0), pattern = slice(data_raw0, 1)),
     tar_target(pars_tte0, fit_tte(model_tte, data_tte0)),
+    tar_target(plot_tte0, visualise_tte(data_tte0, pars_tte0, "_baseline")),
     tar_target(file_pars_tte0, summarise_tte(pars_tte0), format = "file"),
     
     tar_target(data_qol0, format_qol(data_raw0), pattern = map(data_raw0)),
@@ -93,6 +94,8 @@ list(
     tar_target(tab_shortfall_f0, summarise_shortfall(sim_shortfall_f0, paste0("f0_", vset)), pattern = map(sim_shortfall_f0, vset)),
     tar_target(plot_shortfall_f0, vis_shortfall(sim_shortfall_f0, tab_shortfall_f0, glue::as_glue("baseline_") + vset), pattern = map(sim_shortfall_f0, tab_shortfall_f0, vset)),
 
+    tar_target(tab_diff_tte, desc_disuti(pars_tte, pars_tte0)),
+    
     # 
     tar_target(stats, describe_basic(data_raw, data_tte, pars_qol_f, vset), pattern = map(data_raw, pars_qol_f, vset))
 
