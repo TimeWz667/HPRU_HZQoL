@@ -96,12 +96,12 @@ demo_ons <- mor_proj %>%
 ##
 ## Source: https://github.com/bitowaqr/shortfall
 ##
-population_norm <- read_csv(here::here("data", "qale_shortfall.csv")) %>% 
+population_norm <- read_csv(here::here("data", "external", "qale_shortfall.csv")) %>% 
   mutate(Sex = ifelse(sex == "female", "f", "m")) %>% 
   select(Age = age, Sex, norm = co)
 
 
-pn <- read_csv(here::here("data", "qale_shortfall.csv")) %>% 
+pn <- read_csv(here::here("data", "external", "qale_shortfall.csv")) %>% 
   mutate(Sex = ifelse(sex == "female", "f", "m")) %>% 
   select(Sex, cw, co, age5_str, age5_start) %>% 
   distinct() %>% 
@@ -264,7 +264,7 @@ write_csv(pn, here::here("data", "processed", "population_norm.csv"))
 mapping <- read_csv(here::here("data", "pn_mapping.csv"))
 
 mapped <- mapping %>% 
-  left_join(pn, relationship = "many-to-many") 
+  left_join(pn %>% rename(proxy = Country), relationship = "many-to-many") 
 
 write_csv(mapped, here::here("data", "processed", "population_norm_mapped.csv"))
 

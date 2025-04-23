@@ -13,3 +13,12 @@ restructure_stan <- function(post) {
     Summary = su
   )
 }
+
+
+output_posterior <- function(res, tag) {
+  tag <- glue::as_glue(tag)
+  write_csv(res$Summary, file = here::here("docs", "tabs", "fit_" + tag + ".csv"))
+  write_csv(res$Ext, file = here::here("posteriors", "post_" + tag + ".csv"))
+  return(here::here("posteriors", "post_" + tag + ".csv"))
+}
+

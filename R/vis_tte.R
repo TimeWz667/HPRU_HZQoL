@@ -1,4 +1,4 @@
-visualise_tte <- function(dat_tte, pars_tte, modifier = '') {
+visualise_tte <- function(dat_tte, pars_tte) {
   require(tidyverse)
   require(tidybayes)
   
@@ -126,10 +126,19 @@ visualise_tte <- function(dat_tte, pars_tte, modifier = '') {
     ncol = 1
   )
   
-  ggsave(gs$g_imp, file = here::here("docs", "figs", paste0("g_tte_imputed", modifier, ".png")), width = 6, height = 4)
-  ggsave(gs$g_tte_data, file = here::here("docs", "figs", paste0("g_tte_data", modifier, ".png")), width = 6, height = 4)
-  ggsave(gs$g_tte_pred, filename = here::here("docs", "figs", paste0("g_tte_cri", modifier, ".png")), width = 7, height = 4)
-  ggsave(gs$g_tte_bind, file = here::here("docs", "figs", paste0("g_tte_bind", modifier, ".png")), width = 9, height = 12)
-  
+
   return(gs)
 }
+
+
+output_vis_tte <- function(gs, folder, modifier, ext = ".png") {
+  modifier <- glue::as_glue(modifier)
+  ext <- glue::as_glue(ext)
+  
+  ggsave(gs$g_imp, file = here::here(folder, "g_tte_imputed_" + modifier + ext), width = 6, height = 4)
+  ggsave(gs$g_tte_data, file = here::here(folder, "g_tte_data_" + modifier + ext), width = 6, height = 4)
+  ggsave(gs$g_tte_pred, filename = here::here(folder, "g_tte_cri_" + modifier + ext), width = 7, height = 4)
+  ggsave(gs$g_tte_bind, file = here::here(folder, "g_tte_bind_" + modifier + ext), width = 9, height = 12)
+  return(here::here(folder, "g_tte_bind" + modifier + ext))
+}
+

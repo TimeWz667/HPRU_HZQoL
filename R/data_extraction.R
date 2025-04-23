@@ -148,7 +148,7 @@ get_data_norm <- function(file_norm) {
 }
 
 
-get_data_qol <- function(file, tag = "uk") {
+get_data_qol <- function(file, tag) {
   ## QoL with uk value sets
   raw <- read_csv(file)
   
@@ -163,25 +163,41 @@ get_data_qol <- function(file, tag = "uk") {
       Q_rescaled = (EQ5D - min_qol) / (max_qol - min_qol),
       Set = tag
     )
-
-  write_csv(dat_qol, file = here::here("data", "processed", "qol_" +glue::as_glue(tag) + "_set.csv"))
-  save(dat_qol, file = here::here("data", "processed", "qol_" +glue::as_glue(tag) + "_set.rdata")) 
   
   return(dat_qol)
 }
 
 
-get_data_qol_shift <- function(data_raw, file, tag = "uk") {
-  ## QoL with uk value sets
-  # file <- here::here("data","processed", "eq5d_baseline_orig.csv")
-  raw <- read_csv(file) %>% 
-    select(PID = Patient.ID, EQ5D0 = EQ5D)
+get_data_pn <- function(data_raw, data_pn) {
+  # data_raw <- tar_read(data_raw, 1)
+  # data_pn <- tar_read(data_norm, 1)
   
+  dat_qol_pn <- data_raw %>% 
+    filter(!is.na(Age)) %>% 
+    left_join(data_pn %>% select(SID = study, Age, norm_leoss), by = c("SID", "Age")) %>% 
+    rename(EQ5D1 = EQ5D) %>% 
+    mutate(
+      EQ5D = pmin(norm_leoss, EQ5D1) + (1 - norm_leoss),
+      loss = 1 - EQ5D,
+      offset = EQ5D - EQ5D1
+    )
+  
+  return(dat_qol_pn)
+  
+}
+
+
+get_data_qol_shift <- function(data_raw, data_baseline) {
+  ## QoL with uk value sets
+  # data_baseline <- tar_read(data_baseline, 1)
   dat_qol_shift <- data_raw %>% 
-    inner_join(raw) %>%
+    inner_join(data_baseline %>% select(PID = Patient.ID, EQ5D0 = EQ5D)) %>%
     rename(EQ5D1 = EQ5D) %>% 
     mutate(
       EQ5D = 1 - pmax(EQ5D0 - EQ5D1, 0),
+      EQ5D2 = pmin(EQ5D0, EQ5D1) + (1 - EQ5D0),
+      loss = 1 - EQ5D,
+      offset = EQ5D - EQ5D1
     )
   
   return(dat_qol_shift)
