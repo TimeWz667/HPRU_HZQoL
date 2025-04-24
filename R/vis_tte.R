@@ -142,3 +142,38 @@ output_vis_tte <- function(gs, folder, modifier, ext = ".png") {
   return(here::here(folder, "g_tte_bind" + modifier + ext))
 }
 
+
+vis_tte_comparing <- function(tabs_tte_ph, tabs_tte_pn, tabs_tte_0, folder, ext = ".png", scale = 1) {
+  sim <- bind_rows(
+    tibble(Age = seq(50, 90, 5)) %>% cross_join(tabs_tte_ph$Ext) %>% mutate(Cap = "Perfect health"),
+    tibble(Age = seq(50, 90, 5)) %>% cross_join(tabs_tte_pn$Ext) %>% mutate(Cap = "Population norm"),
+    tibble(Age = seq(50, 90, 5)) %>% cross_join(tabs_tte_0$Ext) %>% mutate(Cap = "Pre-HZ baseline")
+  ) %>% 
+    mutate(
+      rate = (r0 * exp(Age * ba1)),
+      T_Exp = 1 / rate
+    ) %>% 
+    group_by(Age, Cap) %>%
+    summarise(
+      m = mean(T_Exp) * scale,
+      l = quantile(T_Exp, 0.025) * scale,
+      u = quantile(T_Exp, 0.975) * scale
+    )
+  
+  g <- sim %>% 
+    ggplot() +
+    geom_ribbon(aes(x = Age, ymin = l, ymax = u, fill = Cap), alpha = 0.2) +
+    geom_line(aes(x = Age, y = m, colour = Cap)) +
+    scale_y_continuous("Time to recovery, months", breaks = seq(0, 2.5, 0.25), 
+                       labels = scales::number_format(scale = 12, suffix = " mo."),
+                       limits = c(0, 1)) +
+    scale_x_continuous("Age", limits = c(50, 90))
+  
+  
+  ggsave(g, filename = here::here(folder, "g_tte_compare.png"), height = 5, width = 7)
+  
+  return(sim)
+}
+
+
+

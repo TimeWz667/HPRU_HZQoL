@@ -74,11 +74,13 @@ list(
   tar_target(file_posterior_tte_pn, output_posterior(tabs_tte_pn, "pn_tte"), format = "file"),
   tar_target(file_vis_tte_pn, output_vis_tte(gs_tte_pn, folder = here::here("docs", "figs"), "pn")),
   
-  tar_target(pars_tte_0, fit_tte(model_tte, data_tte)),
+  tar_target(pars_tte_0, fit_tte(model_tte, data_tte_0)),
   tar_target(tabs_tte_0, restructure_stan(pars_tte_0)),
   tar_target(gs_tte_0, visualise_tte(data_tte_0, tabs_tte_0)),
   tar_target(file_posterior_tte_0, output_posterior(tabs_tte_0, "base_tte"), format = "file"),
-  tar_target(file_vis_tte_0, output_vis_tte(gs_tte_0, folder = here::here("docs", "figs"), "base"))
+  tar_target(file_vis_tte_0, output_vis_tte(gs_tte_0, folder = here::here("docs", "figs"), "base")),
+  tar_target(tabs_tte_compare, vis_tte_comparing(tabs_tte, tabs_tte_pn, tabs_tte_0, folder = here::here("docs", "figs"), ext = ".png", scale = 1))
+
 )
 # 
 # list(

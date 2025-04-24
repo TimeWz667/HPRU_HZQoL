@@ -243,6 +243,17 @@ data_qol_0_f74a643e7929498a|branch|6c11cf7c6232e14b|036d765846e819b0|586784c6515
 data_qol_0_88e2c55bcfaccd1e|branch|6c11cf7c6232e14b|036d765846e819b0|5471f4cb8300be2c|161820661||t20201.9656301242s|s18688b|18688|rds|local|vector|data_qol_0||0.01||
 gs_tte|stem|00d4593e8dd488f1|de46915a5ff40a76|b6ac70983c8c51e5|-2068371044||t20201.9656419276s|s5766690b|5766690|rds|local|vector|||0.74|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 37 rows containing missing values or values outside the scale rangegeom_line.|
 file_posterior_tte|stem|394a9f75c0943e5c|96e7951221746788|75e9ceb3824ed41f|-340102792|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_ph_tte.csv|t20201.9656451948s|s118706b|118706|file|local|vector|||0.28||
+pars_tte_pn|stem|9a267e991bddccf0|d907c94dc30035ce|a4c75ebb97db4c25|1765021799||t20201.9705266084s|s4702188b|4702188|rds|local|vector|||52.19|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess|
+tabs_tte_pn|stem|ca1e9ccd702938d7|6a4c2c4b0fadf03a|022306f0676b5f20|-1071403217||t20201.9705274185s|s43954b|43954|rds|local|vector|||0.03||
+file_posterior_tte_pn|stem|ab7c777e2c9c3eb0|4156ae70a41465ef|faf45ad62f0272ed|680805999|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_pn_tte.csv|t20201.970542328s|s119699b|119699|file|local|vector|||0.22||
+gs_tte_pn|stem|192c966a36854e86|8007b5c190e00fbb|8c97872b401103bd|-783747796||t20201.970549186s|s5667637b|5667637|rds|local|vector|||0.28|Removed 31 rows containing missing values or values outside the scale rangegeom_line.|
+file_vis_tte|stem|908ccb43272d36a0|4ff112a48f224233|3d8eb9b36b5942c3|-1647903454||t20201.9705589966s|s113b|113|rds|local|vector|||0.77|Removed 37 rows containing missing values or values outside the scale rangegeom_line.|
+file_vis_tte_pn|stem|af2ca7484952b895|2e7fc226f838e9e1|bb98d16c3c691c4b|353049873||t20201.970576844s|s113b|113|rds|local|vector|||0.65|Removed 31 rows containing missing values or values outside the scale rangegeom_line.|
+pars_tte_0|stem|68e6a4c9c1214520|b132339d193f8be1|ebad168528563b94|-2099636034||t20201.9905378558s|s4684289b|4684289|rds|local|vector|||27.86|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess|
+tabs_tte_0|stem|4a681ff69188fff9|44b7c43228a0d799|c05478e8e133412a|-794908712||t20201.990538306s|s44048b|44048|rds|local|vector|||0.01||
+file_posterior_tte_0|stem|48bef5fb19eaca04|a0507f8c254da8b0|986fde67086e9e73|-156072290|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_base_tte.csv|t20201.990541607s|s119192b|119192|file|local|vector|||0.28||
+gs_tte_0|stem|4124fa91037b7cb9|1cd7f41306159751|8b44f3d28d43aac3|-1221539268||t20201.9905529308s|s4745667b|4745667|rds|local|vector|||0.72|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 7 rows containing missing values or values outside the scale rangegeom_line.|
+file_vis_tte_0|stem|364a3235681241e7|94db4f0b777014ac|cbbd5d51da6aed5e|1136062742||t20201.9905614102s|s115b|115|rds|local|vector|||0.71|Removed 7 rows containing missing values or values outside the scale rangegeom_line.|
 visualise_qol_freq|function|51b7a134dc83fd49
 get_data_norm|function|94c4ffd6debda126
 summarise_qol_kmeans|function|12585f482f0015aa
@@ -262,6 +273,7 @@ calc_timing|function|e94bd7a5fb48f4ca
 format_qol|function|2549105362a72b4f
 get_data_pn|function|c9e49f9f0fee5532
 output_pars_shortfall|function|194a962e52ff78f2
+vis_tte_comparing|function|e32cde43e15d7b08
 boot_pars_bayes|function|1b658441bfb6c87b
 vis_qol_t|function|39f7a154ed4e6737
 summarise_qol_bayes|function|6719925d1234bb85
@@ -287,14 +299,4 @@ simulate_shortfall|function|06a673e08f7ffd0d
 summarise_shortfall|function|339c85e464b1ecd5
 desc_disuti|function|319d3c0af228f327
 format_tte|function|98b4275be2892d9d
-pars_tte_0|stem|099f286a4c6f41af|619081ef22f6a365|7de76deb2a991689|-2099636034||t20201.9699151295s|s4700019b|4700019|rds|local|vector|||55.22|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
-pars_tte_pn|stem|9a267e991bddccf0|d907c94dc30035ce|a4c75ebb97db4c25|1765021799||t20201.9705266084s|s4702188b|4702188|rds|local|vector|||52.19|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess|
-tabs_tte_0|stem|5a8ceebee1540afd|44b7c43228a0d799|bc88323c0a349620|-794908712||t20201.9705268745s|s43766b|43766|rds|local|vector|||0.01||
-tabs_tte_pn|stem|ca1e9ccd702938d7|6a4c2c4b0fadf03a|022306f0676b5f20|-1071403217||t20201.9705274185s|s43954b|43954|rds|local|vector|||0.03||
-file_posterior_tte_0|stem|71a87cab8bd75184|a0507f8c254da8b0|7e327868142bb0e7|-156072290|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_base_tte.csv|t20201.9705307409s|s118681b|118681|file|local|vector|||0.28||
-gs_tte_0|stem|f129a9d266164b07|1cd7f41306159751|c6c20f2ef78ac0ca|-1221539268||t20201.9705397291s|s4746325b|4746325|rds|local|vector|||0.53|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 13 rows containing missing values or values outside the scale rangegeom_line.|
-file_posterior_tte_pn|stem|ab7c777e2c9c3eb0|4156ae70a41465ef|faf45ad62f0272ed|680805999|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_pn_tte.csv|t20201.970542328s|s119699b|119699|file|local|vector|||0.22||
-gs_tte_pn|stem|192c966a36854e86|8007b5c190e00fbb|8c97872b401103bd|-783747796||t20201.970549186s|s5667637b|5667637|rds|local|vector|||0.28|Removed 31 rows containing missing values or values outside the scale rangegeom_line.|
-file_vis_tte|stem|908ccb43272d36a0|4ff112a48f224233|3d8eb9b36b5942c3|-1647903454||t20201.9705589966s|s113b|113|rds|local|vector|||0.77|Removed 37 rows containing missing values or values outside the scale rangegeom_line.|
-file_vis_tte_0|stem|364a3235681241e7|94db4f0b777014ac|00f3383d86a2d41b|1136062742||t20201.9705692129s|s115b|115|rds|local|vector|||0.87|Removed 13 rows containing missing values or values outside the scale rangegeom_line.|
-file_vis_tte_pn|stem|af2ca7484952b895|2e7fc226f838e9e1|bb98d16c3c691c4b|353049873||t20201.970576844s|s113b|113|rds|local|vector|||0.65|Removed 31 rows containing missing values or values outside the scale rangegeom_line.|
+tabs_tte_compare|stem|fa8c79bc393553ff|1dc9a202bf1109ef|b1b9e13d2b700a65|1487075869||t20202.0212865203s|s1167b|1167|rds|local|vector|||0.33||
