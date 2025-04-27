@@ -116,44 +116,6 @@ list(
   tar_target(out_gloss_0, save_tab(tab_qloss_0, key = paste0("summary_qloss_0_", vset)), pattern = map(tab_qloss_0, vset)),
   
   tar_target(tab_qloss_bind, bind_ql_tabs(tab_qloss_ph = tab_qloss, tab_qloss_pn, tab_qloss_0, ages = seq(50, 90, 10)), pattern = map(tab_qloss, tab_qloss_pn, tab_qloss_0)),
-  tar_target(out_gloss_bind, save_tab(tab_qloss_bind, key = paste0("summary_qloss_bind_", vset)), pattern = map(tab_qloss_bind, vset))
-  
-  
-  # tar_target(plot_shortfall_b, vis_shortfall(sim_shortfall_b, tab_shortfall_b, vset), pattern = map(sim_shortfall_b, tab_shortfall_b, vset)),
-  # tar_target(plot_qol_t, vis_qol_t(pars_shortfall_b, data_norm, vset, age = 80), pattern = map(pars_shortfall_b, vset)),
-  
-  # tar_target(plot_qol_b, visualise_qol_bayes(data_qol, pars_qol_f, pars_qol_b, vset, drf = T), pattern = map(data_qol, pars_qol_b, pars_qol_f, vset)),
+  tar_target(out_gloss_bind, save_tab(tab_qloss_bind, key = paste0("summary_qloss_bind_", vset)), pattern = map(tab_qloss_bind, vset)),
+  tar_target(stats, describe_basic(data_raw, data_tte, pars_qol_f, vset), pattern = map(data_raw, pars_qol_f, vset))
 )
-# 
-# list(
-
-#     ## modelling, QoL, Freq
-#     tar_target(pars_qol_f, fit_qol_freq(data_qol), pattern = map(data_qol)),
-#     tar_target(file_pars_qol_f, summarise_qol_freq(pars_qol_f, vset), pattern = map(pars_qol_f, vset), format = "file"),
-#     tar_target(plot_qol_f, visualise_qol_freq(data_qol, pars_qol_f, vset, drf = F), pattern = map(data_qol, pars_qol_f, vset)),
-#     tar_target(plot_qol_f_apx, visualise_qol_freq(data_qol, pars_qol_f, vset, drf = T), pattern = map(data_qol, pars_qol_f, vset)),
-# 
-#     ## simulation, Freq
-#     # tar_target(pars_shortfall_f, boot_pars(file_pars_tte, file_pars_qol_f, n_sim = 1000), pattern = map(file_pars_qol_f)),
-#     # tar_target(sim_shortfall_f, simulate_shortfall(pars_shortfall_f, data_norm, vset, mod = "f"), pattern = map(pars_shortfall_f, vset)),
-#     # tar_target(tab_shortfall_f, summarise_shortfall(sim_shortfall_f, paste0("f_", vset)), pattern = map(sim_shortfall_f, vset)),
-#     # tar_target(plot_shortfall_f, vis_shortfall(sim_shortfall_f, tab_shortfall_f, paste0("f_", vset)), pattern = map(sim_shortfall_f, tab_shortfall_f, vset)),
-#     
-#     
-#     ## modelling, QoL, Bayes
-#     tar_target(pars_qol_b, fit_qol_bayes(data_qol), pattern = map(data_qol)),
-#     tar_target(file_pars_qol_b, summarise_qol_bayes(pars_qol_b, vset), pattern = map(pars_qol_b, vset), format = "file"),
-#     tar_target(plot_qol_b, visualise_qol_bayes(data_qol, pars_qol_f, pars_qol_b, vset, drf = T), pattern = map(data_qol, pars_qol_b, pars_qol_f, vset)),
-#     
-#     ## simulation, Bayes
-#     # tar_target(pars_shortfall_b, boot_pars_bayes(file_pars_tte, file_pars_qol_b, n_sim = 1000), pattern = map(file_pars_qol_b)),
-#     # tar_target(sim_shortfall_b, simulate_shortfall(pars_shortfall_b, data_norm, vset, mod = "b"), pattern = map(pars_shortfall_b, vset)),
-#     # tar_target(tab_shortfall_b, summarise_shortfall(sim_shortfall_b, vset), pattern = map(sim_shortfall_b, vset)),
-#     # tar_target(plot_shortfall_b, vis_shortfall(sim_shortfall_b, tab_shortfall_b, vset), pattern = map(sim_shortfall_b, tab_shortfall_b, vset)),
-#     # tar_target(plot_qol_t, vis_qol_t(pars_shortfall_b, data_norm, vset, age = 80), pattern = map(pars_shortfall_b, vset)),
-#     # 
-
-#     tar_target(stats, describe_basic(data_raw, data_tte, pars_qol_f, vset), pattern = map(data_raw, pars_qol_f, vset))
-# 
-# )
-
