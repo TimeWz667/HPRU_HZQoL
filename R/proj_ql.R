@@ -177,3 +177,16 @@ bind_ql_tabs <- function(tab_qloss_ph, tab_qloss_pn, tab_qloss_0, ages = seq(50,
 }
 
 
+simplify_ql_pn_sub_tabs <- function(tab_qloss_pn_sub, ages = seq(50, 90, 10)) {
+  tab_qloss_pn_sub %>% 
+    filter(Age %in% seq(50, 90, 10)) %>% 
+    mutate(
+      QL00 = sprintf("%.3f (%.3f - %.3f)", QL00_M, QL00_L, QL00_U),
+      QL15 = sprintf("%.3f (%.3f - %.3f)", QL15_M, QL15_L, QL15_U),
+      QL35 = sprintf("%.3f (%.3f - %.3f)", QL35_M, QL35_L, QL35_U)
+    ) %>% 
+    select(study, Age, QL00, QL15, QL35)
+  
+}
+
+

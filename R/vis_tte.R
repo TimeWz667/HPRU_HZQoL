@@ -119,10 +119,16 @@ visualise_tte <- function(dat_tte, pars_tte) {
     scale_x_continuous("Age", limits = c(0, 100))
   
   
-  gs$g_tte_bind <- ggpubr::ggarrange(
+  gs$g_tte_bind1 <- ggpubr::ggarrange(
     gs$g_imp + labs(subtitle = "(A)") + theme(legend.position = c(1, 1), legend.justification = c(1.1, 1.1)),
     gs$g_tte_data + labs(subtitle = "(B)") + theme(legend.position = c(1, 1), legend.justification = c(1.1, 1.1)),
     gs$g_tte_pred + labs(subtitle = "(C)"),
+    ncol = 1
+  )
+  
+  gs$g_tte_bind2 <- ggpubr::ggarrange(
+    gs$g_tte_data + labs(subtitle = "(A)") + theme(legend.position = c(1, 1), legend.justification = c(1.1, 1.1)),
+    gs$g_tte_pred + labs(subtitle = "(B)"),
     ncol = 1
   )
   
@@ -138,7 +144,8 @@ output_vis_tte <- function(gs, folder, modifier, ext = ".png") {
   ggsave(gs$g_imp, file = here::here(folder, "g_tte_imputed_" + modifier + ext), width = 6, height = 4)
   ggsave(gs$g_tte_data, file = here::here(folder, "g_tte_data_" + modifier + ext), width = 6, height = 4)
   ggsave(gs$g_tte_pred, filename = here::here(folder, "g_tte_cri_" + modifier + ext), width = 7, height = 4)
-  ggsave(gs$g_tte_bind, file = here::here(folder, "g_tte_bind_" + modifier + ext), width = 9, height = 12)
+  ggsave(gs$g_tte_bind1, file = here::here(folder, "g_tte_bind1_" + modifier + ext), width = 9, height = 12)
+  ggsave(gs$g_tte_bind2, file = here::here(folder, "g_tte_bind2_" + modifier + ext), width = 9, height = 8)
   return(here::here(folder, "g_tte_bind" + modifier + ext))
 }
 

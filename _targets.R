@@ -103,12 +103,14 @@ list(
   tar_target(sim_qloss_pn, simulate_ql_pn(pars_qloss_pn, data_norm, age0 = 50, age1 = 99, age_until = 5, dt = 0.01), pattern = map(pars_qloss_pn)),
   tar_target(tab_qloss_pn_sub, summarise_ql_pn(sim_qloss_pn), pattern = map(sim_qloss_pn)),
   tar_target(out_gloss_pn_sub, save_tab(tab_qloss_pn_sub, key = paste0("summary_qloss_pn_sub_", vset)), pattern = map(tab_qloss_pn_sub, vset)),
+  tar_target(tab_qloss_pn_sub_short, simplify_ql_pn_sub_tabs(tab_qloss_pn_sub), pattern = map(tab_qloss_pn_sub)),
+  tar_target(out_gloss_pn_sub_short, save_tab(tab_qloss_pn_sub_short, key = paste0("summary_qloss_pn_sub_", vset)), pattern = map(tab_qloss_pn_sub_short, vset)),
 
   tar_target(data_norm_pooled, get_norm_wt(data_raw_pn, data_norm), pattern = map(data_raw_pn)),
   tar_target(sim_qloss_pn_pooled, simulate_ql_pn(pars_qloss_pn, data_norm_pooled, age0 = 50, age1 = 99, age_until = 5, dt = 0.01), pattern = map(pars_qloss_pn, data_norm_pooled)),
   tar_target(tab_qloss_pn, summarise_ql(pars_qloss_pn, sim_qloss_pn_pooled), pattern = map(pars_qloss_pn, sim_qloss_pn_pooled)),
   tar_target(out_gloss_pn, save_tab(tab_qloss_pn, key = paste0("summary_qloss_pn_", vset)), pattern = map(tab_qloss_pn, vset)),
-  
+
   tar_target(pars_qloss_0, boot_pars_bayes(file_posterior_tte_0, file_pars_qol, n_sim = n_mc), pattern = map(file_pars_qol)),
   tar_target(pars_baseline, get_pars_baseline(data_baseline, n_sim = n_mc), pattern = map(data_baseline)),
   tar_target(sim_qloss_0, simulate_ql_0(pars_qloss_0, pars_baseline, age0 = 50, age1 = 99, age_until = 5, dt = 0.01), pattern = map(pars_qloss_0, pars_baseline)),
