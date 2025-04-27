@@ -1,3 +1,4 @@
+
 sim_pre_ql_k <- function(age0 = 50, pars, pars_demo) {
   n_sim <- max(pars$Key)
   
@@ -16,7 +17,7 @@ sim_pre_ql_k <- function(age0 = 50, pars, pars_demo) {
 }
 
 
-sim_pre_ql_f <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
+sim_pre_ql_f <- function(age0 = 50, pars, dt = 0.01) {
   n_sim <- max(pars$Key)
   #n_sim = 100
   df <- crossing(Key = 1:n_sim, Age = age0, ti = seq(0, 100-age0, dt)) %>% 
@@ -24,7 +25,7 @@ sim_pre_ql_f <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
       AgeT = floor(Age + ti)
     ) %>% 
     left_join(pars, by = "Key")  %>% 
-    left_join(pars_demo %>% rename(AgeT = Age), by = "AgeT") %>% 
+    # left_join(pars_demo %>% rename(AgeT = Age), by = "AgeT") %>% 
     mutate(
       rate = r0 * exp(Age * ba1),
       p_hz = (exp(-rate * ti) - exp(-rate * (ti + dt))) / rate,
@@ -40,16 +41,16 @@ sim_pre_ql_f <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
       Prop_0 = PZ,
       Prop_1 = PC1 * (1 - PZ),
       Prop_2 = 1 - Prop_0 - Prop_1,
-      ql_ph = Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2,
-      ql_ph = (1 - ql_ph) * p_hz,
-      ql_pn = pmin(Q_0, norm) * Prop_0 + pmin(Q_1, norm) * Prop_1 + pmin(Q_2, norm) * Prop_2,
-      ql_pn = (norm - ql_pn) * p_hz
+      ql = Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2,
+      ql = (1 - ql) * p_hz,
+      # ql_pn = pmin(Q_0, norm) * Prop_0 + pmin(Q_1, norm) * Prop_1 + pmin(Q_2, norm) * Prop_2,
+      # ql_pn = (norm - ql_pn) * p_hz
     ) %>% 
     group_by(Key, Age, AgeT) %>% 
     #select(Key, Age, AgeT, ti, ql_ph, ql_pn, rate, p_health, p_hz)
     summarise(
-      across(c(p_hz, p_health, ql_ph, ql_pn), sum),
-      across(c(mr, norm), mean)
+      across(c(p_hz, p_health, ql), sum)
+      # across(c(mr, norm), mean)
     )
   
   return(df)
@@ -57,7 +58,7 @@ sim_pre_ql_f <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
 }
 
 
-sim_pre_ql_b <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
+sim_pre_ql_b <- function(age0 = 50, pars, dt = 0.05) {
   n_sim <- max(pars$Key)
   #n_sim = 100
   df <- crossing(Key = 1:n_sim, Age = age0, ti = seq(0, 100-age0, dt)) %>% 
@@ -65,7 +66,6 @@ sim_pre_ql_b <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
       AgeT = floor(Age + ti)
     ) %>% 
     left_join(pars, by = "Key")  %>% 
-    left_join(pars_demo %>% rename(AgeT = Age), by = "AgeT") %>% 
     mutate(
       rate = r0 * exp(Age * ba1),
       p_hz = (exp(-rate * ti) - exp(-rate * (ti + dt))) / rate,
@@ -83,16 +83,15 @@ sim_pre_ql_b <- function(age0 = 50, pars, pars_demo, dt = 0.01) {
       Prop_0 = PZ,
       Prop_1 = PC1 * (1 - PZ),
       Prop_2 = 1 - Prop_0 - Prop_1,
-      ql_ph = Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2,
-      ql_ph = (1 - ql_ph) * p_hz,
-      ql_pn = pmin(Q_0, norm) * Prop_0 + pmin(Q_1, norm) * Prop_1 + pmin(Q_2, norm) * Prop_2,
-      ql_pn = (norm - ql_pn) * p_hz
+      ql = Q_0 * Prop_0 + Q_1 * Prop_1 + Q_2 * Prop_2,
+      ql = (1 - ql) * p_hz
+      # ql_pn = pmin(Q_0, norm) * Prop_0 + pmin(Q_1, norm) * Prop_1 + pmin(Q_2, norm) * Prop_2,
+      # ql_pn = (norm - ql_pn) * p_hz
     ) %>% 
     group_by(Key, Age, AgeT) %>% 
     #select(Key, Age, AgeT, ti, ql_ph, ql_pn, rate, p_health, p_hz)
     summarise(
-      across(c(p_hz, p_health, ql_ph, ql_pn), sum),
-      across(c(mr, norm), mean)
+      across(c(p_hz, p_health, ql), sum)
     )
   
   return(df)
@@ -104,50 +103,50 @@ sim_ql <- function(df) {
   df %>% 
     group_by(Key) %>% 
     mutate(
-      surv = cumprod(1 - mr),
+      surv = cumprod(1 - 0),
       surv = (surv + c(1, surv[-n()])) / 2,
       d15 = (1 + 0.015) ^ -(AgeT - Age),
       d35 = (1 + 0.035) ^ -(AgeT - Age)
     ) %>% 
     group_by(Key, Age) %>% 
     summarise(
-      LE = sum(surv),
-      QALE1 = sum((norm - ql_pn) * surv),
-      QALE0 = sum(norm * surv),
-      QL00 = sum(ql_pn * surv),
-      QL15 = sum(ql_pn * surv * d15),
-      QL35 = sum(ql_pn * surv * d35),
-      QLH00 = sum(ql_ph * surv),
-      QLH15 = sum(ql_ph * surv * d15),
-      QLH35 = sum(ql_ph * surv * d35)
+      #LE = sum(surv),
+      # QALE1 = sum((norm - ql_pn) * surv),
+      # QALE0 = sum(norm * surv),
+      # QL00 = sum(ql_pn * surv),
+      # QL15 = sum(ql_pn * surv * d15),
+      # QL35 = sum(ql_pn * surv * d35),
+      QL00 = sum(ql * surv),
+      QL15 = sum(ql * surv * d15),
+      QL35 = sum(ql * surv * d35)
     ) %>% 
     ungroup()
 }
 
 
-simulate_shortfall <- function(pars, data_norm, vset = "uk", age0 = 50, age1 = 99, year = 2024, mod = c("k", "f", "b")) {
+simulate_shortfall <- function(pars, vset = "uk", age0 = 50, age1 = 99, year = 2024, mod = c("k", "f", "b")) {
   # pars <- tar_read(pars_shortfall, 1)
   # data_norm <- tar_read(data_norm)
   
-  pars_demo <- data_norm %>% 
-    filter(Year == year) %>% 
-    ungroup() %>% 
-    select(Age, mr = mortality, norm = norm_leoss) 
+  # pars_demo <- data_norm %>% 
+  #   filter(Year == year) %>% 
+  #   ungroup() %>% 
+  #   select(Age, mr = mortality, norm = norm_leoss) 
   
   mod <- match.arg(mod)
   sim <- bind_rows(lapply(age0:age1, \(a0) {
     if (mod == "k") {
-      df <- sim_pre_ql_k(age0 = a0, pars = pars, pars_demo = pars_demo)
+      df <- sim_pre_ql_k(age0 = a0, pars = pars)
     } else if (mod == "f") {
-      df <- sim_pre_ql_f(age0 = a0, pars = pars, pars_demo = pars_demo, dt = 0.01)
+      df <- sim_pre_ql_f(age0 = a0, pars = pars, dt = 0.05)
     } else {
-      df <- sim_pre_ql_b(age0 = a0, pars = pars, pars_demo = pars_demo, dt = 0.01)
+      df <- sim_pre_ql_b(age0 = a0, pars = pars, dt = 0.05)
     }
     
     df %>% sim_ql()
   }))
   
-  write_csv(sim, here::here("posteriors", paste0("QALY_loss_sims_", vset, ".csv")))
+  # write_csv(sim, here::here("posteriors", paste0("QALY_loss_sims_", vset, ".csv")))
   
   return(sim)
 }
@@ -162,7 +161,7 @@ summarise_shortfall <- function(sim, vset) {
     pivot_wider()
   
 
-  write_csv(stats, here::here("docs", "tabs", paste0("QALY_loss_stats_", vset, ".csv")))
+  # write_csv(stats, here::here("docs", "tabs", paste0("QALY_loss_stats_", vset, ".csv")))
   
   return(stats)
 }

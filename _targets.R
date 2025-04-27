@@ -27,6 +27,11 @@ theme_set(theme_bw())
 # source("rev_convert.R")
 
 
+fig_path <- here::here("docs", "figs")
+fig_ext <- ".png"
+n_mc <- 1000
+
+
 list(
   tar_target(vset, c("orig", "uk")),
   tar_target(file_qol, here::here("data", "processed", paste0("eq5d_", vset, ".csv")), format = "file", pattern = map(vset)),
@@ -41,6 +46,10 @@ list(
   tar_target(data_tte, format_tte(data_raw), pattern = slice(data_raw, 1)),
   tar_target(data_qol, format_qol(data_raw), pattern = map(data_raw)),
  
+  #### split training sets for exploratory analyses
+  tar_target(subdata_tte, split_training_tte(data_tte, prop = 0.5, prop_training = 0.5, seed = 11667 + 100)),
+  tar_target(subdata_qol, split_training_qol(data_qol, prop = 0.5, prop_training = 0.5, seed = 11667 + 200)),
+  
   ### Population norm baseline
   tar_target(data_raw_pn, get_data_pn(data_raw, data_norm), pattern = map(data_raw)),
   tar_target(data_tte_pn, format_tte(data_raw_pn), pattern = slice(data_raw_pn, 1)),
@@ -52,11 +61,6 @@ list(
   tar_target(data_tte_0, format_tte(data_raw_0), pattern = slice(data_raw_0, 1)),
   tar_target(data_qol_0, format_qol(data_raw_0), pattern = map(data_raw_0)),
   
-  ## split training sets for exploratory analyses
-  tar_target(subdata_tte, split_training_tte(data_tte, prop = 0.5, prop_training = 0.5, seed = 11667 + 100)),
-  tar_target(subdata_qol, split_training_qol(data_qol, prop = 0.5, prop_training = 0.5, seed = 11667 + 200)),
-  
-  ## compile stan models
 
   # modelling, TTE
   tar_target(file_model_tte, here::here("models", "time2zero_surv_age.stan"), format = "file"),
@@ -66,47 +70,63 @@ list(
   tar_target(tabs_tte, restructure_stan(pars_tte)),
   tar_target(gs_tte, visualise_tte(data_tte, tabs_tte)),
   tar_target(file_posterior_tte, output_posterior(tabs_tte, "ph_tte"), format = "file"),
-  tar_target(file_vis_tte, output_vis_tte(gs_tte, folder = here::here("docs", "figs"), "ph")),
+  tar_target(file_vis_tte, output_vis_tte(gs_tte, folder = fig_path, "ph", ext = fig_ext)),
   
   tar_target(pars_tte_pn, fit_tte(model_tte, data_tte_pn)),
   tar_target(tabs_tte_pn, restructure_stan(pars_tte_pn)),
   tar_target(gs_tte_pn, visualise_tte(data_tte_pn, tabs_tte_pn)),
   tar_target(file_posterior_tte_pn, output_posterior(tabs_tte_pn, "pn_tte"), format = "file"),
-  tar_target(file_vis_tte_pn, output_vis_tte(gs_tte_pn, folder = here::here("docs", "figs"), "pn")),
+  tar_target(file_vis_tte_pn, output_vis_tte(gs_tte_pn, folder = fig_path, "pn", ext = fig_ext)),
   
   tar_target(pars_tte_0, fit_tte(model_tte, data_tte_0)),
   tar_target(tabs_tte_0, restructure_stan(pars_tte_0)),
   tar_target(gs_tte_0, visualise_tte(data_tte_0, tabs_tte_0)),
   tar_target(file_posterior_tte_0, output_posterior(tabs_tte_0, "base_tte"), format = "file"),
-  tar_target(file_vis_tte_0, output_vis_tte(gs_tte_0, folder = here::here("docs", "figs"), "base")),
-  tar_target(tabs_tte_compare, vis_tte_comparing(tabs_tte, tabs_tte_pn, tabs_tte_0, folder = here::here("docs", "figs"), ext = ".png", scale = 1))
+  tar_target(file_vis_tte_0, output_vis_tte(gs_tte_0, folder = fig_path, "base", ext = fig_ext)),
+  tar_target(tabs_tte_compare, vis_tte_comparing(tabs_tte, tabs_tte_pn, tabs_tte_0, folder = fig_path, ext = fig_ext, scale = 1)),
 
+  # modelling, QoL
+  tar_target(pars_qol, fit_qol_bayes(data_qol), pattern = map(data_qol)),
+  tar_target(file_pars_qol, summarise_qol_bayes(pars_qol, vset), pattern = map(pars_qol, vset), format = "file"),
+
+  tar_target(pars_qol_f, fit_qol_freq(data_qol), pattern = map(data_qol)), # for k-means labels
+  tar_target(gs_qol, visualise_qol(data_qol, pars_qol_f, pars_qol, drf = T), pattern = map(data_qol, pars_qol, pars_qol_f, vset)),
+  tar_target(file_vis_qol, output_vis_qol(gs_qol, ext = "_" + glue::as_glue(vset) + ".png", drf = T), map(gs_qol, vset)),
+  
+  # simulate QALY loss
+  tar_target(pars_qloss, boot_pars_bayes(file_posterior_tte, file_pars_qol, n_sim = n_mc), pattern = map(file_pars_qol)),
+  tar_target(sim_qloss, simulate_ql(pars_qloss, age0 = 50, age1 = 99, age_until = 5, dt = 0.01), pattern = map(pars_qloss)),
+  tar_target(tab_qloss, summarise_ql(pars_qloss, sim_qloss), pattern = map(pars_qloss, sim_qloss)),
+  tar_target(out_gloss, save_tab(tab_qloss, key = paste0("summary_qloss_ph_", vset)), pattern = map(tab_qloss, vset)),
+  
+  tar_target(pars_qloss_pn, boot_pars_bayes(file_posterior_tte_pn, file_pars_qol, n_sim = n_mc), pattern = map(file_pars_qol)),
+  tar_target(sim_qloss_pn, simulate_ql_pn(pars_qloss_pn, data_norm, age0 = 50, age1 = 99, age_until = 5, dt = 0.01), pattern = map(pars_qloss_pn)),
+  tar_target(tab_qloss_pn_sub, summarise_ql_pn(sim_qloss_pn), pattern = map(sim_qloss_pn)),
+  tar_target(out_gloss_pn_sub, save_tab(tab_qloss_pn_sub, key = paste0("summary_qloss_pn_sub_", vset)), pattern = map(tab_qloss_pn_sub, vset)),
+
+  tar_target(data_norm_pooled, get_norm_wt(data_raw_pn, data_norm), pattern = map(data_raw_pn)),
+  tar_target(sim_qloss_pn_pooled, simulate_ql_pn(pars_qloss_pn, data_norm_pooled, age0 = 50, age1 = 99, age_until = 5, dt = 0.01), pattern = map(pars_qloss_pn, data_norm_pooled)),
+  tar_target(tab_qloss_pn, summarise_ql(pars_qloss_pn, sim_qloss_pn_pooled), pattern = map(pars_qloss_pn, sim_qloss_pn_pooled)),
+  tar_target(out_gloss_pn, save_tab(tab_qloss_pn, key = paste0("summary_qloss_pn_", vset)), pattern = map(tab_qloss_pn, vset)),
+  
+  tar_target(pars_qloss_0, boot_pars_bayes(file_posterior_tte_0, file_pars_qol, n_sim = n_mc), pattern = map(file_pars_qol)),
+  tar_target(pars_baseline, get_pars_baseline(data_baseline, n_sim = n_mc), pattern = map(data_baseline)),
+  tar_target(sim_qloss_0, simulate_ql_0(pars_qloss_0, pars_baseline, age0 = 50, age1 = 99, age_until = 5, dt = 0.01), pattern = map(pars_qloss_0, pars_baseline)),
+  tar_target(tab_qloss_0, summarise_ql(pars_qloss_0, sim_qloss_0), pattern = map(pars_qloss_0, sim_qloss_0)),
+  tar_target(out_gloss_0, save_tab(tab_qloss_0, key = paste0("summary_qloss_0_", vset)), pattern = map(tab_qloss_0, vset)),
+  
+  tar_target(tab_qloss_bind, bind_ql_tabs(tab_qloss_ph = tab_qloss, tab_qloss_pn, tab_qloss_0, ages = seq(50, 90, 10)), pattern = map(tab_qloss, tab_qloss_pn, tab_qloss_0)),
+  tar_target(out_gloss_bind, save_tab(tab_qloss_bind, key = paste0("summary_qloss_bind_", vset)), pattern = map(tab_qloss_bind, vset))
+  
+  
+  # tar_target(plot_shortfall_b, vis_shortfall(sim_shortfall_b, tab_shortfall_b, vset), pattern = map(sim_shortfall_b, tab_shortfall_b, vset)),
+  # tar_target(plot_qol_t, vis_qol_t(pars_shortfall_b, data_norm, vset, age = 80), pattern = map(pars_shortfall_b, vset)),
+  
+  # tar_target(plot_qol_b, visualise_qol_bayes(data_qol, pars_qol_f, pars_qol_b, vset, drf = T), pattern = map(data_qol, pars_qol_b, pars_qol_f, vset)),
 )
 # 
 # list(
-#     tar_target(file_norm, here::here("data", "external", "qale_shortfall.csv"), format = "file"),
-#     
-#     tar_target(vset, c("uk", "orig")),
-#     tar_target(file_qol, here::here("data", "processed", paste0("eq5d_", vset, ".csv")), format = "file", pattern = map(vset)),
-# 
-#     ## extraction
-#     tar_target(data_raw, get_data_qol(file_qol, vset), pattern = map(file_qol, vset)),
-#     tar_target(data_norm, get_data_norm(file_norm)),
-# 
-#     tar_target(data_tte, format_tte(data_raw), pattern = slice(data_raw, 1)),
-#     tar_target(data_qol, format_qol(data_raw), pattern = map(data_raw)),
-#     ## split training sets
-# 
-#     # tar_target(subdata_tte, split_training_tte(data_tte, prop = 0.5, prop_training = 0.5, seed = 11667 + 100)),
-#     # tar_target(subdata_qol, split_training_qol(data_qol, prop = 0.5, prop_training = 0.5, seed = 11667 + 200)),
-# 
-#     # modelling, TTE
-#     tar_target(file_model_tte, here::here("models", "time2zero_surv_age.stan"), format = "file"),
-#     tar_target(model_tte, stan_model(file_model_tte)),
-#     tar_target(pars_tte, fit_tte(model_tte, data_tte)),
-#     tar_target(file_pars_tte, summarise_tte(pars_tte), format = "file"),
-#     tar_target(plot_tte, visualise_tte(data_tte, pars_tte)),
-# 
+
 #     ## modelling, QoL, Freq
 #     tar_target(pars_qol_f, fit_qol_freq(data_qol), pattern = map(data_qol)),
 #     tar_target(file_pars_qol_f, summarise_qol_freq(pars_qol_f, vset), pattern = map(pars_qol_f, vset), format = "file"),
@@ -132,27 +152,7 @@ list(
 #     # tar_target(plot_shortfall_b, vis_shortfall(sim_shortfall_b, tab_shortfall_b, vset), pattern = map(sim_shortfall_b, tab_shortfall_b, vset)),
 #     # tar_target(plot_qol_t, vis_qol_t(pars_shortfall_b, data_norm, vset, age = 80), pattern = map(pars_shortfall_b, vset)),
 #     # 
-#     # 
-#     # investigate response shift
-#     tar_target(file_qol_baseline, here::here("data", "processed", paste0("eq5d_baseline_", vset, ".csv")), format = "file", pattern = map(vset)),
-#     tar_target(data_raw0, get_data_qol_shift(data_raw, file_qol_baseline, vset), pattern = map(data_raw, file_qol_baseline, vset)),
-#     tar_target(data_tte0, format_tte(data_raw0), pattern = slice(data_raw0, 1)),
-#     tar_target(pars_tte0, fit_tte(model_tte, data_tte0)),
-#     tar_target(plot_tte0, visualise_tte(data_tte0, pars_tte0, "_baseline")),
-#     tar_target(file_pars_tte0, summarise_tte(pars_tte0), format = "file"),
-#     
-#     tar_target(data_qol0, format_qol(data_raw0), pattern = map(data_raw0)),
-#     tar_target(pars_qol_f0, fit_qol_freq(data_qol0), pattern = map(data_qol0)),
-#     tar_target(file_pars_qol_f0, summarise_qol_freq(pars_qol_f0, vset), pattern = map(pars_qol_f0, vset), format = "file"),
-#     
-#     tar_target(pars_shortfall_f0, boot_pars(file_pars_tte0, file_pars_qol_f0, n_sim = 1000), pattern = map(file_pars_qol_f0)),
-#     tar_target(sim_shortfall_f0, simulate_shortfall(pars_shortfall_f0, data_norm, vset, mod = "f"), pattern = map(pars_shortfall_f0, vset)),
-#     tar_target(tab_shortfall_f0, summarise_shortfall(sim_shortfall_f0, paste0("f0_", vset)), pattern = map(sim_shortfall_f0, vset)),
-#     tar_target(plot_shortfall_f0, vis_shortfall(sim_shortfall_f0, tab_shortfall_f0, glue::as_glue("baseline_") + vset), pattern = map(sim_shortfall_f0, tab_shortfall_f0, vset)),
-# 
-#     tar_target(tab_diff_tte, desc_disuti(pars_tte, pars_tte0)),
-#     
-#     # 
+
 #     tar_target(stats, describe_basic(data_raw, data_tte, pars_qol_f, vset), pattern = map(data_raw, pars_qol_f, vset))
 # 
 # )

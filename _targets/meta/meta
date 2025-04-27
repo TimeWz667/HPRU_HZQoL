@@ -8,9 +8,6 @@ js_shortfall_67dc98d687688ae8|branch|10026b4668ce7aca|e6440a15a925188c|7a81cde2c
 js_shortfall_b57d97007fd37e69|branch|18d02f0cb4076365|e6440a15a925188c|9e22e7092e2090cc|1613454315||t20006.3939814815s|72a63744b1d83df6|43395|rds|local|vector|js_shortfall||0.03||
 model_qol|stem|0b8a497981244301|6fab5a7727875d62|e0e5cc629d597411|39158295||t20031.7752547809s|e44e330e1ac1bc3b|1551821|rds|local|vector|||1.05||
 output_csv|function|9d0a0762a236b62b|||||||||||||||
-pars_qol|pattern|7747bfe921f07c6d|caab47360a21a539||741732625||||204113|rds|local|vector||pars_qol_f2e51a82b8122e9f*pars_qol_6d4870ae7dfe1a8e|4355.64||
-pars_qol_6d4870ae7dfe1a8e|branch|f7ceb1d8e4755134|caab47360a21a539|61b8b2b984881926|2074598270||t20026.1050231481s|1f3ed61d0f2f4139|102390|rds|local|vector|pars_qol||2549.67|The largest Rhat is 1.54, indicating chains have not mixed.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlrhat. Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
-pars_qol_f2e51a82b8122e9f|branch|42c6f8733efc4cc5|caab47360a21a539|dc1f3310028f4281|241180141||t20031.797433542s|1cccca9a0ea3f818|101700|rds|local|vector|pars_qol||1915.13||
 pars_shortfall_1c2a7fbe261b50b5|branch|4fccdf4783e1a7e6|8c72393d09478e0e|f8855de15ac23b73|766925795||t20026.3924305556s|98a0a08d7660d5e6|40369|rds|local|vector|pars_shortfall||0.03||
 pars_shortfall_646445537cc521c8|branch|791face0c8e21fcd|8c72393d09478e0e|dec753a9c01b6054|618580596||t19997.0116898148s||40770|rds|local|vector|pars_shortfall||0.09||no applicable method for filter applied to an object of class NULL
 pars_shortfall_75fd12b18d9fcc93|branch|58ac545f59163550|8c72393d09478e0e|c6e78829a92b8c51|1111921805||t20026.3924305556s|e2ab51fd8a13f8d3|40361|rds|local|vector|pars_shortfall||0.06||
@@ -65,7 +62,6 @@ plot_shortfall_dc602edac5d947bf|branch|8827bfa35c687776|eb0ec8473dcd6f7d|348468a
 file_pars_qol_k_94f40f59ccf65d67|branch|5216cbb767ba56e5|7723989db778cf15|a4efaf8fd65059b6|1392381880|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_k_uk.csv|t20132.0673393484s|s2801b|2801|file|local|vector|file_pars_qol_k||0.08||
 file_pars_qol_k_f26501a37f1c67bc|branch|47ca89d48ecb1ed9|7723989db778cf15|a4b715da4a74640d|1327781588|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_k_orig.csv|t20132.0673397423s|s2824b|2824|file|local|vector|file_pars_qol_k||0||
 simulate_shortfall_alt|function|aa14bdc81a65f8cb|||||||||||||||
-visualise_qol|function|86433b2b0fc3902a|||||||||||||||
 js_shortfall_f05716584b22c0a7|branch|ed582ab7d8a5bdcd|e6440a15a925188c|981bfdfc902d93ea|-2057188382|D:/HPRU_HZQoL/pars/pars_qol_uk.json|t20136.8043947667s|s212722b|212722|file|local|vector|js_shortfall||0.63||
 js_shortfall_26c03a129fa8b012|branch|30321d71db66d33c|e6440a15a925188c|b7c9aa0ae962ca2e|-35948183|D:/HPRU_HZQoL/pars/pars_qol_orig.json|t20136.8043973524s|s212657b|212657|file|local|vector|js_shortfall||0.19||
 file_qol_387b59a5eb0be5cd|branch|dc78f810319bd2a3|b0a26d68924c0d57|2c530c1562a7fbd1|-1340806544|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/data/processed/eq5d_uk.csv|t20118.0569890112s|s566975b|566975|file|local|vector|file_qol||0||
@@ -88,11 +84,9 @@ data_qol_ee64f2f6047e377a|branch|3a7950946d2d371c|2f87b54211f448f3|e605819b82185
 data_qol_1c11c94f373ce396|branch|dbf81c4313059b5d|2f87b54211f448f3|10df1c5192390c15|-1953460836||t20112.7571944899s|s31928b|31928|rds|local|vector|data_qol||0.43||
 pars_qol_f_f2e51a82b8122e9f|branch|298fd3af5c36c162|de21bf97785f2ac9|78f05448b702ca43|22321743||t20137.6390272303s|s900465b|900465|rds|local|vector|pars_qol_f||1.51||
 pars_qol_f_6d4870ae7dfe1a8e|branch|a23a141e59ae914f|de21bf97785f2ac9|0309286bbd0b5a33|-1938498941||t20137.6390455385s|s902771b|902771|rds|local|vector|pars_qol_f||1.42||
-pars_qol_f|pattern|3f4f51d1c8f296e4|de21bf97785f2ac9||1719327465||||1803236|rds|local|vector||pars_qol_f_f2e51a82b8122e9f*pars_qol_f_6d4870ae7dfe1a8e|2.93||
 file_pars_qol_f|pattern|68b874fbb544b09e|100f598af79660b2||454274780||||976|file|local|vector||file_pars_qol_f_3619ed07f1799905*file_pars_qol_f_f5cf3a3966e5b81c|0.18||
 pars_shortfall_542fcb6de5c487a4|branch|4f5339e6b4681856|a31a6ad585fca0aa|cfe4dde2215510f8|932308039||t20137.63915991s|s78203b|78203|rds|local|vector|pars_shortfall||0.12||
 pars_shortfall_054fc20f3170af18|branch|1763a6948d253824|a31a6ad585fca0aa|f116799337cb8747|-310420843||t20137.6391611702s|s78247b|78247|rds|local|vector|pars_shortfall||0.09||
-pars_shortfall|pattern|1603f90f9e02c3bf|a31a6ad585fca0aa||-1547213787||||156450|rds|local|vector||pars_shortfall_542fcb6de5c487a4*pars_shortfall_054fc20f3170af18|0.21||
 sim_shortfall_f05716584b22c0a7|branch|0697b53552034e5f|8f2d58c3465f2e0d|639c9f5ff398a441|1938430067||t20137.6415146578s|s2567101b|2567101|rds|local|vector|sim_shortfall||89.94||
 sim_shortfall_26c03a129fa8b012|branch|efaff3185759ebcd|8f2d58c3465f2e0d|50cc0a5c11161abf|-2115966725||t20137.6425305046s|s2571346b|2571346|rds|local|vector|sim_shortfall||87.64||
 tab_shortfall_41331b735e0af204|branch|6db38323ce82bdd1|5557097ffba8b575|670d3e3e14854b06|-625201681||t20137.6425324776s|s12375b|12375|rds|local|vector|tab_shortfall||0.14||
@@ -101,7 +95,6 @@ plot_shortfall_7a332132e1125b90|branch|5177449ff305effc|eb0ec8473dcd6f7d|ac2359f
 plot_shortfall_d6417d36e0178a97|branch|b55548ff5b672ce2|eb0ec8473dcd6f7d|64e3b81bc6e62476|708104395||t20137.6425747382s|s6585858b|6585858|rds|local|vector|plot_shortfall||1.4||
 sim_shortfall_59e9febb0e6d5afc|branch|d89f186ae6a1fd0e|6003a0d0dc13c699|f3dabd38a772275d|-1609293949||t20138.0546274275s|s2624272b|2624272|rds|local|vector|sim_shortfall||88.56||
 sim_shortfall_70ed59c04c7ae002|branch|ddad8b6004922c9f|6003a0d0dc13c699|16979ae2485f48d4|1169958630||t20138.0556642997s|s2623952b|2623952|rds|local|vector|sim_shortfall||89.5||
-sim_shortfall|pattern|56048dc23f0ce5b5|6003a0d0dc13c699||1106514453||||5248224|rds|local|vector||sim_shortfall_59e9febb0e6d5afc*sim_shortfall_70ed59c04c7ae002|178.06||
 tab_shortfall_bf01d8509f41b852|branch|ed30cd371a3069df|5557097ffba8b575|ae00b6c7fea3a580|-348134963||t20138.0556663577s|s12504b|12504|rds|local|vector|tab_shortfall||0.14||
 tab_shortfall_d6394b203f4e9db4|branch|2eb8ebc12d93dd3a|5557097ffba8b575|501b8ecd19874ba6|1085755470||t20138.0556684569s|s12485b|12485|rds|local|vector|tab_shortfall||0.16||
 tab_shortfall|pattern|446d68af65f45e73|5557097ffba8b575||170634571||||24989|rds|local|vector||tab_shortfall_bf01d8509f41b852*tab_shortfall_d6394b203f4e9db4|0.3||
@@ -159,10 +152,8 @@ data_tte0|pattern|8afa1d424f2066bd|5e56c4df71a5ecfe||-758965447||||16341|rds|loc
 pars_tte0|stem|7271d3fbd7ba2866|3c82ed88bdef2066|e1183f5f61c89a29|2018228737||t20172.6602041318s|s44145b|44145|rds|local|vector|||27.43|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess. Tail Effective Samples Size ESS is too low, indicating posterior variances and tail quantiles may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmltailess|
 pars_shortfall_0_7abb799ab9791acd|branch|283767b79d05b25e|c2c387cfe355e49e|ea01cf2a22732402|-1812848216||t20172.6602336749s|s92999b|92999|rds|local|vector|pars_shortfall_0||0.17||
 pars_shortfall_0_1b5dbf0e60daeb2a|branch|5ce32f03bacda32b|c2c387cfe355e49e|ad43641a5a04f815|847277840||t20172.6602352054s|s92683b|92683|rds|local|vector|pars_shortfall_0||0.11||
-pars_shortfall_0|pattern|cf4c539bd670d4ff|c2c387cfe355e49e||-331290774||||185682|rds|local|vector||pars_shortfall_0_7abb799ab9791acd*pars_shortfall_0_1b5dbf0e60daeb2a|0.28||
 sim_shortfall_0_40e46c8df0208631|branch|e2f5fb5800b68def|9ec5e2e3e84db372|ef69cea982f20d42|655664916||t20172.6612832876s|s2553958b|2553958|rds|local|vector|sim_shortfall_0||90.44||
 sim_shortfall_0_aed90d18466229dc|branch|a0b21491dbb6f726|9ec5e2e3e84db372|7c628ff590c8e1ee|2036776951||t20172.6623302439s|s2552304b|2552304|rds|local|vector|sim_shortfall_0||90.33||
-sim_shortfall_0|pattern|13021ca2fd34e29b|9ec5e2e3e84db372||1897314556||||5106262|rds|local|vector||sim_shortfall_0_40e46c8df0208631*sim_shortfall_0_aed90d18466229dc|180.77||
 tab_shortfall_0_7fd91c3e3eb8b479|branch|b97783a5ae6d4d5c|5154449cff287eca|d42e4abab15d5742|-1528198111||t20172.662332276s|s12356b|12356|rds|local|vector|tab_shortfall_0||0.16||
 tab_shortfall_0_f2899e0ae7badb5f|branch|3f562c1a3bb6514c|5154449cff287eca|37cb536384366096|-655392635||t20172.6623343109s|s12350b|12350|rds|local|vector|tab_shortfall_0||0.15||
 tab_shortfall_0|pattern|dcd828a440f55e02|5154449cff287eca||1314614939||||24706|rds|local|vector||tab_shortfall_0_7fd91c3e3eb8b479*tab_shortfall_0_f2899e0ae7badb5f|0.31||
@@ -247,56 +238,178 @@ pars_tte_pn|stem|9a267e991bddccf0|d907c94dc30035ce|a4c75ebb97db4c25|1765021799||
 tabs_tte_pn|stem|ca1e9ccd702938d7|6a4c2c4b0fadf03a|022306f0676b5f20|-1071403217||t20201.9705274185s|s43954b|43954|rds|local|vector|||0.03||
 file_posterior_tte_pn|stem|ab7c777e2c9c3eb0|4156ae70a41465ef|faf45ad62f0272ed|680805999|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_pn_tte.csv|t20201.970542328s|s119699b|119699|file|local|vector|||0.22||
 gs_tte_pn|stem|192c966a36854e86|8007b5c190e00fbb|8c97872b401103bd|-783747796||t20201.970549186s|s5667637b|5667637|rds|local|vector|||0.28|Removed 31 rows containing missing values or values outside the scale rangegeom_line.|
-file_vis_tte|stem|908ccb43272d36a0|4ff112a48f224233|3d8eb9b36b5942c3|-1647903454||t20201.9705589966s|s113b|113|rds|local|vector|||0.77|Removed 37 rows containing missing values or values outside the scale rangegeom_line.|
-file_vis_tte_pn|stem|af2ca7484952b895|2e7fc226f838e9e1|bb98d16c3c691c4b|353049873||t20201.970576844s|s113b|113|rds|local|vector|||0.65|Removed 31 rows containing missing values or values outside the scale rangegeom_line.|
 pars_tte_0|stem|68e6a4c9c1214520|b132339d193f8be1|ebad168528563b94|-2099636034||t20201.9905378558s|s4684289b|4684289|rds|local|vector|||27.86|Bulk Effective Samples Size ESS is too low, indicating posterior means and medians may be unreliable.Running the chains for more iterations may help. Seehttpsmcstan.orgmiscwarnings.htmlbulkess|
 tabs_tte_0|stem|4a681ff69188fff9|44b7c43228a0d799|c05478e8e133412a|-794908712||t20201.990538306s|s44048b|44048|rds|local|vector|||0.01||
 file_posterior_tte_0|stem|48bef5fb19eaca04|a0507f8c254da8b0|986fde67086e9e73|-156072290|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_base_tte.csv|t20201.990541607s|s119192b|119192|file|local|vector|||0.28||
 gs_tte_0|stem|4124fa91037b7cb9|1cd7f41306159751|8b44f3d28d43aac3|-1221539268||t20201.9905529308s|s4745667b|4745667|rds|local|vector|||0.72|A numeric legend.position argument in theme was deprecated in ggplot23.5.0.ℹ Please use the legend.position.inside argument of theme instead.. Removed 7 rows containing missing values or values outside the scale rangegeom_line.|
-file_vis_tte_0|stem|364a3235681241e7|94db4f0b777014ac|cbbd5d51da6aed5e|1136062742||t20201.9905614102s|s115b|115|rds|local|vector|||0.71|Removed 7 rows containing missing values or values outside the scale rangegeom_line.|
-visualise_qol_freq|function|51b7a134dc83fd49
-get_data_norm|function|94c4ffd6debda126
-summarise_qol_kmeans|function|12585f482f0015aa
-sim_pre_ql_f|function|143d9353d3698546
-fit_qol_kmeans|function|17b5e81a01018d95
-restructure_stan|function|5f51b2b00b777379
-calc_hazard|function|ab2ed81d6b57e50e
-fit_tte|function|1099e632af89ab40
-sim_pre_ql_b|function|512b78709e982278
-sim_pre_ql_k|function|2830d1176816ef0e
-sim_ql|function|e0cfa7ae3f1bf51a
-amlu|object|b9a2d490f8dcb9cb
-explore_qol|function|816c0e6a2500d543
-visualise_qol_bayes|function|1937994ec047f248
+pars_qol_6d4870ae7dfe1a8e|branch|c8811e7a1763074e|9e2f6e4d4f3c222f|96e4f0a71d052254|2074598270||t20202.0411313544s|s760013b|760013|rds|local|vector|pars_qol||116.64||
+pars_qol_f2e51a82b8122e9f|branch|7ed18bfffb2fdf89|9e2f6e4d4f3c222f|f928506394a341cd|241180141||t20202.0424419775s|s760715b|760715|rds|local|vector|pars_qol||113.21||
+pars_qol|pattern|b9b5c341ef10db30|9e2f6e4d4f3c222f||741732625||||1520728|rds|local|vector||pars_qol_6d4870ae7dfe1a8e*pars_qol_f2e51a82b8122e9f|229.85||
+file_pars_qol|pattern|75766c277b2b0928|51b1d181e602750f||-59541702||||1217798|file|local|vector||file_pars_qol_531366c379ee1619*file_pars_qol_b0ea4191ecc56fc9|0.82||
+pars_qol_0_6d4870ae7dfe1a8e|branch|54ef76ebdeea58c8|2065e95e3cf3898d|ec5006e1a99e00b3|483059305||t20203.4022722056s|s638183b|638183|rds|local|vector|pars_qol_0||112.04||
+pars_qol_0_f2e51a82b8122e9f|branch|05f18208ae06b9e3|2065e95e3cf3898d|d306ed630fdf7026|-1212363956||t20203.4036141063s|s638154b|638154|rds|local|vector|pars_qol_0||115.9||
+file_vis_tte|stem|908ccb43272d36a0|b855a692f69d07d3|3b4e23a7cd55341f|-1647903454||t20203.4036256214s|s113b|113|rds|local|vector|||0.89|Removed 37 rows containing missing values or values outside the scale rangegeom_line.|
+file_vis_tte_pn|stem|af2ca7484952b895|a95f6b235b458175|4cf1b1172e7b8746|353049873||t20203.4036380702s|s113b|113|rds|local|vector|||0.99|Removed 31 rows containing missing values or values outside the scale rangegeom_line.|
+tabs_tte_compare|stem|fa8c79bc393553ff|7f75f2011ea8b635|cf1f41986fb0ee97|1487075869||t20203.403640577s|s1167b|1167|rds|local|vector|||0.21||
+file_vis_tte_0|stem|364a3235681241e7|51496e52c30fc172|b2bf10af876da3e0|1136062742||t20203.4036490443s|s115b|115|rds|local|vector|||0.64|Removed 7 rows containing missing values or values outside the scale rangegeom_line.|
+pars_qol_pn_194a57cb347b1efb|branch|01a32915702e1072|42cf04002723b24c|eb420abcde7b3c73|-1090537297||t20203.4049553782s|s1058222b|1058222|rds|local|vector|pars_qol_pn||1.47||
+pars_qol_pn_9768d1b90e13aa64|branch|151211864f47949c|42cf04002723b24c|5cd77c387d4777dc|172557470||t20203.404972815s|s1084680b|1084680|rds|local|vector|pars_qol_pn||1.36|Model failed to converge with maxgrad  0.00382079 tol  0.002, component 1|
+pars_qol_pn|pattern|dd54dbf269e07f91|42cf04002723b24c||-307746435||||2142902|rds|local|vector||pars_qol_pn_194a57cb347b1efb*pars_qol_pn_9768d1b90e13aa64|2.83||
+file_pars_qol_pn|pattern|b78cf1a07d1d136b|9268f23f4184aff9||-2039227451||||972|file|local|vector||file_pars_qol_pn_e8db78dc0c2bae06*file_pars_qol_pn_ca22cdbfd344bdb4|0.2||
+pars_shortfall_41fa7538a2a1b843|branch|a9752a72b144772e|a04d18e12a0621f8|c83a399e1e33eab1|-451876194||t20203.4242601074s|s92899b|92899|rds|local|vector|pars_shortfall||0.23||
+pars_shortfall_715f5b2723901ab5|branch|3246f41f184fa8cb|a04d18e12a0621f8|2edc4df45770f958|-209834622||t20203.4242616982s|s93123b|93123|rds|local|vector|pars_shortfall||0.12||
+pars_shortfall|pattern|e825f5b966c644b8|a04d18e12a0621f8||-1547213787||||186022|rds|local|vector||pars_shortfall_41fa7538a2a1b843*pars_shortfall_715f5b2723901ab5|0.35||
+pars_shortfall_pn_56c66ac17da15f92|branch|54234ce9825eb98d|51af356956de314a|d1586eef6f4c37c6|-1214274065||t20203.4456729399s|s78564b|78564|rds|local|vector|pars_shortfall_pn||0.15||
+pars_shortfall_pn_3c5817a788a33df4|branch|0c35fae6b077da92|51af356956de314a|9199755e9b395d58|-1421239843||t20203.4456740097s|s78650b|78650|rds|local|vector|pars_shortfall_pn||0.1||
+pars_shortfall_pn|pattern|087023f2d364ff64|51af356956de314a||-974412231||||157214|rds|local|vector||pars_shortfall_pn_56c66ac17da15f92*pars_shortfall_pn_3c5817a788a33df4|0.25||
+pars_shortfall_0_37c40d4fa7d88912|branch|6ac49c107fa62b63|04f0fe687c65c9b3|019b124991992d37|1404311995||t20203.4456763406s|s78572b|78572|rds|local|vector|pars_shortfall_0||0.09||
+pars_shortfall_0|pattern|7dbd308d6b909647|04f0fe687c65c9b3||-331290774||||157135|rds|local|vector||pars_shortfall_0_34baecdae6d109c6*pars_shortfall_0_37c40d4fa7d88912|0.2||
+sim_shortfall_pn_1931c179672cc550|branch|6f1cc0ebff3d70ac|6e9cead7d0156977|6a18147bf4f233e0|-207114517||t20203.4850875877s|s1115681b|1115681|rds|local|vector|sim_shortfall_pn||53.8||
+sim_shortfall_pn_3e60ad11b659bd1e|branch|0c5e54fb67100d08|6e9cead7d0156977|dc7e07a7c506f1af|-1551271589||t20203.4857119067s|s1116303b|1116303|rds|local|vector|sim_shortfall_pn||53.87||
+sim_shortfall_pn|pattern|09a8aa610df74289|6e9cead7d0156977||-643220363||||2231984|rds|local|vector||sim_shortfall_pn_1931c179672cc550*sim_shortfall_pn_3e60ad11b659bd1e|107.67||
+sim_shortfall_0_bda5f9220df11912|branch|7f3c9fbbaed81827|8fc668a03acfded4|bf27b9512a6676df|-181280959||t20203.4867253402s|s1099630b|1099630|rds|local|vector|sim_shortfall_0||87.5|Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x|
+sim_shortfall_0_63b54d2ae171a503|branch|7f3c9fbbaed81827|8fc668a03acfded4|db55270b1fbf1253|1690791750||t20203.4877288354s|s1099630b|1099630|rds|local|vector|sim_shortfall_0||86.62|Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x|
+sim_shortfall_0|pattern|d33536ee00c9f75a|8fc668a03acfded4||1897314556||||2199260|rds|local|vector||sim_shortfall_0_bda5f9220df11912*sim_shortfall_0_63b54d2ae171a503|174.12||
+pars_qol_0_d05129c7c4d32736|branch|9028a368cda2d299|2065e95e3cf3898d|b69d389092555e72|1119762041||t20203.4918803719s|s639823b|639823|rds|local|vector|pars_qol_0||71.39||
+pars_qol_0_18d21b7d8af1d8c6|branch|fb6715d5404a19af|2065e95e3cf3898d|92495a652fe461f0|-862947375||t20203.4926740746s|s639216b|639216|rds|local|vector|pars_qol_0||68.54||
+pars_qol_0|pattern|d7cfa0f22ab89020|2065e95e3cf3898d||404228259||||1279039|rds|local|vector||pars_qol_0_d05129c7c4d32736*pars_qol_0_18d21b7d8af1d8c6|139.93||
+file_pars_qol_pn_e8db78dc0c2bae06|branch|5b6b1ac103318f55|9268f23f4184aff9|0a7648753062b5e2|-788986712|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_f_orig.csv|t20203.4926765054s|s485b|485|file|local|vector|file_pars_qol_pn||0.16||
+file_pars_qol_pn_ca22cdbfd344bdb4|branch|2da99977d3f434b5|9268f23f4184aff9|f341005e85b70351|635551040|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_f_uk.csv|t20203.4926773272s|s487b|487|file|local|vector|file_pars_qol_pn||0.03||
+file_pars_qol_0_08ea36af1aa73fe7|branch|1f5e6380cb50d220|0b0bba7d0ad32f5b|3263cd4843174ee2|-971674128|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_orig.csv|t20203.4926795444s|s608393b|608393|file|local|vector|file_pars_qol_0||0.36||
+file_pars_qol_0_2ec46438b4e56ca5|branch|3d043d0e18aac0af|0b0bba7d0ad32f5b|3088ab6c06d32605|-1655052642|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_uk.csv|t20203.4926839126s|s608553b|608553|file|local|vector|file_pars_qol_0||0.38||
+file_pars_qol_0|pattern|2d72b0636b0e075a|0b0bba7d0ad32f5b||-266053950||||1216946|file|local|vector||file_pars_qol_0_08ea36af1aa73fe7*file_pars_qol_0_2ec46438b4e56ca5|0.74||
+pars_shortfall_0_34baecdae6d109c6|branch|f5a47bad2301284f|04f0fe687c65c9b3|bdd6e46adc2c9875|1125934494||t20203.445675264s||78563|rds|local|vector|pars_shortfall_0||0.16||ℹ In argument Parameter  recode....Caused by error object Parameter not found
+file_pars_qol_531366c379ee1619|branch|6c9715844ebe75c0|51b1d181e602750f|203861156ac0eca2|622953381|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_orig.csv|t20204.3800297945s|s608611b|608611|file|local|vector|file_pars_qol||0.42||
+file_pars_qol_b0ea4191ecc56fc9|branch|2c9db55083bc220c|51b1d181e602750f|b72edbdd192fb7e1|-1151800101|E:/Projects/HPRU/Shingrix/HPRU_HZQoL/posteriors/post_qol_b_uk.csv|t20204.3800339078s|s609187b|609187|file|local|vector|file_pars_qol||0.33||
+pars_qloss_41fa7538a2a1b843|branch|7a4b3464fd633552|1638526e50f01351|f3c3c4b577e545a1|-1591386058||t20204.3800382439s|s92888b|92888|rds|local|vector|pars_qloss||0.19||
+pars_qloss_715f5b2723901ab5|branch|5d78d2ed5c8c6a36|1638526e50f01351|231a73ca1318d5ec|-1251231382||t20204.3800396856s|s93135b|93135|rds|local|vector|pars_qloss||0.11||
+pars_qloss|pattern|2cbc824a487bc90a|1638526e50f01351||739207808||||186023|rds|local|vector||pars_qloss_41fa7538a2a1b843*pars_qloss_715f5b2723901ab5|0.3||
+pars_qloss_0_41fa7538a2a1b843|branch|430d49ff55bcb80c|1eb0b6aa1df8650d|14b98de47c78e9ad|1832560968||t20204.3801061249s|s92980b|92980|rds|local|vector|pars_qloss_0||0.11||
+pars_qloss_0_715f5b2723901ab5|branch|d1c347eeed063da8|1eb0b6aa1df8650d|5e14d06399df01ec|-815416503||t20204.380107447s|s93090b|93090|rds|local|vector|pars_qloss_0||0.11||
+pars_qloss_0|pattern|6b578a933372ee8c|1eb0b6aa1df8650d||1541427022||||186070|rds|local|vector||pars_qloss_0_41fa7538a2a1b843*pars_qloss_0_715f5b2723901ab5|0.22||
+sim_qloss_0_e0bb35050335ac3a|branch|f444cb71d5d06208|a9e8d848311e15d3|37bbbb0797338531|-1406201549||t20204.4027554968s|s1030180b|1030180|rds|local|vector|sim_qloss_0||46.67|Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x|
+sim_qloss_0_598afcce0d156867|branch|4627a71979cfc951|a9e8d848311e15d3|aed0c1340decbe6a|-1142526080||t20204.4032954865s|s1032074b|1032074|rds|local|vector|sim_qloss_0||46.59|Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 1 of x matches multiple rows in y.ℹ Row 1 of y matches multiple rows in x|
+sim_shortfall_896da42a1f2fb31e|branch|e2f1deea72624b69|3556b6721ce4f56f|cba6bed864e105b0|2096698617||t20204.4073789696s|s1107025b|1107025|rds|local|vector|sim_shortfall||20.22||
+sim_shortfall_39e67fb77a8eef27|branch|c7888a1394f7cde5|3556b6721ce4f56f|cf0668cabe13dff4|267251475||t20204.4076165271s|s1106272b|1106272|rds|local|vector|sim_shortfall||20.47||
+sim_shortfall|pattern|dfac37a31d23c84c|3556b6721ce4f56f||1106514453||||2213297|rds|local|vector||sim_shortfall_896da42a1f2fb31e*sim_shortfall_39e67fb77a8eef27|40.69||
+pars_qloss_pn_41fa7538a2a1b843|branch|7cfa086f9efb3cd9|f3e9dd668ef590e2|f74bf45d901c1479|1198516358||t20204.4642046041s|s92935b|92935|rds|local|vector|pars_qloss_pn||0.26||
+pars_qloss_pn_715f5b2723901ab5|branch|780554c0a8d8ba9e|f3e9dd668ef590e2|e00db4ccb4f5173e|1304895640||t20204.4642062021s|s93198b|93198|rds|local|vector|pars_qloss_pn||0.12||
+pars_qloss_pn|pattern|ece1787bf9d6083e|f3e9dd668ef590e2||-1811820398||||186133|rds|local|vector||pars_qloss_pn_41fa7538a2a1b843*pars_qloss_pn_715f5b2723901ab5|0.38||
+data_norm_pooled_875d31cf9eaba4ca|branch|05532e5e4dfbdea0|6a1c938b0fcfcefc|33796ec287353b37|-186510110||t20204.7125824663s|s1364b|1364|rds|local|vector|data_norm_pooled||0.05||
+data_norm_pooled_9314f8ea28a6dd84|branch|05532e5e4dfbdea0|6a1c938b0fcfcefc|cdb71b9068823f60|94492182||t20204.7125829258s|s1364b|1364|rds|local|vector|data_norm_pooled||0.02||
+data_norm_pooled|pattern|05adac903e9fcc62|6a1c938b0fcfcefc||137102075||||2728|rds|local|vector||data_norm_pooled_875d31cf9eaba4ca*data_norm_pooled_9314f8ea28a6dd84|0.07||
+pars_baseline|pattern|335930e89831f58c|41b88d3a8b16bfb0||2068634877||||17412|rds|local|vector||pars_baseline_32e0070788aff6a7*pars_baseline_a43186f4d7d38123|0.03||
+pars_baseline_32e0070788aff6a7|branch|1e08456aaa68dfdd|41b88d3a8b16bfb0|51c793ed0f3801a6|390759591||t20204.7814550307s|s8714b|8714|rds|local|vector|pars_baseline||0.03||
+pars_baseline_a43186f4d7d38123|branch|e9099bf60dd617c8|41b88d3a8b16bfb0|0c600568ed8d5157|-407318507||t20204.7814552174s|s8698b|8698|rds|local|vector|pars_baseline||0.02||
+out_gloss_bind_1719278bc3e6ca9e|branch|ef4544ca3955cdc9|fc8e162f12195025|1677bf53dcb559a3|-306894945||t20204.9301566801s|s562b|562|rds|local|vector|out_gloss_bind||0.06||
+out_gloss_bind_c9d5e4fe8bf26ec2|branch|ef4544ca3955cdc9|fc8e162f12195025|1459ea9934512318|-1706992296||t20204.9301569231s|s562b|562|rds|local|vector|out_gloss_bind||0.01||
+sim_qloss_80d4bb2fbcfc38e9|branch|15a8202b43184255|ab14040449693de2|147668e4a41fb646|464514769||t20204.9483778806s|s1107240b|1107240|rds|local|vector|sim_qloss||20.67||
+sim_qloss_98ced34b2f2228ae|branch|ba4a00999b2dd515|ab14040449693de2|b4995cea59f9cab7|1679615969||t20204.9486015036s|s1105889b|1105889|rds|local|vector|sim_qloss||19.25||
+sim_qloss|pattern|6bb2e16fd1e9bd9a|ab14040449693de2||1058966145||||2213129|rds|local|vector||sim_qloss_80d4bb2fbcfc38e9*sim_qloss_98ced34b2f2228ae|39.92||
+tab_qloss_12f0e3ea3cce9c6c|branch|f1ae132eb2c7b60c|0457fb68178a9d8b|859383ab2a4b6b9f|866442653||t20204.9486027637s|s8142b|8142|rds|local|vector|tab_qloss||0.09||
+tab_qloss_559368adf2805d2f|branch|5e85162c3b21e3e0|0457fb68178a9d8b|09de768b9b19dcf6|-1163165210||t20204.9486039234s|s8135b|8135|rds|local|vector|tab_qloss||0.08||
+tab_qloss|pattern|00f5bf89a774ae60|0457fb68178a9d8b||-937649423||||16277|rds|local|vector||tab_qloss_12f0e3ea3cce9c6c*tab_qloss_559368adf2805d2f|0.17||
+sim_qloss_pn_pooled_15e721b769017974|branch|7b5f0f51b97b6147|6427125b0a4a523c|3f4ea7b401c32c7e|1179394808||t20204.9489569838s|s1109253b|1109253|rds|local|vector|sim_qloss_pn_pooled||30.42||
+sim_qloss_pn_pooled_bba97446ddc3626d|branch|256217ec260aff43|6427125b0a4a523c|883619dd16fcf4a3|512911342||t20204.949315791s|s1111765b|1111765|rds|local|vector|sim_qloss_pn_pooled||30.94||
+sim_qloss_pn_pooled|pattern|713529bb2bbc9f25|6427125b0a4a523c||-816358819||||2221018|rds|local|vector||sim_qloss_pn_pooled_15e721b769017974*sim_qloss_pn_pooled_bba97446ddc3626d|61.36||
+sim_qloss_pn_a94ab4781370dd3e|branch|36bdf53b5cef00ab|6ec6522c32d4eefb|8c65509e2af673c1|106368449||t20204.9502810729s|s7895909b|7895909|rds|local|vector|sim_qloss_pn||82.87||
+sim_qloss_pn_8c8e054f3cf63196|branch|1fd05e72ab029e92|6ec6522c32d4eefb|7eecc373fec38161|543335661||t20204.9512161499s|s7893070b|7893070|rds|local|vector|sim_qloss_pn||80.47||
+sim_qloss_pn|pattern|6d1a3d86c0f2278e|6ec6522c32d4eefb||-1713987709||||15788979|rds|local|vector||sim_qloss_pn_a94ab4781370dd3e*sim_qloss_pn_8c8e054f3cf63196|163.34||
+out_gloss_9d1e4148ee9612c7|branch|f1ae132eb2c7b60c|f8c6d7e32b5fa8c4|c6fba31a67c813eb|-1139562994||t20204.9512170817s|s8142b|8142|rds|local|vector|out_gloss||0.07||
+out_gloss_84f93d5e61dbcdd3|branch|5e85162c3b21e3e0|f8c6d7e32b5fa8c4|3d19fa26c40eeb18|-2045980593||t20204.9512173354s|s8135b|8135|rds|local|vector|out_gloss||0.01||
+out_gloss|pattern|8d40ea09addae3e2|f8c6d7e32b5fa8c4||1440893689||||16277|rds|local|vector||out_gloss_9d1e4148ee9612c7*out_gloss_84f93d5e61dbcdd3|0.08||
+tab_qloss_pn_6f87ce942b65cf61|branch|fdbdcaefa943f2f0|d346b6e7f0698885|c943f2cbf30cd41e|249107844||t20204.9512185208s|s8121b|8121|rds|local|vector|tab_qloss_pn||0.09||
+tab_qloss_pn_9674ffc8d2bc161b|branch|88dc41bf0b754897|d346b6e7f0698885|9a542d052944884f|1212691238||t20204.9512196812s|s8098b|8098|rds|local|vector|tab_qloss_pn||0.08||
+tab_qloss_pn|pattern|f72aa44781cfb106|d346b6e7f0698885||-2126181239||||16219|rds|local|vector||tab_qloss_pn_6f87ce942b65cf61*tab_qloss_pn_9674ffc8d2bc161b|0.17||
+tab_qloss_pn_sub_221efcb2102b1dfd|branch|6bed0ac42598b820|61d977ccf6b50a8c|bc4b2ec3fe692745|1398328543||t20204.9512275704s|s33758b|33758|rds|local|vector|tab_qloss_pn_sub||0.57||
+tab_qloss_pn_sub_0e4babf7dfc41569|branch|f1688c1966e5d51a|61d977ccf6b50a8c|3724cc9efa4f7712|933334729||t20204.9512323812s|s33778b|33778|rds|local|vector|tab_qloss_pn_sub||0.3||
+tab_qloss_pn_sub|pattern|51dff9129bd97405|61d977ccf6b50a8c||1820400430||||67536|rds|local|vector||tab_qloss_pn_sub_221efcb2102b1dfd*tab_qloss_pn_sub_0e4babf7dfc41569|0.87||
+sim_qloss_0_3c96d565745a7dd2|branch|4f5b005dc239a39d|a9e8d848311e15d3|828e63df740383c0|1183611201||t20204.9514370056s|s1123179b|1123179|rds|local|vector|sim_qloss_0||17.62||
+sim_qloss_0_77c5a21e2af7f0a4|branch|12433f8b6e37af4a|a9e8d848311e15d3|d358c7b33f40f0ca|1298807699||t20204.9518104042s|s1123016b|1123016|rds|local|vector|sim_qloss_0||32.22||
+sim_qloss_0|pattern|3e77f8fc0a8fcbbe|a9e8d848311e15d3||-181267979||||2246195|rds|local|vector||sim_qloss_0_3c96d565745a7dd2*sim_qloss_0_77c5a21e2af7f0a4|49.84||
+out_gloss_pn_2e274a48b74c9402|branch|fdbdcaefa943f2f0|4da9a63f70f86e24|c951d1e9244b2f7b|-1832519318||t20204.9518106218s|s8121b|8121|rds|local|vector|out_gloss_pn||0.02||
+out_gloss_pn_49a1eed07f7bbda9|branch|88dc41bf0b754897|4da9a63f70f86e24|3f80e536edbb95a7|1432893395||t20204.9518107584s|s8098b|8098|rds|local|vector|out_gloss_pn||0.01||
+out_gloss_pn|pattern|b93c92009f926c57|4da9a63f70f86e24||80788052||||16219|rds|local|vector||out_gloss_pn_2e274a48b74c9402*out_gloss_pn_49a1eed07f7bbda9|0.03||
+out_gloss_pn_sub_2921ecc0e8ba4492|branch|6bed0ac42598b820|782cf9d2e1bb6808|2823602c6ae01d90|1608879308||t20204.9518114767s|s33758b|33758|rds|local|vector|out_gloss_pn_sub||0.05||
+out_gloss_pn_sub_33ffb8ff12e694f3|branch|f1688c1966e5d51a|782cf9d2e1bb6808|78f1749f66c5cb2a|401405356||t20204.9518121935s|s33778b|33778|rds|local|vector|out_gloss_pn_sub||0.04||
+out_gloss_pn_sub|pattern|a158f3855491db39|782cf9d2e1bb6808||-1198880009||||67536|rds|local|vector||out_gloss_pn_sub_2921ecc0e8ba4492*out_gloss_pn_sub_33ffb8ff12e694f3|0.09||
+tab_qloss_0_cd43054cb57809a6|branch|37b1c1a3c020f9f3|d25840ba31a72cbe|733d7064531c0f41|-174295155||t20204.9518133335s|s8167b|8167|rds|local|vector|tab_qloss_0||0.09||
+tab_qloss_0_4b07d0db37ca2973|branch|57384537d9fd2773|d25840ba31a72cbe|ee3d059a44aa57d4|-607272484||t20204.9518146165s|s8152b|8152|rds|local|vector|tab_qloss_0||0.09||
+tab_qloss_0|pattern|9727527679323ae2|d25840ba31a72cbe||1925193298||||16319|rds|local|vector||tab_qloss_0_cd43054cb57809a6*tab_qloss_0_4b07d0db37ca2973|0.18||
+out_gloss_0_1719278bc3e6ca9e|branch|37b1c1a3c020f9f3|e0cad0715ee58f0f|06404d44355d514b|803745059||t20204.9518152254s|s8167b|8167|rds|local|vector|out_gloss_0||0||
+out_gloss_0_c9d5e4fe8bf26ec2|branch|57384537d9fd2773|e0cad0715ee58f0f|5f7d77f3419213c2|1736094318||t20204.9518153788s|s8152b|8152|rds|local|vector|out_gloss_0||0||
+out_gloss_0|pattern|80f8efa1dc64fdd4|e0cad0715ee58f0f||-1221490557||||16319|rds|local|vector||out_gloss_0_1719278bc3e6ca9e*out_gloss_0_c9d5e4fe8bf26ec2|0||
+tab_qloss_bind_82c05f50e8eae316|branch|3271c0d25d994386|9fc4f05a843b4df5|afd80bf4ecb56c6b|311126034||t20204.9713756872s|s618b|618|rds|local|vector|tab_qloss_bind||0.02||
+tab_qloss_bind_1f82332a874817ca|branch|efc1f22f3d6844d8|9fc4f05a843b4df5|8c59a7597e7ba45e|637689458||t20204.9713758458s|s621b|621|rds|local|vector|tab_qloss_bind||0.01||
+tab_qloss_bind|pattern|c7aef0860baaf72e|9fc4f05a843b4df5||391933568||||1239|rds|local|vector||tab_qloss_bind_82c05f50e8eae316*tab_qloss_bind_1f82332a874817ca|0.03||
+out_gloss_bind_c989b1d950b63ca5|branch|3271c0d25d994386|fc8e162f12195025|6cb22aa7170c2ab7|-389784145||t20204.9733029485s|s618b|618|rds|local|vector|out_gloss_bind||0.06||
+out_gloss_bind_d24db8a201e5ba55|branch|efc1f22f3d6844d8|fc8e162f12195025|98bec6414a381bfb|-1992556408||t20204.9733031283s|s621b|621|rds|local|vector|out_gloss_bind||0.02||
+out_gloss_bind|pattern|74480608d334fbbe|fc8e162f12195025||-1545727082||||1239|rds|local|vector||out_gloss_bind_c989b1d950b63ca5*out_gloss_bind_d24db8a201e5ba55|0.08||
+visualise_qol_bayes|function|dc6a4e3af5de0d39|||||||||||||||
+pars_qol_f|pattern|f6e4a922cd64e1fc|de21bf97785f2ac9||1719327465||||0|rds|local|vector||pars_qol_f_6d4870ae7dfe1a8e*pars_qol_f_f2e51a82b8122e9f|0||
+gs_qol_a7f77a54bf0ac640|branch|dbb7492c06664b28|9342e82fe8fb017e|8f77bb55d50c610c|881255338||t20205.0327612252s|s6513930b|6513930|rds|local|vector|gs_qol||0.88|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+gs_qol_c045fe45d7a58104|branch|8068406499da40e3|9342e82fe8fb017e|97efbdefdb372657|-1846007007||t20205.0327772608s|s6503902b|6503902|rds|local|vector|gs_qol||0.61|There were 2 warnings in mutate.The first warning wasℹ In argument is_z  simulatemspz, 1, newdata  ., type   response1.Caused by warning in lme4.simulateFun unused arguments ignoredℹ Run dplyrlast_dplyr_warnings to see the 1 remaining warning.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+gs_qol|pattern|0101bb543efc0a40|9342e82fe8fb017e||-1089841363||||13017832|rds|local|vector||gs_qol_a7f77a54bf0ac640*gs_qol_c045fe45d7a58104|1.49||
+file_vis_qol|pattern|eff1849435d6ce44|cd38a353d3eefee5||645642970||||232|rds|local|vector||file_vis_qol_e14e33b5e730739b*file_vis_qol_845b5cb7e464da87|3.29||
+output_pars_shortfall|function|194a962e52ff78f2
 get_data_qol_shift|function|624833a17673bfc3
 calc_timing|function|e94bd7a5fb48f4ca
-format_qol|function|2549105362a72b4f
-get_data_pn|function|c9e49f9f0fee5532
-output_pars_shortfall|function|194a962e52ff78f2
-vis_tte_comparing|function|e32cde43e15d7b08
-boot_pars_bayes|function|1b658441bfb6c87b
-vis_qol_t|function|39f7a154ed4e6737
-summarise_qol_bayes|function|6719925d1234bb85
-vis_qol|function|5fb11dd124e6cfe2
-get_data_qol|function|349b2ff82cabf5b9
-describe_basic|function|d8eaefbec52a80c9
-summarise_qol|function|8d3eaa9cee0fa482
-fit_qol_freq|function|b5cce917e68c7e7c
-output_posterior|function|22bfedcd87ce828b
-vis_shortfall|function|32d5725b609b87ea
-split_training_qol|function|98234a5a66385fb5
-summarise_qol_freq|function|5ca4b61d1d85059d
-visualise_qol_k|function|7039bae48825e1f0
-visualise_tte|function|073be2ebaffd6526
-split_training_tte|function|76c6c8798135dc9e
-output_vis_tte|function|30baf7f0799ced6f
 reload_pars|function|ae86d7eb3a15bfd2
+describe_basic|function|d8eaefbec52a80c9
+bind_ql_tabs|function|710c0741bd362eff
+vis_qol_t|function|39f7a154ed4e6737
+split_training_tte|function|76c6c8798135dc9e
+visualise_tte|function|073be2ebaffd6526
+summarise_qol_freq|function|5ca4b61d1d85059d
+fit_qol_freq|function|b5cce917e68c7e7c
+get_data_norm|function|94c4ffd6debda126
+sim_pre_ql_b|function|1bb55a385f60e995
+summarise_qol_kmeans|function|12585f482f0015aa
+fit_qol_kmeans|function|17b5e81a01018d95
+restructure_stan|function|5f51b2b00b777379
+amlu|object|874cb15208e18bc7
+visualise_qol_freq|function|51b7a134dc83fd49
+sim_pre_ql_f|function|5288daf26db093fe
 boot_pars|function|a10261b3aa902fa0
+sim_ql_s1|function|bccd9e704d740c86
+calc_hazard|function|ab2ed81d6b57e50e
+sim_pre_ql_k|function|2830d1176816ef0e
+summarise_qol|function|8d3eaa9cee0fa482
+output_vis_tte|function|30baf7f0799ced6f
+get_data_qol|function|349b2ff82cabf5b9
+get_data_pn|function|c9e49f9f0fee5532
+save_tabs|function|d035b159b76cafbf
+summarise_qol_bayes|function|6719925d1234bb85
+visualise_qol|function|c151116968265f3a
+save_tab|function|fe3a1311c7d937b2
+output_vis_qol|function|c32c0f950287f194
+vis_qol|function|5fb11dd124e6cfe2
+explore_qol|function|816c0e6a2500d543
+get_pars_baseline|function|19082ace187d8402
+fit_tte|function|1099e632af89ab40
+output_posterior|function|22bfedcd87ce828b
+visualise_qol_k|function|7039bae48825e1f0
+vis_tte_comparing|function|e32cde43e15d7b08
+split_training_qol|function|98234a5a66385fb5
+boot_pars_bayes|function|1b658441bfb6c87b
+n_mc|object|d887885b74fc7404
+format_qol|function|2549105362a72b4f
+sim_ql|function|3e7f9e61e2ea9386
+get_norm_wt|function|d49f3b8e76a2173b
+fig_ext|object|54ae343bffc11636
+vis_shortfall|function|32d5725b609b87ea
+fig_path|object|ca7d1123de946071
 fit_qol|function|31744dcfd056d45d
 fit_qol_bayes|function|90cbd6e2c16f15ef
+desc_disuti|function|f8e4619b89d691b9
+summarise_shortfall|function|45848be03ef7b45e
+summarise_ql|function|d312619aa47fc474
+summarise_ql_pn|function|ec13947ee60b06f6
+simulate_ql|function|7780d0662fb592bf
+simulate_ql_pn|function|b2e7cf77e1136652
+simulate_ql_0|function|badf13f20ba54d9e
 empirical_surv|function|18b044ab39a0adbb
-simulate_shortfall|function|06a673e08f7ffd0d
-summarise_shortfall|function|339c85e464b1ecd5
-desc_disuti|function|319d3c0af228f327
+simulate_shortfall|function|b9230dfd15fd51f0
 format_tte|function|98b4275be2892d9d
-tabs_tte_compare|stem|fa8c79bc393553ff|1dc9a202bf1109ef|b1b9e13d2b700a65|1487075869||t20202.0212865203s|s1167b|1167|rds|local|vector|||0.33||
+file_vis_qol_e14e33b5e730739b|branch|2181e0f56aa2f482|cd38a353d3eefee5|428cfa9ce3b40fc0|-1796484497||t20205.0383584742s|s117b|117|rds|local|vector|file_vis_qol||1.84|Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
+file_vis_qol_845b5cb7e464da87|branch|f60635077cad6080|cd38a353d3eefee5|264142f5ea890812|1597023408||t20205.0383804988s|s115b|115|rds|local|vector|file_vis_qol||1.45|Removed 9 rows containing nonfinite outside the scale range stat_bin.. Removed 9 rows containing missing values or values outside the scale rangegeom_point.|
