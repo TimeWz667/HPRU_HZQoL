@@ -119,5 +119,11 @@ list(
   
   tar_target(tab_qloss_bind, bind_ql_tabs(tab_qloss_ph = tab_qloss, tab_qloss_pn, tab_qloss_0, ages = seq(50, 90, 10)), pattern = map(tab_qloss, tab_qloss_pn, tab_qloss_0)),
   tar_target(out_gloss_bind, save_tab(tab_qloss_bind, key = paste0("summary_qloss_bind_", vset)), pattern = map(tab_qloss_bind, vset)),
-  tar_target(stats, describe_basic(data_raw, data_tte, pars_qol_f, vset), pattern = map(data_raw, pars_qol_f, vset))
+  tar_target(stats, describe_basic(data_raw, data_tte, pars_qol_f, vset), pattern = map(data_raw, pars_qol_f, vset)),
+  
+  # Output for CEA inputs
+  tar_target(out_pars_ph, write_csv(sim_qloss, here::here("pars", "pars_ql_ph_" + glue::as_glue(vset) + ".csv")), pattern = map(sim_qloss, vset)),
+  tar_target(out_pars_pn, write_csv(sim_qloss_pn_pooled, here::here("pars", "pars_ql_pn_" + glue::as_glue(vset) + ".csv")), pattern = map(sim_qloss_pn_pooled, vset)),
+  tar_target(out_pars_0, write_csv(sim_qloss_0, here::here("pars", "pars_ql_baseline_" + glue::as_glue(vset) + ".csv")), pattern = map(sim_qloss_0, vset))
+  
 )
